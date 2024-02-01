@@ -23,10 +23,7 @@ Platform: Desktop
 
 # Team Members
 
-Rohun Baxi - r2baxi@uwaterloo.ca
-Akshen Jasikumar - ajasikum@uwaterloo.ca
-Yun Tao - y83tao@uwaterloo.ca
-Areeb Shaikh - a59shaik@uwaterloo.ca
+Rohun Baxi - r2baxi@uwaterloo.ca, Akshen Jasikumar - ajasikum@uwaterloo.ca, Yun Tao - y83tao@uwaterloo.ca, Areeb Shaikh - a59shaik@uwaterloo.ca
 
 # Screenshot
 
