@@ -1,19 +1,21 @@
 CS 346 - Meeting Minutes
 
-Date:
-Team:
+Date: 2024-02-9
+Team: 102-16
 
-Present:
-Absent:
+Present: Areeb, Akshen, Rohun, Yun
+Absent: -
 
 Agenda:
-What do we wish to discuss?
+We intend to discuss the logistics of the project (i.e future vision)
+and develop issue items.
 
 Notes:
-Comments, ideas, details.
+- Productive evening with issue items created
 
 Decisions:
-What was the outcome of the discussion?
+The outcome of our discussion was the creation of several issue items
+that were assigned to each of our project members
 
 Actions:
-What needs to be done?
+What lies ahead is the completion of a subset of issue items, done by each member.
