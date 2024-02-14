@@ -1,0 +1,4 @@
+package userinterface
+
+class TempViewModel {
+}
