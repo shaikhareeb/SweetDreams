@@ -11,18 +11,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import userinterface.LoginPage
+import userinterface.MainPage
 import userinterface.RegisterPage
 
 var register = RegisterPage();
 var login = LoginPage();
+var main = MainPage();
 
 @Composable
 @Preview
 fun App() {
     login.onSignUp = {SetPage(0)};
+    login.onLogin = {SetPage(2)}
     login.RenderPage ();
     register.onReturn = {SetPage(1)}
     register.RenderPage ();
+    main.RenderPage()
 
     SetPage(1)
 }
@@ -34,11 +38,15 @@ fun SetPage(int: Int){
     if (int == 1){
         login.ShowPage()
     }
+    if (int == 2) {
+        main.ShowPage()
+    }
 }
 
 fun CloseAllPages(){
     login.ClosePage();
     register.ClosePage();
+    main.ClosePage();
 }
 
 

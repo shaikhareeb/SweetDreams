@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 
 class LoginPage : Page() {
     lateinit var onSignUp : () -> Unit
+    lateinit var onLogin: () -> Unit
     @Composable
     override fun Content(){
         var name by remember { mutableStateOf("") }
@@ -28,7 +29,7 @@ class LoginPage : Page() {
             HelloContent(name = name, onNameChange = { if (it.length <= 50) name = it }, "Username")
             HelloContent(name = name, onNameChange = { if (it.length <= 50) name = it }, "Password")
 
-            Button(onClick = { }) {
+            Button(onClick = { onLogin() }) {
                 Text("Login")
             }
             Button(onClick = { onSignUp() }) {
