@@ -10,20 +10,37 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import userinterface.LoginPage
+import userinterface.RegisterPage
+
+var register = RegisterPage();
+var login = LoginPage();
 
 @Composable
 @Preview
 fun App() {
-    var text by remember { mutableStateOf("Hello, World!") }
+    login.onSignUp = {SetPage(0)};
+    login.RenderPage ();
+    register.onReturn = {SetPage(1)}
+    register.RenderPage ();
 
-    MaterialTheme {
-        Button(onClick = {
-            text = "Hello, Desktop!"
-        }) {
-            Text(text)
-        }
+    SetPage(1)
+}
+fun SetPage(int: Int){
+    CloseAllPages();
+    if (int == 0){
+        register.ShowPage()
+    }
+    if (int == 1){
+        login.ShowPage()
     }
 }
+
+fun CloseAllPages(){
+    login.ClosePage();
+    register.ClosePage();
+}
+
 
 fun main() = application {
     Window(onCloseRequest = ::exitApplication) {
