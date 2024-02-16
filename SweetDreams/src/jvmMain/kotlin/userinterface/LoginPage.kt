@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 
 class LoginPage : Page() {
@@ -30,9 +31,9 @@ class LoginPage : Page() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Welcome to SweetDreams")
-            TextFieldFormat(name = username, onNameChange = { if (it.length <= 50) username = it }, "Username")
-            TextFieldFormat(name = pwd, onNameChange = { if (it.length <= 50) pwd = it }, "Password")
+            SimpleImage()
+            TextFieldFormat(name = username, isPwd = false, onNameChange = { if (it.length <= 50) username = it }, "Username")
+            TextFieldFormat(name = pwd, isPwd = true, onNameChange = { if (it.length <= 50) pwd = it }, "Password")
 
             Button(onClick = {
                 val tryLoggingIn = onLogin(username, pwd);
@@ -51,10 +52,17 @@ class LoginPage : Page() {
     }
 
     @Composable
-    fun TextFieldFormat(name: String, onNameChange: (String) -> Unit, title: String) {
-        Column(modifier = Modifier.padding(5.dp)) {
-            OutlinedTextField(value = name, singleLine=true, onValueChange = onNameChange, label = { Text(title) })
+    fun TextFieldFormat(name: String, isPwd: Boolean, onNameChange: (String) -> Unit, title: String) {
+        if (isPwd) {
+            Column(modifier = Modifier.padding(5.dp)) {
+                OutlinedTextField(value = name, singleLine=true, onValueChange = onNameChange, label = { Text(title) }, visualTransformation = PasswordVisualTransformation())
+            }
+        } else {
+            Column(modifier = Modifier.padding(5.dp)) {
+                OutlinedTextField(value = name, singleLine=true, onValueChange = onNameChange, label = { Text(title) })
+            }
         }
+
     }
 
     @Composable

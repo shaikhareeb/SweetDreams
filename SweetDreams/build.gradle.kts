@@ -29,6 +29,9 @@ kotlin {
                 implementation(compose.desktop.currentOs)
             }
         }
+        jvmMain.dependencies {
+            implementation(jvmMain.resources)
+        }
         val jvmTest by getting
     }
 }
