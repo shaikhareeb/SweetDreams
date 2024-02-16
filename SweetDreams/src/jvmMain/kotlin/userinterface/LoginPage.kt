@@ -17,10 +17,13 @@ import androidx.compose.ui.unit.dp
 
 class LoginPage : Page() {
     lateinit var onSignUp : () -> Unit
-    lateinit var onLogin: () -> Unit
+    lateinit var onLogin: (username: String, pwd: String) -> Boolean
     @Composable
     override fun Content(){
-        var name by remember { mutableStateOf("") }
+        var username by remember { mutableStateOf("") }
+        var pwd by remember { mutableStateOf("") }
+
+        var errorText by remember { mutableStateOf("") }
 
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -28,15 +31,22 @@ class LoginPage : Page() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text("Welcome to SweetDreams")
-            TextFieldFormat(name = name, onNameChange = { if (it.length <= 50) name = it }, "Username")
-            TextFieldFormat(name = name, onNameChange = { if (it.length <= 50) name = it }, "Password")
+            TextFieldFormat(name = username, onNameChange = { if (it.length <= 50) username = it }, "Username")
+            TextFieldFormat(name = pwd, onNameChange = { if (it.length <= 50) pwd = it }, "Password")
 
-            Button(onClick = { onLogin() }) {
+            Button(onClick = {
+                val tryLoggingIn = onLogin(username, pwd);
+                if (!tryLoggingIn) {
+                    errorText = "Username/password combination is invalid. Try Again"
+                }
+            }) {
                 Text("Login")
             }
             Button(onClick = { onSignUp() }) {
                 Text("Sign up")
             }
+
+            Text(errorText)
         }
     }
 

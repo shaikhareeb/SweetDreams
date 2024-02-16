@@ -13,10 +13,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 class RegisterPage : Page() {
-    lateinit var onReturn : () -> Unit
+    lateinit var onReturn : (fname: String, lname: String, userName: String, email: String, pwd: String, pwdVerfication: String) -> String
     @Composable
     override fun Content(){
-        var name by remember { mutableStateOf("") }
+        var fname by remember { mutableStateOf("") }
+        var lname by remember { mutableStateOf("") }
+        var userName by remember { mutableStateOf("") }
+        var email by remember { mutableStateOf("") }
+        var pwd by remember { mutableStateOf("") }
+        var pwdVerification by remember { mutableStateOf("") }
+
+        var errorText by remember { mutableStateOf("") }
 
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -24,15 +31,22 @@ class RegisterPage : Page() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text("Sign up for SweetDreams")
-            TextFieldFormat(name = name, onNameChange = { if (it.length <= 50) name = it }, "First Name")
-            TextFieldFormat(name = name, onNameChange = { if (it.length <= 50) name = it }, "Last Name")
-            TextFieldFormat(name = name, onNameChange = { if (it.length <= 50) name = it }, "Username")
-            TextFieldFormat(name = name, onNameChange = { if (it.length <= 50) name = it }, "Email")
-            TextFieldFormat(name = name, onNameChange = { if (it.length <= 50) name = it }, "Password")
-            TextFieldFormat(name = name, onNameChange = { if (it.length <= 50) name = it }, "Re-enter Password")
-            Button(onClick = { onReturn() }) {
+            TextFieldFormat(name = fname, onNameChange = { if (it.length <= 50) fname = it }, "First Name")
+            TextFieldFormat(name = lname, onNameChange = { if (it.length <= 50) lname = it }, "Last Name")
+            TextFieldFormat(name = userName, onNameChange = { if (it.length <= 50) userName = it }, "Username")
+            TextFieldFormat(name = email, onNameChange = { if (it.length <= 50) email = it }, "Email")
+            TextFieldFormat(name = pwd, onNameChange = { if (it.length <= 50) pwd = it }, "Password")
+            TextFieldFormat(name = pwdVerification, onNameChange = { if (it.length <= 50) pwdVerification = it }, "Re-enter Password")
+            Button(onClick = {
+                val tryReturning = onReturn(fname, lname, userName, email, pwd, pwdVerification);
+                if (tryReturning != "") {
+                    errorText = "Passwords do not match. Try again"
+                }
+                 }) {
                 Text("Register")
             }
+
+            Text(errorText)
         }
     }
 

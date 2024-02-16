@@ -1,15 +1,9 @@
 // Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-import androidx.compose.material.MaterialTheme
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import model.AccountManager
 import userinterface.LoginPage
 import userinterface.MainPage
 import userinterface.RegisterPage
@@ -18,18 +12,35 @@ var register = RegisterPage();
 var login = LoginPage();
 var main = MainPage();
 
+
 @Composable
 @Preview
 fun App() {
+    var accountManager = AccountManager()
+
     login.onSignUp = {SetPage(0)};
-    login.onLogin = {SetPage(2)}
+    login.onLogin = onReturn@{ s: String, s1: String ->
+        val userLoginSuccess = accountManager.validateUser(s, s1)
+        if (userLoginSuccess) {
+            SetPage(2)
+        }
+        return@onReturn userLoginSuccess;
+    }
     login.RenderPage ();
-    register.onReturn = {SetPage(1)}
-    register.RenderPage ();
+    register.onReturn = onReturn@{ s: String, s1: String, s2: String, s3: String, s4: String, s5: String ->
+        val addUser = accountManager.addUser(s, s1, s2, s3, s4, s5);
+        if (addUser == "") {
+            SetPage(1)
+        }
+        return@onReturn addUser;
+    }
+
+    register.RenderPage();
     main.RenderPage()
 
     SetPage(1)
 }
+
 fun SetPage(int: Int){
     CloseAllPages();
     if (int == 0){
