@@ -31,6 +31,8 @@ Rohun Baxi - r2baxi@uwaterloo.ca, Akshen Jasikumar - ajasikum@uwaterloo.ca, Yun 
 
 # User Documentation
 
+To run this application, clone the repo, ensure JDK 17 is installed, and press run on the top right corner of the IDE.
+
 # Project Documentation
 
 # Software Releases
