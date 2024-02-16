@@ -52,20 +52,6 @@ class LoginPage : Page() {
     }
 
     @Composable
-    fun TextFieldFormat(name: String, isPwd: Boolean, onNameChange: (String) -> Unit, title: String) {
-        if (isPwd) {
-            Column(modifier = Modifier.padding(5.dp)) {
-                OutlinedTextField(value = name, singleLine=true, onValueChange = onNameChange, label = { Text(title) }, visualTransformation = PasswordVisualTransformation())
-            }
-        } else {
-            Column(modifier = Modifier.padding(5.dp)) {
-                OutlinedTextField(value = name, singleLine=true, onValueChange = onNameChange, label = { Text(title) })
-            }
-        }
-
-    }
-
-    @Composable
     fun SimpleImage() {
         Image(
             painter = painterResource("Picture1.png"),

@@ -13,6 +13,9 @@ class AccountManager {
     }
 
     fun addUser(fname: String, lname: String, uname: String, email: String, pwd: String, pwd2: String): String {
+        if (fname.isEmpty() || lname.isEmpty() || uname.isEmpty() || email.isEmpty() || pwd.isEmpty() || pwd2.isEmpty()) {
+            return "Fill in all of the fields before registering"
+        }
         if (pwd != pwd2) return "Passwords do not match. Please try again";
         currentAccounts += arrayOf(fname, lname, uname, email, pwd)
         return "";

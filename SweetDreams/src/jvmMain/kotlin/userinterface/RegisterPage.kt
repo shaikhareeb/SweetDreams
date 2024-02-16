@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 
 class RegisterPage : Page() {
     lateinit var onReturn : (fname: String, lname: String, userName: String, email: String, pwd: String, pwdVerfication: String) -> String
+    lateinit var onBack : () -> Unit
     @Composable
     override fun Content(){
         var fname by remember { mutableStateOf("") }
@@ -31,29 +32,25 @@ class RegisterPage : Page() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text("Sign up for SweetDreams")
-            TextFieldFormat(name = fname, onNameChange = { if (it.length <= 50) fname = it }, "First Name")
-            TextFieldFormat(name = lname, onNameChange = { if (it.length <= 50) lname = it }, "Last Name")
-            TextFieldFormat(name = userName, onNameChange = { if (it.length <= 50) userName = it }, "Username")
-            TextFieldFormat(name = email, onNameChange = { if (it.length <= 50) email = it }, "Email")
-            TextFieldFormat(name = pwd, onNameChange = { if (it.length <= 50) pwd = it }, "Password")
-            TextFieldFormat(name = pwdVerification, onNameChange = { if (it.length <= 50) pwdVerification = it }, "Re-enter Password")
+            TextFieldFormat(name = fname, isPwd = false, onNameChange = { if (it.length <= 50) fname = it }, "First Name")
+            TextFieldFormat(name = lname, isPwd = false, onNameChange = { if (it.length <= 50) lname = it }, "Last Name")
+            TextFieldFormat(name = userName, isPwd = false, onNameChange = { if (it.length <= 50) userName = it }, "Username")
+            TextFieldFormat(name = email, isPwd = false, onNameChange = { if (it.length <= 50) email = it }, "Email")
+            TextFieldFormat(name = pwd, isPwd = true, onNameChange = { if (it.length <= 50) pwd = it }, "Password")
+            TextFieldFormat(name = pwdVerification, isPwd = true, onNameChange = { if (it.length <= 50) pwdVerification = it }, "Re-enter Password")
             Button(onClick = {
                 val tryReturning = onReturn(fname, lname, userName, email, pwd, pwdVerification);
                 if (tryReturning != "") {
-                    errorText = "Passwords do not match. Try again"
+                    errorText = tryReturning
                 }
                  }) {
                 Text("Register")
             }
+            Button(onClick = onBack) {
+                Text("Go Back")
+            }
 
             Text(errorText)
-        }
-    }
-
-    @Composable
-    fun TextFieldFormat(name: String, onNameChange: (String) -> Unit, title: String) {
-        Column(modifier = Modifier.padding(5.dp)) {
-            OutlinedTextField(value = name, singleLine=true, onValueChange = onNameChange, label = { Text(title) })
         }
     }
 }
