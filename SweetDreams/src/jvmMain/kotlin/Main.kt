@@ -68,7 +68,7 @@ fun main() = application {
     Window(
         title = "SweetDreams",
         state = WindowState(width = 500.dp, height = 800.dp),
-        onCloseRequest = ::exitApplication
+        onCloseRequest = ::exitApplication,
     ) {
         App()
     }
