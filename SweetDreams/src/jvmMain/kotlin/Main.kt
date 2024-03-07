@@ -12,6 +12,7 @@ import userinterface.RegisterPage
 import userinterface.PlaylistsPage
 import userinterface.UploadPage
 import userinterface.SettingsPage
+import userinterface.NavBar
 
 var register = RegisterPage();
 var login = LoginPage();
@@ -19,6 +20,7 @@ var main = MainPage();
 var playlists = PlaylistsPage();
 var upload = UploadPage();
 var settings = SettingsPage();
+var navbar = NavBar()
 
 
 
@@ -43,9 +45,14 @@ fun App() {
         return@onReturn addUser;
     }
     register.onBack = {SetPage(1)}
-    main.onSettings = {SetPage(3)}
-    main.onPlaylists = {SetPage(4)}
-    main.onUpload = {SetPage(5)}
+    navbar.onSettings = {SetPage(3)}
+    navbar.onPlaylists = {SetPage(4)}
+    navbar.onUpload = {SetPage(5)}
+
+    main.navBar = navbar
+    playlists.navBar = navbar
+    upload.navBar = navbar
+    settings.navBar = navbar
 
     login.RenderPage ();
     register.RenderPage();
@@ -57,29 +64,19 @@ fun App() {
     SetPage(1)
 }
 
-fun SetPage(int: Int){
+fun SetPage(int: Int) {
     CloseAllPages();
-    if (int == 0){
-        register.ShowPage()
-    }
-    if (int == 1){
-        login.ShowPage()
-    }
-    if (int == 2) {
-        main.ShowPage()
-    }
-    if (int == 3) {
-        settings.ShowPage()
-    }
-    if (int == 4) {
-        playlists.ShowPage()
-    }
-    if (int == 5) {
-        upload.ShowPage()
+    when (int) {
+        0 -> register.ShowPage()
+        1 -> login.ShowPage()
+        2 -> main.ShowPage()
+        3 -> settings.ShowPage()
+        4 -> playlists.ShowPage()
+        5 -> upload.ShowPage()
     }
 }
 
-fun CloseAllPages(){
+fun CloseAllPages() {
     login.ClosePage();
     register.ClosePage();
     main.ClosePage();

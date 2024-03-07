@@ -1,0 +1,33 @@
+package userinterface
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Button
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+
+class NavBar {
+    lateinit var onPlaylists : () -> Unit
+    lateinit var onUpload : () -> Unit
+    lateinit var onSettings : () -> Unit
+    @Composable
+    fun nav() {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.Start
+        ) {
+            Button(onClick = { onPlaylists() }) {
+                Text("Playlists")
+            }
+            Button(onClick = { onUpload() }) {
+                Text("Upload")
+            }
+            Button(onClick = { onSettings() }) {
+                Text("Settings")
+            }
+        }
+    }
+}

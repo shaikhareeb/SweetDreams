@@ -9,8 +9,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 class PlaylistsPage: Page() {
+    lateinit var navBar : NavBar
     @Composable
-    override fun Content(){
+    override fun Content() {
+        navBar.nav()
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
