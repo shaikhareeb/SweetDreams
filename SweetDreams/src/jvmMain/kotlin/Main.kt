@@ -9,10 +9,17 @@ import model.AccountManager
 import userinterface.LoginPage
 import userinterface.MainPage
 import userinterface.RegisterPage
+import userinterface.PlaylistsPage
+import userinterface.UploadPage
+import userinterface.SettingsPage
 
 var register = RegisterPage();
 var login = LoginPage();
 var main = MainPage();
+var playlists = PlaylistsPage();
+var upload = UploadPage();
+var settings = SettingsPage();
+
 
 
 @Composable
@@ -36,10 +43,16 @@ fun App() {
         return@onReturn addUser;
     }
     register.onBack = {SetPage(1)}
+    main.onSettings = {SetPage(3)}
+    main.onPlaylists = {SetPage(4)}
+    main.onUpload = {SetPage(5)}
 
     login.RenderPage ();
     register.RenderPage();
-    main.RenderPage()
+    main.RenderPage();
+    playlists.RenderPage();
+    upload.RenderPage();
+    settings.RenderPage();
 
     SetPage(1)
 }
@@ -55,19 +68,31 @@ fun SetPage(int: Int){
     if (int == 2) {
         main.ShowPage()
     }
+    if (int == 3) {
+        settings.ShowPage()
+    }
+    if (int == 4) {
+        playlists.ShowPage()
+    }
+    if (int == 5) {
+        upload.ShowPage()
+    }
 }
 
 fun CloseAllPages(){
     login.ClosePage();
     register.ClosePage();
     main.ClosePage();
+    settings.ClosePage();
+    playlists.ClosePage();
+    upload.ClosePage();
 }
 
 
 fun main() = application {
     Window(
         title = "SweetDreams",
-        state = WindowState(width = 500.dp, height = 800.dp),
+        state = WindowState(width = 1024.dp, height = 768.dp),
         onCloseRequest = ::exitApplication,
     ) {
         App()
