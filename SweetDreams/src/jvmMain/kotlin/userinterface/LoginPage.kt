@@ -3,14 +3,12 @@ package userinterface
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -35,16 +33,16 @@ class LoginPage : Page() {
             TextFieldFormat(name = username, isPwd = false, onNameChange = { if (it.length <= 50) username = it }, "Email")
             TextFieldFormat(name = pwd, isPwd = true, onNameChange = { if (it.length <= 50) pwd = it }, "Password")
 
-            Button(onClick = {
+            Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                 val tryLoggingIn = onLogin(username, pwd);
                 if (!tryLoggingIn) {
                     errorText = "Email/password combination is invalid. Try Again"
                 }
             }) {
-                Text("Login")
+                Text("Login", color = Color.White)
             }
-            Button(onClick = { onSignUp() }) {
-                Text("Sign up")
+            Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = { onSignUp() }) {
+                Text("Sign up", color = Color.White)
             }
 
             Text(errorText)

@@ -47,7 +47,7 @@ class ExplorePage : Page() {
 
     @Composable
     override fun Content() {
-        Column(modifier = Modifier.fillMaxSize().border(2.dp, Color.Gray).background(Color(0xFF4A148C))) {
+        Column(modifier = Modifier.fillMaxSize().border(2.dp, Color.Gray).background(Color(0xFF93AEDE))) {
 
             Row(modifier = Modifier.fillMaxWidth()) {
                 // NavBar on the left
@@ -61,7 +61,7 @@ class ExplorePage : Page() {
                 // Main content area for videos in a manually created scrollable grid
                 val scrollState = rememberScrollState()
                 Column(
-                    modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(scrollState).background(Color(0xFF4A148C)),
+                    modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(scrollState).background(Color(0x95b0df)),
                     verticalArrangement = Arrangement.Top,
                 ) {
                     // Header
@@ -97,6 +97,7 @@ class ExplorePage : Page() {
     fun VideoCard(video: Video) {
         Card(
             modifier = Modifier.width(200.dp).padding(bottom = 16.dp), // Set width for the card
+            backgroundColor = Color(0xFFF2F1FB),
             elevation = 4.dp
         ) {
             Column(modifier = Modifier.padding(8.dp)) {

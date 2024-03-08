@@ -1,15 +1,18 @@
 package userinterface
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 class NavBar {
@@ -28,81 +31,98 @@ class NavBar {
                 .width(200.dp)
                 .fillMaxHeight()
                 .border(2.dp, Color.Gray)
-                .background(Color(0xFF4A148C)) // Dark purple background
+                .background(Color(0xFF465E96)) // Dark purple background
                 .padding(vertical = 8.dp), // Add some vertical padding for the column
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(8.dp)) // Adds space at the top
 
+            Image(
+                painter = painterResource("Picture1.png"), // Replace with your image path
+                contentDescription = "Logo",
+                modifier = Modifier
+                    .size(100.dp) // Adjust the size as needed
+                    .padding(bottom = 16.dp) // Add some space below the logo
+            )
+
             Button(
                 onClick = { onUser() },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(95.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
                 shape = RoundedCornerShape(8.dp) // Rounded corners
             ) {
-                Text("User")
+                Text("User", color = Color.White)
             }
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Button(
                 onClick = { onExplore() },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(95.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
-                Text("Explore")
+                Text("Explore", color = Color.White)
             }
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Button(
                 onClick = { onUpload() },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(95.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
-                Text("Upload")
+                Text("Upload", color = Color.White)
             }
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Button(
                 onClick = { onPlaylists() },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(95.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
-                Text("Playlists")
+                Text("Playlists", color = Color.White)
             }
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Button(
                 onClick = { onSettings() },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(95.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
-                Text("Settings")
+                Text("Settings", color = Color.White)
             }
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Button(
                 onClick = { onLock() },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(95.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
-                Text("Lock Application")
+                Text("Lock Application", color = Color.White)
             }
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Button(
                 onClick = { onLogout() },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(95.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
-                Text("Log Out")
+                Text("Log Out", color = Color.White)
+
             }
 
             Spacer(modifier = Modifier.height(8.dp))
         }
     }
+
 }

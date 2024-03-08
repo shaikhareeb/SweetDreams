@@ -2,9 +2,7 @@ package userinterface
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.Slider
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -38,31 +36,25 @@ class SettingsPage: Page() {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("Language: English")
-                Slider(
-                    value = sliderPosition,
-                    onValueChange = { sliderPosition = it },
 
-                    )
-                Text(text = "Volume")
                 TextFieldFormat(
                     name = pwd,
                     isPwd = false,
                     onNameChange = { if (it.length <= 50) pwd = it },
                     "New Password"
                 )
-                TextFieldFormat(name = uid, isPwd = false, onNameChange = { if (it.length <= 50) uid = it }, "Re-enter id to delete account")
-                Button(onClick = {
+                TextFieldFormat(name = uid, isPwd = false, onNameChange = { if (it.length <= 50) uid = it }, "Re-enter password to delete")
+                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                     errorText = onDelete(uid)
                 }) {
-                    Text("Delete Account")
+                    Text("Delete Account", color = Color.White)
                 }
                 TextFieldFormat(name = pwd, isPwd = true, onNameChange = { if (it.length <= 50) pwd = it }, "New Password")
-                Button(onClick = {
+                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                     onReset
                     (pwd)
                 }) {
-                    Text("Reset Password")
+                    Text("Reset Password", color = Color.White)
                 }
                 Text(errorText)
             }

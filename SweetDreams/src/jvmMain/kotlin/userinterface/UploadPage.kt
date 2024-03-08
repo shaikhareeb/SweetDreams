@@ -3,6 +3,7 @@ package userinterface
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -62,13 +63,13 @@ class UploadPage: Page() {
                     onNameChange = { if (it.length <= 50) tags = it },
                     "Tags String (comma seperated)"
                 )
-                Button(onClick = {
+                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                     val tryReturning = onSignup(link, tags);
                     if (tryReturning != "") {
                         errorText = tryReturning
                     }
                 }) {
-                    Text("Add Youtube-Linked Lullaby")
+                    Text("Add Youtube-Linked Lullaby", color = Color.White)
                 }
 
                 Text(errorText)
