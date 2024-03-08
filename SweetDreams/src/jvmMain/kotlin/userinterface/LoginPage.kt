@@ -32,13 +32,13 @@ class LoginPage : Page() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             SimpleImage()
-            TextFieldFormat(name = username, isPwd = false, onNameChange = { if (it.length <= 50) username = it }, "Username")
+            TextFieldFormat(name = username, isPwd = false, onNameChange = { if (it.length <= 50) username = it }, "Email")
             TextFieldFormat(name = pwd, isPwd = true, onNameChange = { if (it.length <= 50) pwd = it }, "Password")
 
             Button(onClick = {
                 val tryLoggingIn = onLogin(username, pwd);
                 if (!tryLoggingIn) {
-                    errorText = "Username/password combination is invalid. Try Again"
+                    errorText = "Email/password combination is invalid. Try Again"
                 }
             }) {
                 Text("Login")

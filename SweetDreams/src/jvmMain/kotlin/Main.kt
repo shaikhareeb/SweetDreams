@@ -43,12 +43,21 @@ fun App() {
     }
     register.onBack = {SetPage(1)}
 
+    settings.onReset = onReturn@{pwd: String ->
+        SetPage(1)
+
+    }
+    settings.onDelete = {
+        SetPage(1)
+    }
+
 
     navbar.onExplore = {SetPage(2)}
     navbar.onUser = {SetPage(3)}
     navbar.onUpload = {SetPage(4)}
     navbar.onPlaylists = {SetPage(5)}
     navbar.onSettings = {SetPage(6)}
+    navbar.onLogout = {SetPage(1)}
 
     explore.navBar = navbar
     user.navBar = navbar

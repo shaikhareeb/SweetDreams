@@ -36,10 +36,12 @@ class AccountManager {
         }
         if (pwd != pwd2) return "Passwords do not match. Please try again";
         var record = UserRecord.CreateRequest();
+
         record.setEmail(email);
         record.setPassword(pwd);
 
         auth.createUser(record);
         return "";
     }
+
 }

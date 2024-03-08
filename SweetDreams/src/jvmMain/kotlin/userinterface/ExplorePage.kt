@@ -8,6 +8,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
+var currentLullabies = Array(1) { arrayOf("https://www.youtube.com/watch?v=2SmUkXtQIPc&ab_channel=BestBabyLullabies", "youtube,whitenoise") }
+
 class ExplorePage: Page() {
     lateinit var navBar : NavBar
     @Composable
@@ -18,7 +20,9 @@ class ExplorePage: Page() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Explore")
+            for (lullaby in currentLullabies) {
+                Text(lullaby.get(0))
+            }
         }
     }
 }

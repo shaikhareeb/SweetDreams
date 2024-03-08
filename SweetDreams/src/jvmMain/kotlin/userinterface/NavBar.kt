@@ -15,6 +15,7 @@ class NavBar {
     lateinit var onUpload : () -> Unit
     lateinit var onPlaylists : () -> Unit
     lateinit var onSettings : () -> Unit
+    lateinit var onLogout: () -> Unit
     @Composable
     fun nav() {
         Column(
@@ -35,6 +36,9 @@ class NavBar {
             }
             Button(onClick = { onSettings() }) {
                 Text("Settings")
+            }
+            Button(onClick = { onLogout() }) {
+                Text("Log Out")
             }
         }
     }
