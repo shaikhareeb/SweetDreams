@@ -18,9 +18,9 @@ class AccountManager {
         json.put("email", email)
         json.put("password", password)
         json.put("returnSecureToken", true)
-        var result = model.PostHttpBody(
+        var result = PostHttpBody(
             json,
-            "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + model.apikey);
+            "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + apikey);
 
         return result != "NULL";
     }

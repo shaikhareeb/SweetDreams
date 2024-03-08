@@ -1,5 +1,6 @@
 package model
 
+import androidx.compose.ui.graphics.ImageBitmap
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
@@ -9,6 +10,13 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.json.JSONObject
 import java.io.FileInputStream
+import androidx.compose.foundation.Image
+import androidx.compose.runtime.Composable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.io.InputStream
+import java.net.URL
+import javax.imageio.ImageIO
 
 val apikey = "AIzaSyCQT048S2I6bzN00IS6uhmEYnzpE9priNk";
 
@@ -22,20 +30,16 @@ fun Initialize() {
 
 fun PostHttpBody(jsonObj: JSONObject?, url: String) : String {
     val mediaType = "application/json; charset=utf-8".toMediaType()
-    var json = jsonObj;
-
-    if (json == null) json = JSONObject()
+    var json = jsonObj
+    if (json == null) json = JSONObject();
     val requestBody = json.toString().toRequestBody(mediaType)
     val request = Request.Builder()
         .url(url)
         .post(requestBody)
         .build()
 
-    println(request)
-
     val client = OkHttpClient()
     client.newCall(request).execute().use { response ->
-        print(response.body?.string())
         if (!response.isSuccessful) return "NULL";
         val responseBody = response.body?.string()
         if (responseBody != null) {

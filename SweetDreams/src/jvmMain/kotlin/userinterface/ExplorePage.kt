@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import youtube.youtubeData
 
 // Assume Video data class and NavBar class are defined elsewhere
 data class Video(
@@ -21,6 +22,7 @@ data class Video(
 )
 class ExplorePage : Page() {
     lateinit var navBar: NavBar
+    lateinit var thumbnails : Array<youtubeData?>
 
     // Sample list of videos
     private val videos = listOf(
@@ -44,6 +46,10 @@ class ExplorePage : Page() {
         Video(9, "Video Title 9", "This is a description of video 9.", "thumbnail9.jpg")
         // Add more videos as needed
     )
+
+    init {
+        thumbnails = youtube.getSearchData("Lullabies");
+    }
 
     @Composable
     override fun Content() {
@@ -102,13 +108,28 @@ class ExplorePage : Page() {
         ) {
             Column(modifier = Modifier.padding(8.dp)) {
                 // Placeholder for video thumbnail
-                Box(modifier = Modifier.height(180.dp).fillMaxWidth().border(1.dp, Color.Gray), contentAlignment = Alignment.Center) {
-                    Text("Thumbnail")
+                Box(
+                    modifier = Modifier.height(180.dp).fillMaxWidth().border(1.dp, Color.Gray),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (video.id <= thumbnails.size) {
+                        val youtubeData = thumbnails[video.id - 1];
+                        if (youtubeData != null)
+                            thumbnails[video.id - 1]?.let { Text(it.thumbnail) };
+                    }
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-                Text(text = video.title, style = MaterialTheme.typography.h6)
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(text = video.description, style = MaterialTheme.typography.body2)
+                if (video.id <= thumbnails.size) {
+                    thumbnails[video.id - 1]?.let {
+                        Text(text = it.title, style = MaterialTheme.typography.h6)
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(text = it.description, style = MaterialTheme.typography.body2)
+                    };
+                  } else {
+                    Text(text = video.title, style = MaterialTheme.typography.h6)
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(text = video.description, style = MaterialTheme.typography.body2)
+                }
             }
         }
     }

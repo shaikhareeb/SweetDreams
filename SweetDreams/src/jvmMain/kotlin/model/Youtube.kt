@@ -1,17 +1,53 @@
 package youtube
 
 import model.GetHttpBody
+import org.json.JSONArray
 import org.json.JSONObject
 
-fun GetYoutubeVideo(videoId:String){
+data class youtubeData (
+    val id: Int,
+    val title: String,
+    val description: String,
+    val thumbnail: String,
+)
+
+fun GetYoutubeVideo(videoId:String) : JSONObject{
     var url = "https://www.googleapis.com/youtube/v3/videos?";
     url += "key=AIzaSyCwu-oCqEIfcEJOTBrNAIK2wmRyLXTXeBw";
     url += "&id=$videoId";
     url += "&part=snippet"
 
-
     var result = GetHttpBody(url)
-    println(result);
+    return JSONObject(result);
+}
+
+fun GetSearchList(search : String) : JSONArray{
+    var url = "https://www.googleapis.com/youtube/v3/search?";
+    url += "key=AIzaSyCwu-oCqEIfcEJOTBrNAIK2wmRyLXTXeBw";
+    url += "&q=$search";
+    url += "&type=video"
+
+    var result = GetHttpBody(url);
+    var json = JSONObject(result);
+    var arr = json.getJSONArray("items");
+    return arr
+}
+
+fun getSearchData(search : String) : Array<youtubeData?> {
+    var list = GetSearchList(search);
+    val vals: Array<youtubeData?> = arrayOfNulls<youtubeData>(5)
+    var i = 0;
+    (0 until list.length()).forEach {
+        val item = list.getJSONObject(it)
+        var videoId = item.getJSONObject("id").get("videoId").toString();
+        var videoDetails = GetYoutubeVideo(videoId);
+        var videoTitle = JSONObject(videoDetails.getJSONArray("items").get(0).toString()).getJSONObject("snippet").getString("title").toString();
+        var thumbnailUrl = JSONObject(videoDetails.getJSONArray("items").get(0).toString()).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getString("url");
+        vals[i] = youtubeData(0, videoTitle, "", thumbnailUrl);
+        i += 1
+    }
+
+    return vals;
 }
 
 fun Initialize() {

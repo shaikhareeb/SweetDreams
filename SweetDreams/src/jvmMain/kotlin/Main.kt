@@ -24,8 +24,6 @@ var navbar = NavBar()
 @Preview
 fun App() {
     model.Initialize();
-    youtube.Initialize();
-    youtube.GetYoutubeVideo("vR2lf8Z0SVo");
 
     var accountManager = AccountManager()
 
@@ -118,8 +116,8 @@ fun CloseAllPages() {
 
 fun main() = application {
     Window(
-        title = "",
-        state = WindowState(width = 1080.dp, height = 768.dp),
+        title = "SweetDreams",
+        state = WindowState(width = 1024.dp, height = 768.dp),
         onCloseRequest = ::exitApplication,
     ) {
         App()
