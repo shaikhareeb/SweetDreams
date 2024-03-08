@@ -30,6 +30,7 @@ kotlin {
                 implementation("com.squareup.okhttp3:okhttp:4.9.0")
                 implementation("org.json:json:20210307")
                 implementation("com.google.firebase:firebase-admin:7.0.1")
+                implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10")
             }
         }
         jvmMain.dependencies {
@@ -37,6 +38,7 @@ kotlin {
             implementation("com.squareup.okhttp3:okhttp:4.9.0")
             implementation("org.json:json:20210307")
             implementation("com.google.firebase:firebase-admin:7.0.1")
+            implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.4.10")
         }
         val jvmTest by getting
     }

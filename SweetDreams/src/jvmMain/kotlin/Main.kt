@@ -116,8 +116,8 @@ fun CloseAllPages() {
 
 fun main() = application {
     Window(
-        title = "SweetDreams",
-        state = WindowState(width = 1024.dp, height = 768.dp),
+        title = "",
+        state = WindowState(width = 1080.dp, height = 768.dp),
         onCloseRequest = ::exitApplication,
     ) {
         App()
