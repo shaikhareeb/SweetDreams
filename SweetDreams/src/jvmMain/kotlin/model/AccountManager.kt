@@ -9,8 +9,14 @@ var currentAccounts = Array(1) { arrayOf("john","smith","john123","john@gmail.co
 
 class AccountManager {
     lateinit var auth: FirebaseAuth;
+    lateinit var email: String;
+
     init {
         auth = FirebaseAuth.getInstance();
+    }
+
+    fun setUser(email : String){
+        this.email = email;
     }
 
     fun validateUser(email: String, password: String): Boolean {
@@ -21,7 +27,9 @@ class AccountManager {
         var result = PostHttpBody(
             json,
             "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + apikey);
-
+        if (result != "NULL"){
+            setUser(email);
+        }
         return result != "NULL";
     }
 
@@ -47,5 +55,9 @@ class AccountManager {
             return "Wrong user id or not possible to delete account"
         }
         return ""
+    }
+
+    fun forgotPassword() : String {
+        return auth.generatePasswordResetLink(email)
     }
 }

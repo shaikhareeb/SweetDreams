@@ -12,7 +12,7 @@ import androidx.compose.ui.unit.dp
 class SettingsPage: Page() {
     lateinit var navBar : NavBar
     lateinit var onDelete : (String) -> String
-    lateinit var onReset : (String) -> Unit
+    lateinit var onReset : (String) -> String
 
 
     @Composable
@@ -49,10 +49,8 @@ class SettingsPage: Page() {
                 }) {
                     Text("Delete Account", color = Color.White)
                 }
-                TextFieldFormat(name = pwd, isPwd = true, onNameChange = { if (it.length <= 50) pwd = it }, "New Password")
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-                    onReset
-                    (pwd)
+                    errorText = onReset(pwd)
                 }) {
                     Text("Reset Password", color = Color.White)
                 }

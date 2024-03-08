@@ -49,6 +49,7 @@ class ExplorePage : Page() {
 
     init {
         thumbnails = youtube.getSearchData("Lullabies");
+        //thumbnails = arrayOfNulls(0);
     }
 
     @Composable

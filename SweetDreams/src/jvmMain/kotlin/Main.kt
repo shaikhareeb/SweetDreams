@@ -45,8 +45,7 @@ fun App() {
     register.onBack = {SetPage(1)}
 
     settings.onReset = onReturn@{pwd: String ->
-        SetPage(1)
-
+        return@onReturn accountManager.forgotPassword()
     }
     settings.onDelete = onReturn@{uid: String ->
         var res = accountManager.deleteUser(uid)
