@@ -48,8 +48,10 @@ fun App() {
         SetPage(1)
 
     }
-    settings.onDelete = {
-        SetPage(1)
+    settings.onDelete = onReturn@{uid: String ->
+        var res = accountManager.deleteUser(uid)
+        if (res == "") SetPage(1)
+        return@onReturn res;
     }
     lockpage.onLogin = onReturn@{ s: String, s1: String ->
         val userLoginSuccess = accountManager.validateUser(s, s1)

@@ -37,7 +37,8 @@ To run this application, clone the repo, ensure JDK 17 is installed, and press r
 
 # Software Releases
 
-Sprint 1 Release: https://git.uwaterloo.ca/r2baxi/Team-102-16/-/releases/sprint-1-conclusion
+1. Sprint 1 Release (Feb. 16, 2024): https://git.uwaterloo.ca/r2baxi/Team-102-16/-/releases/sprint-1-conclusion
+2. Sprint 2 Release (Mar. 8, 2024): https://git.uwaterloo.ca/r2baxi/Team-102-16/-/releases/sprint-2-conclusion
 
 # Third-Party Acknowledgement
 
