@@ -3,6 +3,7 @@ package userinterface
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.Button
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -48,9 +49,7 @@ class ExplorePage: Page() {
                 },
             )
 
-            val showLullabies = currentLullabies
-
-            for (lullaby in showLullabies) {
+            for (lullaby in currentLullabies) {
                 var tags = lullaby.get(1).split(",")
                 if (isWhitenoise.value && !("whitenoise" in tags)) {
                     continue;
