@@ -1,48 +1,70 @@
 package userinterface
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.graphics.Color
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 class NavBar {
-    lateinit var onUser : () -> Unit
-    lateinit var onExplore : () -> Unit
-    lateinit var onUpload : () -> Unit
-    lateinit var onPlaylists : () -> Unit
-    lateinit var onSettings : () -> Unit
+    lateinit var onUser: () -> Unit
+    lateinit var onExplore: () -> Unit
+    lateinit var onUpload: () -> Unit
+    lateinit var onPlaylists: () -> Unit
+    lateinit var onSettings: () -> Unit
     lateinit var onLogout: () -> Unit
     lateinit var onLock: () -> Unit
 
     @Composable
     fun nav() {
         Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.Start
+            modifier = Modifier.fillMaxWidth().fillMaxHeight().border(2.dp, Color.Gray),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(onClick = { onUser() }) {
+            Button(
+                modifier = Modifier.fillMaxWidth().weight(.5f),
+                onClick = { onUser() }
+            ) {
                 Text("User")
             }
-            Button(onClick = { onExplore() }) {
+            Button(
+                modifier = Modifier.fillMaxWidth().weight(.5f),
+                onClick = { onExplore() }
+            ) {
                 Text("Explore")
             }
-            Button(onClick = { onUpload() }) {
+            Button(
+                modifier = Modifier.fillMaxWidth().weight(.5f),
+                onClick = { onUpload() }
+            ) {
                 Text("Upload")
             }
-            Button(onClick = { onPlaylists() }) {
+            Button(
+                modifier = Modifier.fillMaxWidth().weight(.5f),
+                onClick = { onPlaylists() }
+            ) {
                 Text("Playlists")
             }
-            Button(onClick = { onSettings() }) {
+            Button(
+                modifier = Modifier.fillMaxWidth().weight(.5f),
+                onClick = { onSettings() }
+            ) {
                 Text("Settings")
             }
-            Button(onClick = { onLock() }) {
-                Text("LOCK APPLICATION")
+            Button(
+                modifier = Modifier.fillMaxWidth().weight(.5f),
+                onClick = { onLock() }
+            ) {
+                Text("Lock Application")
             }
-            Button(onClick = { onLogout() }) {
+            Button(
+                modifier = Modifier.fillMaxWidth().weight(.5f),
+                onClick = { onLogout() }
+            ) {
                 Text("Log Out")
             }
         }
