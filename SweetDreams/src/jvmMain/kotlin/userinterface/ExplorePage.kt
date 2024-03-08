@@ -35,15 +35,15 @@ class ExplorePage : Page() {
         Video(7, "Video Title 7", "This is a description of video 7.", "thumbnail7.jpg"),
         Video(8, "Video Title 8", "This is a description of video 8.", "thumbnail8.jpg"),
         Video(9, "Video Title 9", "This is a description of video 9.", "thumbnail9.jpg"),
-        Video(1, "Video Title 1", "This is a description of video 1.", "thumbnail1.jpg"),
-        Video(2, "Video Title 2", "This is a description of video 2.", "thumbnail2.jpg"),
-        Video(3, "Video Title 3", "This is a description of video 3.", "thumbnail3.jpg"),
-        Video(4, "Video Title 4", "This is a description of video 4.", "thumbnail4.jpg"),
-        Video(5, "Video Title 5", "This is a description of video 5.", "thumbnail5.jpg"),
-        Video(6, "Video Title 6", "This is a description of video 6.", "thumbnail6.jpg"),
-        Video(7, "Video Title 7", "This is a description of video 7.", "thumbnail7.jpg"),
-        Video(8, "Video Title 8", "This is a description of video 8.", "thumbnail8.jpg"),
-        Video(9, "Video Title 9", "This is a description of video 9.", "thumbnail9.jpg")
+        Video(10, "Video Title 1", "This is a description of video 1.", "thumbnail1.jpg"),
+        Video(11, "Video Title 2", "This is a description of video 2.", "thumbnail2.jpg"),
+        Video(12, "Video Title 3", "This is a description of video 3.", "thumbnail3.jpg"),
+        Video(13, "Video Title 4", "This is a description of video 4.", "thumbnail4.jpg"),
+        Video(14, "Video Title 5", "This is a description of video 5.", "thumbnail5.jpg"),
+        Video(15, "Video Title 6", "This is a description of video 6.", "thumbnail6.jpg"),
+        Video(16, "Video Title 7", "This is a description of video 7.", "thumbnail7.jpg"),
+        Video(17, "Video Title 8", "This is a description of video 8.", "thumbnail8.jpg"),
+        Video(18, "Video Title 9", "This is a description of video 9.", "thumbnail9.jpg")
         // Add more videos as needed
     )
 

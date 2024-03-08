@@ -26,6 +26,7 @@ fun GetSearchList(search : String) : JSONArray{
     url += "key=AIzaSyCwu-oCqEIfcEJOTBrNAIK2wmRyLXTXeBw";
     url += "&q=$search";
     url += "&type=video"
+    url += "&maxResults=20"
 
     var result = GetHttpBody(url);
     var json = JSONObject(result);
@@ -35,7 +36,7 @@ fun GetSearchList(search : String) : JSONArray{
 
 fun getSearchData(search : String) : Array<youtubeData?> {
     var list = GetSearchList(search);
-    val vals: Array<youtubeData?> = arrayOfNulls<youtubeData>(5)
+    val vals: Array<youtubeData?> = arrayOfNulls<youtubeData>(20)
     var i = 0;
     (0 until list.length()).forEach {
         val item = list.getJSONObject(it)
