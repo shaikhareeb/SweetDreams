@@ -2,13 +2,7 @@ package model
 
 import com.google.api.client.http.HttpResponseException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserRecord
 import com.google.firebase.auth.UserRecord.CreateRequest
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
-import okio.IOException
 import org.json.JSONObject
 
 var currentAccounts = Array(1) { arrayOf("john","smith","john123","john@gmail.com","johnpwd") }
@@ -24,7 +18,7 @@ class AccountManager {
         json.put("email", email)
         json.put("password", password)
         json.put("returnSecureToken", true)
-        var result = model.GetHttpBody(
+        var result = model.PostHttpBody(
             json,
             "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + model.apikey);
 

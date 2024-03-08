@@ -24,6 +24,8 @@ var navbar = NavBar()
 @Preview
 fun App() {
     model.Initialize();
+    youtube.Initialize();
+    youtube.GetYoutubeVideo("vR2lf8Z0SVo");
 
     var accountManager = AccountManager()
 

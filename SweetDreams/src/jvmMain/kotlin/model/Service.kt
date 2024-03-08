@@ -20,21 +20,43 @@ fun Initialize() {
     FirebaseApp.initializeApp(options)
 }
 
-fun GetHttpBody(json : JSONObject, url : String) : String {
+fun PostHttpBody(jsonObj: JSONObject?, url: String) : String {
     val mediaType = "application/json; charset=utf-8".toMediaType()
+    var json = jsonObj;
+
+    if (json == null) json = JSONObject()
     val requestBody = json.toString().toRequestBody(mediaType)
     val request = Request.Builder()
         .url(url)
         .post(requestBody)
         .build()
 
+    println(request)
+
     val client = OkHttpClient()
     client.newCall(request).execute().use { response ->
+        print(response.body?.string())
         if (!response.isSuccessful) return "NULL";
         val responseBody = response.body?.string()
         if (responseBody != null) {
             return responseBody;
         }
+    }
+    return "NULL"
+}
+
+fun GetHttpBody(url: String) : String {
+    val request = Request.Builder()
+        .url(url)
+        .get()
+        .build()
+
+    println(request)
+
+    val client = OkHttpClient()
+    client.newCall(request).execute().use { response ->
+        var body = response.body;
+        if (body != null) return body.string();
     }
     return "NULL"
 }
