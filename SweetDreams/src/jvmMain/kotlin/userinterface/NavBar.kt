@@ -10,8 +10,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 class NavBar {
-    lateinit var onPlaylists : () -> Unit
+    lateinit var onUser : () -> Unit
+    lateinit var onExplore : () -> Unit
     lateinit var onUpload : () -> Unit
+    lateinit var onPlaylists : () -> Unit
     lateinit var onSettings : () -> Unit
     @Composable
     fun nav() {
@@ -19,11 +21,17 @@ class NavBar {
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.Start
         ) {
-            Button(onClick = { onPlaylists() }) {
-                Text("Playlists")
+            Button(onClick = { onUser() }) {
+                Text("User")
+            }
+            Button(onClick = { onExplore() }) {
+                Text("Explore")
             }
             Button(onClick = { onUpload() }) {
                 Text("Upload")
+            }
+            Button(onClick = { onPlaylists() }) {
+                Text("Playlists")
             }
             Button(onClick = { onSettings() }) {
                 Text("Settings")

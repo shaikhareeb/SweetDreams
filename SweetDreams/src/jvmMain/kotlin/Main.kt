@@ -6,19 +6,14 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import model.AccountManager
-import userinterface.LoginPage
-import userinterface.MainPage
-import userinterface.RegisterPage
-import userinterface.PlaylistsPage
-import userinterface.UploadPage
-import userinterface.SettingsPage
-import userinterface.NavBar
+import userinterface.*
 
 var register = RegisterPage();
 var login = LoginPage();
-var main = MainPage();
-var playlists = PlaylistsPage();
+var user = UserPage();
+var explore = ExplorePage();
 var upload = UploadPage();
+var playlists = PlaylistsPage();
 var settings = SettingsPage();
 var navbar = NavBar()
 
@@ -45,18 +40,24 @@ fun App() {
         return@onReturn addUser;
     }
     register.onBack = {SetPage(1)}
-    navbar.onSettings = {SetPage(3)}
-    navbar.onPlaylists = {SetPage(4)}
-    navbar.onUpload = {SetPage(5)}
 
-    main.navBar = navbar
+
+    navbar.onExplore = {SetPage(2)}
+    navbar.onUser = {SetPage(3)}
+    navbar.onUpload = {SetPage(4)}
+    navbar.onPlaylists = {SetPage(5)}
+    navbar.onSettings = {SetPage(6)}
+
+    explore.navBar = navbar
+    user.navBar = navbar
     playlists.navBar = navbar
     upload.navBar = navbar
     settings.navBar = navbar
 
     login.RenderPage ();
     register.RenderPage();
-    main.RenderPage();
+    explore.RenderPage();
+    user.RenderPage();
     playlists.RenderPage();
     upload.RenderPage();
     settings.RenderPage();
@@ -69,20 +70,23 @@ fun SetPage(int: Int) {
     when (int) {
         0 -> register.ShowPage()
         1 -> login.ShowPage()
-        2 -> main.ShowPage()
-        3 -> settings.ShowPage()
-        4 -> playlists.ShowPage()
-        5 -> upload.ShowPage()
+        2 -> explore.ShowPage()
+        3 -> user.ShowPage()
+        4 -> upload.ShowPage()
+        5 -> playlists.ShowPage()
+        6 -> settings.ShowPage()
     }
 }
 
 fun CloseAllPages() {
     login.ClosePage();
     register.ClosePage();
-    main.ClosePage();
-    settings.ClosePage();
-    playlists.ClosePage();
+    explore.ClosePage();
+    user.ClosePage();
     upload.ClosePage();
+    playlists.ClosePage();
+    settings.ClosePage();
+
 }
 
 

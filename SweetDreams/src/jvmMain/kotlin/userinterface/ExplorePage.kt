@@ -8,7 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
-class MainPage: Page() {
+class ExplorePage: Page() {
     lateinit var navBar : NavBar
     @Composable
     override fun Content(){
@@ -18,7 +18,7 @@ class MainPage: Page() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("SweetDreams Application")
+            Text("Explore")
         }
     }
 }
