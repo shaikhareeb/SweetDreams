@@ -1,5 +1,6 @@
 package model
 
+import com.google.api.client.http.HttpResponseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserRecord
 import com.google.firebase.auth.UserRecord.CreateRequest
@@ -34,8 +35,9 @@ class AccountManager {
         if (fname.isEmpty() || lname.isEmpty() || uname.isEmpty() || email.isEmpty() || pwd.isEmpty() || pwd2.isEmpty()) {
             return "Fill in all of the fields before registering"
         }
+        if (pwd.length < 8) return "Password is too short"
         if (pwd != pwd2) return "Passwords do not match. Please try again";
-        var record = UserRecord.CreateRequest();
+        var record = CreateRequest();
 
         record.setEmail(email);
         record.setPassword(pwd);
@@ -44,4 +46,12 @@ class AccountManager {
         return "";
     }
 
+    fun deleteUser(uid: String): String {
+        try {
+            auth.deleteUser(uid)
+        } catch (e: HttpResponseException) {
+            return "Wrong user id or not possible to delete account"
+        }
+        return ""
+    }
 }

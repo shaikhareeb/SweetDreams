@@ -12,14 +12,17 @@ import androidx.compose.ui.Modifier
 
 class SettingsPage: Page() {
     lateinit var navBar : NavBar
-    lateinit var onDelete : () -> Unit
+    lateinit var onDelete : (String) -> String
     lateinit var onReset : (String) -> Unit
 
 
     @Composable
     override fun Content(){
         var sliderPosition = 100.toFloat()
+        var uid by remember { mutableStateOf("") }
         var pwd by remember { mutableStateOf("") }
+
+        var errorText by remember { mutableStateOf("") }
         navBar.nav()
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -33,17 +36,21 @@ class SettingsPage: Page() {
 
             )
             Text(text = "Volume")
-            TextFieldFormat(name = pwd, isPwd = false, onNameChange = { if (it.length <= 50) pwd = it }, "New Password")
 
+            TextFieldFormat(name = uid, isPwd = false, onNameChange = { if (it.length <= 50) uid = it }, "Re-enter id to delete account")
             Button(onClick = {
-                onDelete()
+                errorText = onDelete(uid)
             }) {
                 Text("Delete Account")
             }
+
+            TextFieldFormat(name = pwd, isPwd = true, onNameChange = { if (it.length <= 50) pwd = it }, "New Password")
             Button(onClick = {onReset
                 (pwd)}) {
                 Text("Reset Password")
             }
+
+            Text(errorText)
 
         }
     }
