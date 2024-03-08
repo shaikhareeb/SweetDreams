@@ -15,6 +15,7 @@ var explore = ExplorePage();
 var upload = UploadPage();
 var playlists = PlaylistsPage();
 var settings = SettingsPage();
+var lockpage = LockPage();
 var navbar = NavBar()
 
 
@@ -50,6 +51,13 @@ fun App() {
     settings.onDelete = {
         SetPage(1)
     }
+    lockpage.onLogin = onReturn@{ s: String, s1: String ->
+        val userLoginSuccess = accountManager.validateUser(s, s1)
+        if (userLoginSuccess) {
+            SetPage(2)
+        }
+        return@onReturn userLoginSuccess;
+    }
 
 
     navbar.onExplore = {SetPage(2)}
@@ -57,6 +65,7 @@ fun App() {
     navbar.onUpload = {SetPage(4)}
     navbar.onPlaylists = {SetPage(5)}
     navbar.onSettings = {SetPage(6)}
+    navbar.onLock = {SetPage(7)}
     navbar.onLogout = {SetPage(1)}
 
     explore.navBar = navbar
@@ -72,6 +81,7 @@ fun App() {
     playlists.RenderPage();
     upload.RenderPage();
     settings.RenderPage();
+    lockpage.RenderPage();
 
     SetPage(1)
 }
@@ -86,6 +96,7 @@ fun SetPage(int: Int) {
         4 -> upload.ShowPage()
         5 -> playlists.ShowPage()
         6 -> settings.ShowPage()
+        7 -> lockpage.ShowPage()
     }
 }
 
@@ -97,7 +108,7 @@ fun CloseAllPages() {
     upload.ClosePage();
     playlists.ClosePage();
     settings.ClosePage();
-
+    lockpage.ClosePage();
 }
 
 
