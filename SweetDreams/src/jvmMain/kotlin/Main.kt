@@ -22,6 +22,8 @@ var navbar = NavBar()
 @Composable
 @Preview
 fun App() {
+    model.Initialize();
+
     var accountManager = AccountManager()
 
     login.onSignUp = {SetPage(0)};
