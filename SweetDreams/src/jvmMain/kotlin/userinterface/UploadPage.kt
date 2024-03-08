@@ -18,7 +18,12 @@ class UploadPage: Page() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text("Upload Page")
+            Text("Add a new lullaby from Youtube to your SweetDreams account")
+            var link by remember { mutableStateOf("") }
+            var tags by remember { mutableStateOf("") }
+
+            TextFieldFormat(name = link, isPwd = false, onNameChange = { if (it.length <= 50) link = it }, "First Name")
+            TextFieldFormat(name = tags, isPwd = false, onNameChange = { if (it.length <= 50) tags = it }, "Last Name")
         }
     }
 }
