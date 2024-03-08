@@ -35,6 +35,7 @@ fun App() {
         }
         return@onReturn userLoginSuccess;
     }
+    login.onForgotPwd = {mail: String -> accountManager.forgotPasswordEmail(mail)}
     register.onReturn = onReturn@{ s: String, s1: String, s2: String, s3: String, s4: String, s5: String ->
         val addUser = accountManager.addUser(s, s1, s2, s3, s4, s5);
         if (addUser == "") {

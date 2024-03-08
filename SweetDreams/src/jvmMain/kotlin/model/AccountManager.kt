@@ -60,4 +60,8 @@ class AccountManager {
     fun forgotPassword() : String {
         return auth.generatePasswordResetLink(email)
     }
+
+    fun forgotPasswordEmail(mail: String) : String {
+        return auth.generatePasswordResetLink(mail)
+    }
 }

@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 class LoginPage : Page() {
     lateinit var onSignUp : () -> Unit
     lateinit var onLogin: (username: String, pwd: String) -> Boolean
+    lateinit var onForgotPwd: (email: String) -> Unit
     @Composable
     override fun Content(){
         var username by remember { mutableStateOf("") }
@@ -43,6 +44,16 @@ class LoginPage : Page() {
             }
             Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = { onSignUp() }) {
                 Text("Sign up", color = Color.White)
+            }
+            Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                if (username == "") {
+                    errorText = "Enter a valid email"
+                    return@Button
+                }
+                onForgotPwd(username)
+                errorText = "Password reset link has been sent to your email."
+            }) {
+                Text("Forgot Password", color = Color.White)
             }
 
             Text(errorText)
