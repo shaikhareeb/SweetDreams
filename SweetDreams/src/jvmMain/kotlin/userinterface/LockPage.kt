@@ -2,10 +2,12 @@ package userinterface
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import model.AccountManager
 
@@ -28,13 +30,13 @@ class LockPage: Page() {
             Spacer(modifier = Modifier.height(20.dp))
             TextFieldFormat(name = username, isPwd = false, onNameChange = { if (it.length <= 50) username = it }, "Account Email")
             TextFieldFormat(name = pwd, isPwd = true, onNameChange = { if (it.length <= 50) pwd = it }, "Account Password")
-            Button(onClick = {
+            Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                 val tryLoggingIn = onLogin(username, pwd);
                 if (!tryLoggingIn) {
                     errorText = "Email/password combination is invalid. Try Again"
                 }
             }) {
-                Text("Unlock Application (Return to Explore)")
+                Text("Unlock Application (Return to Explore)", color = Color.White)
             }
 
             Text(errorText)

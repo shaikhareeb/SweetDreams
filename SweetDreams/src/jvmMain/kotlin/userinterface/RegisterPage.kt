@@ -5,11 +5,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 class RegisterPage : Page() {
@@ -38,16 +40,16 @@ class RegisterPage : Page() {
             TextFieldFormat(name = email, isPwd = false, onNameChange = { if (it.length <= 50) email = it }, "Email")
             TextFieldFormat(name = pwd, isPwd = true, onNameChange = { if (it.length <= 50) pwd = it }, "Password")
             TextFieldFormat(name = pwdVerification, isPwd = true, onNameChange = { if (it.length <= 50) pwdVerification = it }, "Re-enter Password")
-            Button(onClick = {
+            Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                 val tryReturning = onReturn(fname, lname, userName, email, pwd, pwdVerification);
                 if (tryReturning != "") {
                     errorText = tryReturning
                 }
                  }) {
-                Text("Register")
+                Text("Register", color = Color.White)
             }
-            Button(onClick = onBack) {
-                Text("Go Back")
+            Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = onBack) {
+                Text("Go Back", color = Color.White)
             }
 
             Text(errorText)
