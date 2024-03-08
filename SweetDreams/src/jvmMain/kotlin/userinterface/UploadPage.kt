@@ -47,33 +47,33 @@ class UploadPage: Page() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text("Upload Page")
-//                Text("Add a new lullaby from Youtube to your SweetDreams account")
-//                var link by remember { mutableStateOf("") }
-//                var tags by remember { mutableStateOf("") }
-//                var errorText by remember { mutableStateOf("") }
-//
-//                TextFieldFormat(
-//                    name = link,
-//                    isPwd = false,
-//                    onNameChange = { if (it.length <= 50) link = it },
-//                    "Youtube Link"
-//                )
-//                TextFieldFormat(
-//                    name = tags,
-//                    isPwd = false,
-//                    onNameChange = { if (it.length <= 50) tags = it },
-//                    "Tags String (comma seperated)"
-//                )
-//                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-//                    val tryReturning = onSignup(link, tags);
-//                    if (tryReturning != "") {
-//                        errorText = tryReturning
-//                    }
-//                }) {
-//                    Text("Add Youtube-Linked Lullaby", color = Color.White)
-//                }
-//
-//                Text(errorText)
+                Text("Add a new lullaby from Youtube to your SweetDreams account")
+                var link by remember { mutableStateOf("") }
+                var tags by remember { mutableStateOf("") }
+                var errorText by remember { mutableStateOf("") }
+
+                TextFieldFormat(
+                    name = link,
+                    isPwd = false,
+                    onNameChange = { if (it.length <= 50) link = it },
+                    "Youtube Link"
+                )
+                TextFieldFormat(
+                    name = tags,
+                    isPwd = false,
+                    onNameChange = { if (it.length <= 50) tags = it },
+                    "Tags String (comma seperated)"
+                )
+                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                    val tryReturning = onSignup(link, tags);
+                    if (tryReturning != "") {
+                        errorText = tryReturning
+                    }
+                }) {
+                    Text("Add Youtube-Linked Lullaby", color = Color.White)
+                }
+
+                Text(errorText)
             }
         }
     }
