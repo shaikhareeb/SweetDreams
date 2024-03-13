@@ -42,5 +42,7 @@ To run this application, clone the repo, ensure JDK 17 is installed, and press r
 
 # Third-Party Acknowledgement
 
+A citation for a small snippet of code inspired from a 3rd party online tutorial source (https://www.geeksforgeeks.org/java-swing-jfilechooser/) is included in UploadPage.kt.
+
 # Copyright & License
 
