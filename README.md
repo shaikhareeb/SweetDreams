@@ -40,9 +40,9 @@ To run this application, clone the repo, ensure JDK 17 is installed, and press r
 1. Sprint 1 Release (Feb. 16, 2024): https://git.uwaterloo.ca/r2baxi/Team-102-16/-/releases/sprint-1-conclusion
 2. Sprint 2 Release (Mar. 8, 2024): https://git.uwaterloo.ca/r2baxi/Team-102-16/-/releases/sprint-2-conclusion
 
-# Third-Party Acknowledgement
+# Third-Party Acknowledgements / Citations
 
-A citation for a small snippet of code inspired from a 3rd party online tutorial source (https://www.geeksforgeeks.org/java-swing-jfilechooser/) is included in UploadPage.kt.
+A citation for a small snippet of code inspired from a 3rd party online tutorial external code source (https://www.geeksforgeeks.org/java-swing-jfilechooser/) is included in UploadPage.kt.
 
 # Copyright & License
 
