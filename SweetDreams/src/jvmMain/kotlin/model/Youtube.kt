@@ -9,6 +9,7 @@ data class youtubeData (
     val title: String,
     val description: String,
     val thumbnail: String,
+    val playerId: String
 )
 
 fun GetYoutubeVideo(videoId:String) : JSONObject{
@@ -44,7 +45,7 @@ fun getSearchData(search : String) : Array<youtubeData?> {
         var videoDetails = GetYoutubeVideo(videoId);
         var videoTitle = JSONObject(videoDetails.getJSONArray("items").get(0).toString()).getJSONObject("snippet").getString("title").toString();
         var thumbnailUrl = JSONObject(videoDetails.getJSONArray("items").get(0).toString()).getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getString("url");
-        vals[i] = youtubeData(0, videoTitle, "", thumbnailUrl);
+        vals[i] = youtubeData(0, videoTitle, "", thumbnailUrl, videoId);
         i += 1
     }
 

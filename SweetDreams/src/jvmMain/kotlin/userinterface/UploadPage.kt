@@ -10,6 +10,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import javax.sound.sampled.AudioSystem
+import javax.sound.sampled.Clip
+import javax.swing.JFileChooser
+import javax.swing.filechooser.FileNameExtensionFilter
+import javax.swing.filechooser.FileSystemView
 
 class UploadPage: Page() {
     lateinit var navBar : NavBar
@@ -51,6 +56,7 @@ class UploadPage: Page() {
                 var link by remember { mutableStateOf("") }
                 var tags by remember { mutableStateOf("") }
                 var errorText by remember { mutableStateOf("") }
+                var fileChooseOpen by remember { mutableStateOf(false) }
 
                 TextFieldFormat(
                     name = link,
@@ -74,6 +80,38 @@ class UploadPage: Page() {
                 }
 
                 Text(errorText)
+
+                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                    fileChooseOpen = true
+                }) {
+                    Text("Upload Local File from Desktop", color = Color.White)
+                }
+
+                var uploadFilePath by remember { mutableStateOf("") }
+                var fileChooserOpened by remember { mutableStateOf(false) }
+
+                // SOURCE CODE CITATION: This code was taken/inspired by the following Java file chooser tutorial: https://www.geeksforgeeks.org/java-swing-jfilechooser/
+                if (fileChooseOpen) {
+                    fileChooserOpened = true;
+                    val fileChooser = JFileChooser(FileSystemView.getFileSystemView().homeDirectory)
+
+                    val openValue: Int = fileChooser.showOpenDialog(null);
+                    val allowedTypes = FileNameExtensionFilter("Audio files", "mp3", "wav")
+                    fileChooser.addChoosableFileFilter(allowedTypes)
+
+                    if (openValue == JFileChooser.APPROVE_OPTION) {
+                        uploadFilePath = fileChooser.selectedFile.absolutePath
+                    } else {
+                        uploadFilePath = ""
+                    }
+                    fileChooseOpen = false;
+                }
+
+                if (uploadFilePath == "" && fileChooserOpened) {
+                    Text("You have not selected a file")
+                } else if (uploadFilePath != "") {
+                    Text("Selected File Path: " + uploadFilePath)
+                }
             }
         }
     }

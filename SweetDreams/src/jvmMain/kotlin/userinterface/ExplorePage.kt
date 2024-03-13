@@ -131,6 +131,11 @@ class ExplorePage : Page() {
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(text = video.description, style = MaterialTheme.typography.body2)
                 }
+
+                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                }) {
+                    Text("Play Video", color = Color.White)
+                }
             }
         }
     }
