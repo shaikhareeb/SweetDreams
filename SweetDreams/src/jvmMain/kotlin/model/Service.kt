@@ -24,6 +24,7 @@ fun Initialize() {
     val serviceAccount = FileInputStream("src/jvmMain/Resources/key.json")
     val options = FirebaseOptions.builder()
         .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+        .setStorageBucket("sweetdreams-cf57f.appspot.com")
         .build()
     FirebaseApp.initializeApp(options)
 }

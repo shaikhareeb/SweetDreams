@@ -6,6 +6,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import model.AccountManager
+import model.UploadManager
 import userinterface.*
 
 var register = RegisterPage();
@@ -26,6 +27,7 @@ fun App() {
     model.Initialize();
 
     var accountManager = AccountManager()
+    var uploadManager = UploadManager()
 
     login.onSignUp = {SetPage(0)};
     login.onLogin = onReturn@{ s: String, s1: String ->
@@ -61,6 +63,7 @@ fun App() {
         return@onReturn userLoginSuccess;
     }
 
+    upload.onUpload = {filepath: String -> uploadManager.uploadAudioFile(filepath)}
 
     navbar.onExplore = {SetPage(2)}
     navbar.onUser = {SetPage(3)}
@@ -76,7 +79,7 @@ fun App() {
     upload.navBar = navbar
     settings.navBar = navbar
 
-    login.RenderPage ();
+    login.RenderPage();
     register.RenderPage();
     explore.RenderPage();
     user.RenderPage();

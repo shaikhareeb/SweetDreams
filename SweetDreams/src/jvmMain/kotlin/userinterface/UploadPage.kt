@@ -18,6 +18,7 @@ import javax.swing.filechooser.FileSystemView
 
 class UploadPage: Page() {
     lateinit var navBar : NavBar
+    lateinit var onUpload: (filepath: String) -> Unit
     @Composable
     override fun Content(){
         fun onSignup(link: String, tags: String): String {
@@ -101,6 +102,7 @@ class UploadPage: Page() {
 
                     if (openValue == JFileChooser.APPROVE_OPTION) {
                         uploadFilePath = fileChooser.selectedFile.absolutePath
+                        onUpload(uploadFilePath)
                     } else {
                         uploadFilePath = ""
                     }
