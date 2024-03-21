@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import model.AudioManager
+import model.PlaylistManager
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import youtube.youtubeData
 import java.net.URL
@@ -34,31 +35,20 @@ class ExplorePage : Page() {
     lateinit var playAudio: (String) -> Unit
 
     // Sample list of videos
-    private val videos = listOf(
-        Video(1, "Video Title 1", "This is a description of video 1.", "thumbnail1.jpg"),
-        Video(2, "Video Title 2", "This is a description of video 2.", "thumbnail2.jpg"),
-        Video(3, "Video Title 3", "This is a description of video 3.", "thumbnail3.jpg"),
-        Video(4, "Video Title 4", "This is a description of video 4.", "thumbnail4.jpg"),
-        Video(5, "Video Title 5", "This is a description of video 5.", "thumbnail5.jpg"),
-        Video(6, "Video Title 6", "This is a description of video 6.", "thumbnail6.jpg"),
-        Video(7, "Video Title 7", "This is a description of video 7.", "thumbnail7.jpg"),
-        Video(8, "Video Title 8", "This is a description of video 8.", "thumbnail8.jpg"),
-        Video(9, "Video Title 9", "This is a description of video 9.", "thumbnail9.jpg"),
-        Video(10, "Video Title 1", "This is a description of video 1.", "thumbnail1.jpg"),
-        Video(11, "Video Title 2", "This is a description of video 2.", "thumbnail2.jpg"),
-        Video(12, "Video Title 3", "This is a description of video 3.", "thumbnail3.jpg"),
-        Video(13, "Video Title 4", "This is a description of video 4.", "thumbnail4.jpg"),
-        Video(14, "Video Title 5", "This is a description of video 5.", "thumbnail5.jpg"),
-        Video(15, "Video Title 6", "This is a description of video 6.", "thumbnail6.jpg"),
-        Video(16, "Video Title 7", "This is a description of video 7.", "thumbnail7.jpg"),
-        Video(17, "Video Title 8", "This is a description of video 8.", "thumbnail8.jpg"),
-        Video(18, "Video Title 9", "This is a description of video 9.", "thumbnail9.jpg")
-        // Add more videos as needed
-    )
+    lateinit var videos: MutableList<Video>
 
     init {
         thumbnails = youtube.getSearchData("Lullabies");
         //thumbnails = arrayOfNulls(0);
+        videos = mutableListOf();
+        var index = 0;
+        for (data in thumbnails) {
+            var newVid = data?.let { Video(index, it.title, data.description, data.thumbnail) };
+            index ++;
+            if (newVid != null) {
+                videos.add(newVid)
+            };
+        }
     }
 
     @Composable
@@ -145,28 +135,21 @@ class ExplorePage : Page() {
                     modifier = Modifier.height(180.dp).fillMaxWidth().border(1.dp, Color.Gray),
                     contentAlignment = Alignment.Center
                 ) {
-                    if (video.id <= thumbnails.size) {
-                        val youtubeData = thumbnails[video.id - 1];
-                        if (youtubeData != null)
-                            thumbnails[video.id - 1]?.let { Text(it.thumbnail) };
-                    }
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-                if (video.id <= thumbnails.size) {
-                    thumbnails[video.id - 1]?.let {
-                        Text(text = it.title, style = MaterialTheme.typography.h6)
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Text(text = it.description, style = MaterialTheme.typography.body2)
-                    };
-                  } else {
-                    Text(text = video.title, style = MaterialTheme.typography.h6)
-                    Spacer(modifier = Modifier.height(4.dp))
-                    Text(text = video.description, style = MaterialTheme.typography.body2)
-                }
+                Text(text = video.title, style = MaterialTheme.typography.h6)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(text = video.description, style = MaterialTheme.typography.body2)
+
 
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                 }) {
                     Text("Play Video", color = Color.White)
+                }
+                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                    PlaylistManager.instance?.AddToQueue(video);
+                }) {
+                    Text("+", color = Color.White)
                 }
             }
         }
