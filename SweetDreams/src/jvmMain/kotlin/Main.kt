@@ -7,6 +7,7 @@ import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import model.AccountManager
 import model.AudioManager
+import model.PlaylistManager
 import model.UploadManager
 import userinterface.*
 
@@ -20,6 +21,8 @@ var settings = SettingsPage();
 var lockpage = LockPage();
 var navbar = NavBar()
 var audiobar = AudioBar()
+
+var playlistManager = PlaylistManager()
 
 
 @Composable
