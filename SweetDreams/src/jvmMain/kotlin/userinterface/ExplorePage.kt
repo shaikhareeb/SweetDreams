@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import model.AudioManager
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import youtube.youtubeData
@@ -57,13 +58,29 @@ class ExplorePage : Page() {
     )
 
     init {
-        thumbnails = youtube.getSearchData("Lullabies");
-        //thumbnails = arrayOfNulls(0);
+        //thumbnails = youtube.getSearchData("Lullabies");
+        thumbnails = arrayOfNulls(0);
     }
 
     @Composable
     override fun Content() {
-        Column(modifier = Modifier.fillMaxSize().border(2.dp, Color.Gray).background(Color(0xFF93AEDE))) {
+        Scaffold(
+            bottomBar = {
+                Spacer(modifier = Modifier.width(200.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxHeight(0.1F)
+                        .fillMaxWidth()
+                        .border(2.dp, Color.Black)
+                        .background(Color(0xFF93AEDE))
+                        .padding(vertical = 8.dp, horizontal = 8.dp),
+                ) {
+                    audioBar.audioplayer()
+                }
+            }
+        )
+        {
+            Column(modifier = Modifier.fillMaxSize().border(2.dp, Color.Gray).background(Color(0xFF93AEDE))) {
 
             Row(modifier = Modifier.fillMaxWidth()) {
                 // NavBar on the left
@@ -86,29 +103,31 @@ class ExplorePage : Page() {
                         style = MaterialTheme.typography.h4.copy(color = Color.White),
                         modifier = Modifier.padding(16.dp)
 
-                    )
-                    // Create rows for the grid
-                    val numberOfRows = (videos.size + 2) / 3 // Assuming 3 columns
-                    for (rowIndex in 0 until numberOfRows) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(16.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            for (columnIndex in 0..3) {
-                                val videoIndex = rowIndex * 3 + columnIndex
-                                if (videoIndex < videos.size) {
-                                    VideoCard(video = videos[videoIndex])
-                                } else {
-                                    Spacer(modifier = Modifier.width(200.dp).padding(bottom = 16.dp)) // Fill space if no video
+                        )
+                        // Create rows for the grid
+                        val numberOfRows = (videos.size + 2) / 3 // Assuming 3 columns
+                        for (rowIndex in 0 until numberOfRows) {
+                            Row(
+                                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                for (columnIndex in 0..3) {
+                                    val videoIndex = rowIndex * 3 + columnIndex
+                                    if (videoIndex < videos.size) {
+                                        VideoCard(video = videos[videoIndex])
+                                    } else {
+                                        Spacer(
+                                            modifier = Modifier.width(200.dp).padding(bottom = 16.dp)
+                                        ) // Fill space if no video
+                                    }
                                 }
-                            }
 
+                            }
                         }
-                    }
-                    Text(
-                        "Uploads",
-                        style = MaterialTheme.typography.h6.copy(color = Color.White),
-                        modifier = Modifier.padding(16.dp)
+                        Text(
+                            "Uploads",
+                            style = MaterialTheme.typography.h6.copy(color = Color.White),
+                            modifier = Modifier.padding(16.dp)
 
                     )
                     for (rowIndex in 0 until numberOfRows) {
@@ -125,6 +144,7 @@ class ExplorePage : Page() {
                                 }
                             }
 
+                            }
                         }
                     }
                 }
@@ -167,37 +187,6 @@ class ExplorePage : Page() {
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                 }) {
                     Text("Play Video", color = Color.White)
-                }
-            }
-        }
-    }
-
-    @Composable
-    fun UploadedAudioCard(audio: Video, playAudio: (String) -> Unit) {
-        Card(
-            modifier = Modifier.width(200.dp).padding(bottom = 16.dp), // Set width for the card
-            backgroundColor = Color(0xFFF2F1FB),
-            elevation = 4.dp
-        ) {
-            Column(modifier = Modifier.padding(8.dp)) {
-                // Placeholder for audio thumbnail
-                Box(
-                    modifier = Modifier.height(180.dp).fillMaxWidth().border(1.dp, Color.Gray),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(text = audio.thumbnail, style = MaterialTheme.typography.h6)
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(text = audio.title, style = MaterialTheme.typography.h6)
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(text = audio.description, style = MaterialTheme.typography.body2)
-
-
-                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-                    println("File played from Firebase Storage with URL: ${URL(audio.bloburl)}")
-                    playAudio(audio.bloburl)
-                }) {
-                    Text("Play Audio", color = Color.White)
                 }
             }
         }

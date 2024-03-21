@@ -1,16 +1,18 @@
 package userinterface
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import java.net.URL
 
 abstract class Page {
     var currentLullabies = Array(1) { arrayOf("https://www.youtube.com/watch?v=2SmUkXtQIPc&ab_channel=BestBabyLullabies", "youtube,whitenoise") }
@@ -45,5 +47,34 @@ abstract class Page {
         }
     }
 
+    @Composable
+    fun UploadedAudioCard(audio: Video, playAudio: (String) -> Unit) {
+        Card(
+            modifier = Modifier.width(200.dp).padding(bottom = 16.dp), // Set width for the card
+            backgroundColor = Color(0xFFF2F1FB),
+            elevation = 4.dp
+        ) {
+            Column(modifier = Modifier.padding(8.dp)) {
+                // Placeholder for audio thumbnail
+                Box(
+                    modifier = Modifier.height(180.dp).fillMaxWidth().border(1.dp, Color.Gray),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = audio.thumbnail, style = MaterialTheme.typography.h6)
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(text = audio.title, style = MaterialTheme.typography.h6)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(text = audio.description, style = MaterialTheme.typography.body2)
 
+
+                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                    println("File played from Firebase Storage with URL: ${URL(audio.bloburl)}")
+                    playAudio(audio.bloburl)
+                }) {
+                    Text("Play Audio", color = Color.White)
+                }
+            }
+        }
+    }
 }

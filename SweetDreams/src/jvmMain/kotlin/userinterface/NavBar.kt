@@ -29,8 +29,7 @@ class NavBar {
         Column(
             modifier = Modifier
                 .width(200.dp)
-                .fillMaxHeight()
-                .border(2.dp, Color.Gray)
+                .fillMaxHeight(0.9F)
                 .background(Color(0xFF465E96)) // Dark purple background
                 .padding(vertical = 8.dp), // Add some vertical padding for the column
             horizontalAlignment = Alignment.CenterHorizontally
@@ -48,7 +47,7 @@ class NavBar {
             Button(
                 onClick = { onUser() },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(60.dp),
                 shape = RoundedCornerShape(8.dp) // Rounded corners
             ) {
                 Text("User", color = Color.White)
@@ -59,7 +58,7 @@ class NavBar {
             Button(
                 onClick = { onExplore() },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(60.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Text("Explore", color = Color.White)
@@ -70,7 +69,7 @@ class NavBar {
             Button(
                 onClick = { onUpload() },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(60.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Text("Upload", color = Color.White)
@@ -81,7 +80,7 @@ class NavBar {
             Button(
                 onClick = { onPlaylists() },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(60.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Text("Playlists", color = Color.White)
@@ -92,7 +91,7 @@ class NavBar {
             Button(
                 onClick = { onSettings() },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(60.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Text("Settings", color = Color.White)
@@ -103,7 +102,7 @@ class NavBar {
             Button(
                 onClick = { onLock() },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(60.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Text("Lock Application", color = Color.White)
@@ -114,7 +113,7 @@ class NavBar {
             Button(
                 onClick = { onLogout() },
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(80.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(60.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
                 Text("Log Out", color = Color.White)

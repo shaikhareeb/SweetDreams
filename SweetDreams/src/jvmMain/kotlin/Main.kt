@@ -35,15 +35,22 @@ fun App() {
         audioManager.openClip(url)
         audioManager.startClip()
     }
+    user.playAudio = onReturn@{url: String ->
+        audioManager.openClip(url)
+        audioManager.startClip()
+    }
 
     login.onSignUp = {SetPage(0)};
     login.onLogin = onReturn@{ s: String, s1: String ->
         val userLoginSuccess = accountManager.validateUser(s, s1)
         if (userLoginSuccess) {
-            val user = accountManager.getUser()
-            val uploads = uploadManager.getAudioFiles(user)
-            val bloblinks = uploadManager.getAudioLinks(user)
+            val u = accountManager.getUser()
+            val uploads = uploadManager.getAudioFiles(u)
+            val bloblinks = uploadManager.getAudioLinks(u)
             explore.uploadedAudio = uploads.mapIndexed { index, upload ->
+                Video(index + 1, upload, "desc", "thumbnail", bloblinks.get(index)) // Assuming id starts from 1
+            }
+            user.uploadedAudio = uploads.mapIndexed { index, upload ->
                 Video(index + 1, upload, "desc", "thumbnail", bloblinks.get(index)) // Assuming id starts from 1
             }
             SetPage(2)
@@ -77,13 +84,23 @@ fun App() {
     }
 
     upload.onUpload = {filepath: String ->
-        val user = accountManager.getUser()
-        uploadManager.uploadAudioFile(filepath, user)
-        val uploads = uploadManager.getAudioFiles(user)
-        val bloblinks = uploadManager.getAudioLinks(user)
+        val u = accountManager.getUser()
+        uploadManager.uploadAudioFile(filepath, u)
+        val uploads = uploadManager.getAudioFiles(u)
+        val bloblinks = uploadManager.getAudioLinks(u)
         explore.uploadedAudio = uploads.mapIndexed { index, upload ->
             Video(index + 1, upload, "desc", "thumbnail", bloblinks.get(index)) // Assuming id starts from 1
         }
+        user.uploadedAudio = uploads.mapIndexed { index, upload ->
+            Video(index + 1, upload, "desc", "thumbnail", bloblinks.get(index)) // Assuming id starts from 1
+        }
+    }
+
+    audiobar.onPlay = {
+        audioManager.startClip()
+    }
+    audiobar.onPause = {
+        audioManager.pauseClip()
     }
 
     navbar.onExplore = {SetPage(2)}
@@ -94,6 +111,7 @@ fun App() {
     navbar.onLock = {SetPage(7)}
     navbar.onLogout = {SetPage(1)}
 
+
     explore.navBar = navbar
     user.navBar = navbar
     playlists.navBar = navbar
@@ -101,6 +119,10 @@ fun App() {
     settings.navBar = navbar
 
     explore.audioBar = audiobar
+    user.audioBar = audiobar
+    playlists.audioBar = audiobar
+    upload.audioBar = audiobar
+    settings.audioBar = audiobar
 
     login.RenderPage();
     register.RenderPage();

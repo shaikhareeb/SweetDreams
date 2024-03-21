@@ -14,6 +14,7 @@ class AudioManager {
     }
 
     fun startClip() {
+        println("Try to start the current clip")
         clip.start()
     }
 
@@ -22,6 +23,7 @@ class AudioManager {
     }
 
     fun pauseClip() {
+        println("Try to pause the current clip")
         clip.stop()
     }
 }
