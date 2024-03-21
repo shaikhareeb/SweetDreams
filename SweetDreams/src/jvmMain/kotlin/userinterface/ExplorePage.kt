@@ -11,6 +11,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import model.AudioManager
+import okhttp3.HttpUrl.Companion.toHttpUrl
 import youtube.youtubeData
 import java.net.URL
 import javax.sound.sampled.AudioSystem
@@ -26,8 +28,10 @@ data class Video(
 )
 class ExplorePage : Page() {
     lateinit var navBar: NavBar
+    lateinit var audioBar: AudioBar
     lateinit var uploadedAudio: List<Video>
     lateinit var thumbnails : Array<youtubeData?>
+    lateinit var playAudio: (String) -> Unit
 
     // Sample list of videos
     private val videos = listOf(
@@ -115,7 +119,7 @@ class ExplorePage : Page() {
                             for (columnIndex in 0..3) {
                                 val videoIndex = rowIndex * 3 + columnIndex
                                 if (videoIndex < uploadedAudio.size) {
-                                    UploadedAudioCard(audio = uploadedAudio[videoIndex])
+                                    UploadedAudioCard(audio = uploadedAudio[videoIndex], playAudio)
                                 } else {
                                     Spacer(modifier = Modifier.width(200.dp).padding(bottom = 16.dp)) // Fill space if no video
                                 }
@@ -169,7 +173,7 @@ class ExplorePage : Page() {
     }
 
     @Composable
-    fun UploadedAudioCard(audio: Video) {
+    fun UploadedAudioCard(audio: Video, playAudio: (String) -> Unit) {
         Card(
             modifier = Modifier.width(200.dp).padding(bottom = 16.dp), // Set width for the card
             backgroundColor = Color(0xFFF2F1FB),
@@ -190,10 +194,8 @@ class ExplorePage : Page() {
 
 
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-                    // SOURCE CODE CITATION: This code snippet was taken from the following online forum: https://slack-chats.kotlinlang.org/t/520128/is-there-an-api-to-play-audio-using-compose-desktop-i-got-an
-                    val audioInputStream = AudioSystem.getAudioInputStream(URL(audio.bloburl))
-                    val clip = AudioSystem.getClip()
-                    clip.open(audioInputStream)
+                    println("File played from Firebase Storage with URL: ${URL(audio.bloburl)}")
+                    playAudio(audio.bloburl)
                 }) {
                     Text("Play Audio", color = Color.White)
                 }

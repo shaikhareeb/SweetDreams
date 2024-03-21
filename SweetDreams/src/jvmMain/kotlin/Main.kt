@@ -6,6 +6,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
 import model.AccountManager
+import model.AudioManager
 import model.UploadManager
 import userinterface.*
 
@@ -18,7 +19,7 @@ var playlists = PlaylistsPage();
 var settings = SettingsPage();
 var lockpage = LockPage();
 var navbar = NavBar()
-
+var audiobar = AudioBar()
 
 
 @Composable
@@ -28,6 +29,12 @@ fun App() {
 
     var accountManager = AccountManager()
     var uploadManager = UploadManager()
+    var audioManager = AudioManager()
+
+    explore.playAudio = onReturn@{url: String ->
+        audioManager.openClip(url)
+        audioManager.startClip()
+    }
 
     login.onSignUp = {SetPage(0)};
     login.onLogin = onReturn@{ s: String, s1: String ->
@@ -92,6 +99,8 @@ fun App() {
     playlists.navBar = navbar
     upload.navBar = navbar
     settings.navBar = navbar
+
+    explore.audioBar = audiobar
 
     login.RenderPage();
     register.RenderPage();
