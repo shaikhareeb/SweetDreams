@@ -15,8 +15,12 @@ class AccountManager {
         auth = FirebaseAuth.getInstance();
     }
 
-    fun setUser(email : String){
+    fun setUser(email : String) {
         this.email = email;
+    }
+
+    fun getUser(): String {
+        return this.email
     }
 
     fun validateUser(email: String, password: String): Boolean {

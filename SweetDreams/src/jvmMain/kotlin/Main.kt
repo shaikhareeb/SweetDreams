@@ -63,7 +63,10 @@ fun App() {
         return@onReturn userLoginSuccess;
     }
 
-    upload.onUpload = {filepath: String -> uploadManager.uploadAudioFile(filepath)}
+    upload.onUpload = {filepath: String ->
+        val user = accountManager.getUser()
+        uploadManager.uploadAudioFile(filepath, user)
+    }
 
     navbar.onExplore = {SetPage(2)}
     navbar.onUser = {SetPage(3)}

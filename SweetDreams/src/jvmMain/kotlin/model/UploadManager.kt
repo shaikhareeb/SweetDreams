@@ -5,10 +5,10 @@ import com.google.firebase.cloud.StorageClient
 import java.io.File
 
 class UploadManager {
-    fun uploadAudioFile(filePath: String) {
+    fun uploadAudioFile(filePath: String, user: String) {
         val file = File(filePath)
         val storage = StorageClient.getInstance().bucket()
-        val blob = storage.create("path/in/firebase/storage/${file.name}", file.inputStream())
+        val blob = storage.create("users/$user/uploads/${file.name}", file.inputStream())
 
         println("File uploaded to Firebase Storage with URL: ${blob.mediaLink}")
     }
