@@ -25,4 +25,14 @@ class UploadManager {
 
         return files
     }
-}
+
+    fun getAudioLinks(user: String): List<String> {
+        val files = mutableListOf<String>()
+
+        val blobs = storage.list(Storage.BlobListOption.prefix("users/$user/uploads/")).iterateAll()
+        blobs.forEach { blob ->
+            files.add(blob.mediaLink)
+        }
+
+        return files
+    }}

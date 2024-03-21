@@ -12,13 +12,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import youtube.youtubeData
+import java.net.URL
+import javax.sound.sampled.AudioSystem
+import javax.sound.sampled.Clip
 
 // Assume Video data class and NavBar class are defined elsewhere
 data class Video(
     val id: Int,
     val title: String,
     val description: String,
-    val thumbnail: String // Placeholder for thumbnail URL or resource
+    val thumbnail: String, // Placeholder for thumbnail URL or resource
+    val bloburl: String = "null"
 )
 class ExplorePage : Page() {
     lateinit var navBar: NavBar
@@ -186,6 +190,10 @@ class ExplorePage : Page() {
 
 
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                    // SOURCE CODE CITATION: This code snippet was taken from the following online forum: https://slack-chats.kotlinlang.org/t/520128/is-there-an-api-to-play-audio-using-compose-desktop-i-got-an
+                    val audioInputStream = AudioSystem.getAudioInputStream(URL(audio.bloburl))
+                    val clip = AudioSystem.getClip()
+                    clip.open(audioInputStream)
                 }) {
                     Text("Play Audio", color = Color.White)
                 }

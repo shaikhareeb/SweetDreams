@@ -35,8 +35,9 @@ fun App() {
         if (userLoginSuccess) {
             val user = accountManager.getUser()
             val uploads = uploadManager.getAudioFiles(user)
+            val bloblinks = uploadManager.getAudioLinks(user)
             explore.uploadedAudio = uploads.mapIndexed { index, upload ->
-                Video(index + 1, upload, "desc", "thumbnail") // Assuming id starts from 1
+                Video(index + 1, upload, "desc", "thumbnail", bloblinks.get(index)) // Assuming id starts from 1
             }
             SetPage(2)
         }
@@ -72,8 +73,9 @@ fun App() {
         val user = accountManager.getUser()
         uploadManager.uploadAudioFile(filepath, user)
         val uploads = uploadManager.getAudioFiles(user)
+        val bloblinks = uploadManager.getAudioLinks(user)
         explore.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", "thumbnail") // Assuming id starts from 1
+            Video(index + 1, upload, "desc", "thumbnail", bloblinks.get(index)) // Assuming id starts from 1
         }
     }
 
