@@ -66,6 +66,8 @@ fun App() {
     upload.onUpload = {filepath: String ->
         val user = accountManager.getUser()
         uploadManager.uploadAudioFile(filepath, user)
+        val files = uploadManager.getAudioFiles(user)
+        println(files)
     }
 
     navbar.onExplore = {SetPage(2)}
