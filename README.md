@@ -46,5 +46,7 @@ A citation for a small snippet of code inspired from a 3rd party online tutorial
 
 A citation for a small snippet of code used for the basic setup of a audio stream was taken from this Kotlin forums link (https://slack-chats.kotlinlang.org/t/520128/is-there-an-api-to-play-audio-using-compose-desktop-i-got-an) is included in AudioManager.kt
 
+A citation for the general scaffolding structure used for the pages of this project from this StackOverflow link (https://stackoverflow.com/questions/72081206/kotlin-jetpack-compose-how-to-remove-dp-or-sizefrom-the-modifier-fillmaxheight) is included in UserPage.kt
+
 # Copyright & License
 
