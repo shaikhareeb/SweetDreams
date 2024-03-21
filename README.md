@@ -44,5 +44,7 @@ To run this application, clone the repo, ensure JDK 17 is installed, and press r
 
 A citation for a small snippet of code inspired from a 3rd party online tutorial external code source (https://www.geeksforgeeks.org/java-swing-jfilechooser/) is included in UploadPage.kt.
 
+A citation for a small snippet of code used for the basic setup of a audio stream was taken from this Kotlin forums link (https://slack-chats.kotlinlang.org/t/520128/is-there-an-api-to-play-audio-using-compose-desktop-i-got-an) is included in ExplorePage.kt
+
 # Copyright & License
 
