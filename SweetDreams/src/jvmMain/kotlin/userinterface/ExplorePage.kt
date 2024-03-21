@@ -22,6 +22,7 @@ data class Video(
 )
 class ExplorePage : Page() {
     lateinit var navBar: NavBar
+    lateinit var uploadedAudio: List<Video>
     lateinit var thumbnails : Array<youtubeData?>
 
     // Sample list of videos
@@ -93,6 +94,29 @@ class ExplorePage : Page() {
                                     Spacer(modifier = Modifier.width(200.dp).padding(bottom = 16.dp)) // Fill space if no video
                                 }
                             }
+
+                        }
+                    }
+                    Text(
+                        "Uploads",
+                        style = MaterialTheme.typography.h6.copy(color = Color.White),
+                        modifier = Modifier.padding(16.dp)
+
+                    )
+                    for (rowIndex in 0 until numberOfRows) {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            for (columnIndex in 0..3) {
+                                val videoIndex = rowIndex * 3 + columnIndex
+                                if (videoIndex < uploadedAudio.size) {
+                                    UploadedAudioCard(audio = uploadedAudio[videoIndex])
+                                } else {
+                                    Spacer(modifier = Modifier.width(200.dp).padding(bottom = 16.dp)) // Fill space if no video
+                                }
+                            }
+
                         }
                     }
                 }
@@ -135,6 +159,35 @@ class ExplorePage : Page() {
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                 }) {
                     Text("Play Video", color = Color.White)
+                }
+            }
+        }
+    }
+
+    @Composable
+    fun UploadedAudioCard(audio: Video) {
+        Card(
+            modifier = Modifier.width(200.dp).padding(bottom = 16.dp), // Set width for the card
+            backgroundColor = Color(0xFFF2F1FB),
+            elevation = 4.dp
+        ) {
+            Column(modifier = Modifier.padding(8.dp)) {
+                // Placeholder for audio thumbnail
+                Box(
+                    modifier = Modifier.height(180.dp).fillMaxWidth().border(1.dp, Color.Gray),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(text = audio.thumbnail, style = MaterialTheme.typography.h6)
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(text = audio.title, style = MaterialTheme.typography.h6)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(text = audio.description, style = MaterialTheme.typography.body2)
+
+
+                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                }) {
+                    Text("Play Audio", color = Color.White)
                 }
             }
         }

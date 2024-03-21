@@ -33,6 +33,11 @@ fun App() {
     login.onLogin = onReturn@{ s: String, s1: String ->
         val userLoginSuccess = accountManager.validateUser(s, s1)
         if (userLoginSuccess) {
+            val user = accountManager.getUser()
+            val uploads = uploadManager.getAudioFiles(user)
+            explore.uploadedAudio = uploads.mapIndexed { index, upload ->
+                Video(index + 1, upload, "desc", "thumbnail") // Assuming id starts from 1
+            }
             SetPage(2)
         }
         return@onReturn userLoginSuccess;
@@ -66,8 +71,10 @@ fun App() {
     upload.onUpload = {filepath: String ->
         val user = accountManager.getUser()
         uploadManager.uploadAudioFile(filepath, user)
-        val files = uploadManager.getAudioFiles(user)
-        println(files)
+        val uploads = uploadManager.getAudioFiles(user)
+        explore.uploadedAudio = uploads.mapIndexed { index, upload ->
+            Video(index + 1, upload, "desc", "thumbnail") // Assuming id starts from 1
+        }
     }
 
     navbar.onExplore = {SetPage(2)}
