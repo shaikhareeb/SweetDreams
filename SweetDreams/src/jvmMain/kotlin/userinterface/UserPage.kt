@@ -21,6 +21,7 @@ class UserPage: Page() {
 
     @Composable
     override fun Content() {
+        // SOURCE CODE CITATION: The scaffolding structure throughout the project was inspired by discussion from this StackOverflow article: https://stackoverflow.com/questions/72081206/kotlin-jetpack-compose-how-to-remove-dp-or-sizefrom-the-modifier-fillmaxheight
         Scaffold(
             bottomBar = {
                 Spacer(modifier = Modifier.width(200.dp))
