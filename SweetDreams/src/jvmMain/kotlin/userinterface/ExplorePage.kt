@@ -39,16 +39,16 @@ class ExplorePage : Page() {
     lateinit var videos: MutableList<Video>
 
     init {
-        // thumbnails = youtube.getSearchData("Lullabies");
-        //thumbnails = arrayOfNulls(0);
+        thumbnails = youtube.getSearchData("Lullabies");
         videos = mutableListOf();
-//        for (data in thumbnails) {
-//            var newVid = data?.let { Video(index, it.title, data.description, data.thumbnail) };
-//            index ++;
-//            if (newVid != null) {
-//                videos.add(newVid)
-//            };
-//        }
+        var index1 = 0;
+        for (data in thumbnails) {
+            var newVid = data?.let { Video(index1, it.title, data.description, data.thumbnail) };
+            index1 ++;
+            if (newVid != null) {
+                videos.add(newVid)
+            };
+        }
 
         var index = 0;
         for (i in 0..10) {

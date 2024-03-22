@@ -27,7 +27,7 @@ fun GetSearchList(search : String) : JSONArray{
     url += "key=AIzaSyCwu-oCqEIfcEJOTBrNAIK2wmRyLXTXeBw";
     url += "&q=$search";
     url += "&type=video"
-    url += "&maxResults=20"
+    url += "&maxResults=5"
 
     var result = GetHttpBody(url);
     var json = JSONObject(result);
