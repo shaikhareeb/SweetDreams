@@ -111,6 +111,17 @@ fun App() {
         audioManager.pauseClip()
     }
 
+    audiobar.onPlayQueue = {
+        val playlist = PlaylistManager.instance?.GetPlaylist();
+        if (playlist != null) {
+            for (i in playlist.size - 1 downTo 0) {
+                audioManager.openClip(playlist[i].bloburl)
+                audioManager.startClip()
+            }
+        }
+
+    }
+
     navbar.onExplore = {SetPage(2)}
     navbar.onUser = {SetPage(3)}
     navbar.onUpload = {SetPage(4)}

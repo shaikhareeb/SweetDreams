@@ -11,10 +11,11 @@ import androidx.compose.ui.unit.dp
 class AudioBar {
     lateinit var onPlay: () -> Unit
     lateinit var onPause: () -> Unit
+    lateinit var onPlayQueue: () -> Unit
 
     @Composable
     fun audioplayer() {
-        Row(modifier = Modifier.padding(horizontal = 350.dp), horizontalArrangement = Arrangement.Center) {
+        Row(modifier = Modifier.padding(horizontal = 250.dp), horizontalArrangement = Arrangement.Center) {
             Button(
                 onClick = {onPlay()},
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
@@ -32,6 +33,17 @@ class AudioBar {
             ) {
                 Text("Pause", color = Color.White)
             }
+
+            Button(
+                onClick = {onPlayQueue()},
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(60.dp),
+                shape = RoundedCornerShape(8.dp) // Rounded corners
+            ) {
+                Text("Play Queue", color = Color.White)
+            }
+
+
         }
     }
 }

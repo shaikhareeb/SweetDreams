@@ -2,6 +2,8 @@ package model
 
 import java.net.URL
 import javax.sound.sampled.AudioSystem
+import javax.sound.sampled.LineEvent
+import javax.sound.sampled.LineListener
 
 // SOURCE CODE CITATION: This audio-playing code was inspired from the following online forum: https://slack-chats.kotlinlang.org/t/520128/is-there-an-api-to-play-audio-using-compose-desktop-i-got-an
 class AudioManager {
@@ -12,6 +14,15 @@ class AudioManager {
         clip.close()
         audioInputStream = AudioSystem.getAudioInputStream(URL(url))
         clip.open(audioInputStream)
+//        clip.addLineListener(object : LineListener {
+//            override fun update(event: LineEvent) {
+//                if (event.type == LineEvent.Type.STOP) {
+//                    println("Clip stopped playing")
+//                    // Perform any cleanup or next steps here
+//                    clip.close() // Optionally close the clip
+//                }
+//            }
+//        })
     }
 
     fun startClip() {
