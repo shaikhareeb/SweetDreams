@@ -3,8 +3,6 @@ package userinterface
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
@@ -28,7 +26,8 @@ class PlaylistsPage : Page() {
     lateinit var thumbnails : Array<youtubeData?>
     lateinit var playAudio: (String) -> Unit
 
-    val playlist = PlaylistManager.instance?.GetPlaylist();
+    init {
+    }
 
     @Composable
     override fun Content() {
@@ -46,48 +45,54 @@ class PlaylistsPage : Page() {
                     audioBar.audioplayer()
                 }
             }
-        ) {
-            Row(modifier = Modifier.fillMaxSize().border(2.dp, Color.Gray)) {
-                // NavBar on the left with its own outline
-                Column(
-                    modifier = Modifier.width(200.dp).fillMaxHeight().border(2.dp, Color.Gray),
-                    verticalArrangement = Arrangement.Top
-                ) {
-                    navBar.nav()
-                }
+        )
+        {
+            val playlist = PlaylistManager.instance?.GetPlaylist();
 
-                // Main content area for videos in a manually created scrollable grid
-                val scrollState = rememberScrollState()
-                Column(
-                    modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(scrollState).background(Color(0x95b0df)),
-                    verticalArrangement = Arrangement.Top,
-                ) {
-                    // Header
-                    Text(
-                        "Playlist",
-                        style = MaterialTheme.typography.h4.copy(color = Color.White),
-                        modifier = Modifier.padding(16.dp)
+            Column(modifier = Modifier.fillMaxSize().border(2.dp, Color.Gray).background(Color(0xFF93AEDE))) {
 
-                    )
-                    // Create rows for the grid
-                    if (playlist != null) {
-                        val numberOfRows = (playlist.size + 2) / 3 // Assuming 3 columns
-                        for (rowIndex in 0 until numberOfRows) {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                for (columnIndex in 0..3) {
-                                    val videoIndex = rowIndex * 3 + columnIndex
-                                    if (videoIndex < playlist.size) {
-                                        VideoCard(video = playlist[videoIndex])
-                                    } else {
-                                        Spacer(
-                                            modifier = Modifier.width(200.dp).padding(bottom = 16.dp)
-                                        ) // Fill space if no video
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    // NavBar on the left
+                    Column(
+                        modifier = Modifier.width(200.dp).fillMaxHeight().border(2.dp, Color.Gray),
+                        verticalArrangement = Arrangement.Top
+                    ) {
+                        navBar.nav()
+                    }
+
+                    // Main content area for videos in a manually created scrollable grid
+                    val scrollState = rememberScrollState()
+                    Column(
+                        modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(scrollState).background(Color(0x95b0df)),
+                        verticalArrangement = Arrangement.Top,
+                    ) {
+                        // Header
+                        Text(
+                            "Queue",
+                            style = MaterialTheme.typography.h4.copy(color = Color.White),
+                            modifier = Modifier.padding(16.dp)
+
+                        )
+                        // Create rows for the grid
+                        if (playlist != null) {
+                            val numberOfRows = (playlist.size + 2) / 3 // Assuming 3 columns
+                            for (rowIndex in 0 until numberOfRows) {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    for (columnIndex in 0..3) {
+                                        val videoIndex = rowIndex * 3 + columnIndex
+                                        if (videoIndex < playlist.size) {
+                                            VideoCard(video = playlist[videoIndex])
+                                        } else {
+                                            Spacer(
+                                                modifier = Modifier.width(200.dp).padding(bottom = 16.dp)
+                                            ) // Fill space if no video
+                                        }
                                     }
-                                }
 
+                                }
                             }
                         }
                     }
@@ -117,6 +122,7 @@ class PlaylistsPage : Page() {
 
 
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                    playAudio(video.bloburl)
                 }) {
                     Text("Play Video", color = Color.White)
                 }

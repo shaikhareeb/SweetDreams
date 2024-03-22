@@ -9,6 +9,7 @@ class AudioManager {
     var audioInputStream = AudioSystem.getAudioInputStream(Thread.currentThread().contextClassLoader.getResource("sample_wav_file.wav"))
 
     fun openClip(url: String) {
+        clip.close()
         audioInputStream = AudioSystem.getAudioInputStream(URL(url))
         clip.open(audioInputStream)
     }

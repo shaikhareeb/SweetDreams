@@ -39,17 +39,26 @@ class ExplorePage : Page() {
     lateinit var videos: MutableList<Video>
 
     init {
-        thumbnails = youtube.getSearchData("Lullabies");
+        // thumbnails = youtube.getSearchData("Lullabies");
         //thumbnails = arrayOfNulls(0);
         videos = mutableListOf();
+//        for (data in thumbnails) {
+//            var newVid = data?.let { Video(index, it.title, data.description, data.thumbnail) };
+//            index ++;
+//            if (newVid != null) {
+//                videos.add(newVid)
+//            };
+//        }
+
         var index = 0;
-        for (data in thumbnails) {
-            var newVid = data?.let { Video(index, it.title, data.description, data.thumbnail) };
+        for (i in 0..10) {
+            var newVid = Video(index, "video", "blah", "blah")
             index ++;
             if (newVid != null) {
                 videos.add(newVid)
             };
         }
+
     }
 
     @Composable
@@ -71,31 +80,52 @@ class ExplorePage : Page() {
         )
         {
             Column(modifier = Modifier.fillMaxSize().border(2.dp, Color.Gray).background(Color(0xFF93AEDE))) {
+                Row(modifier = Modifier.fillMaxWidth()) {
+                    // NavBar on the left
+                    Column(
+                        modifier = Modifier.width(200.dp).fillMaxHeight().border(2.dp, Color.Gray),
+                        verticalArrangement = Arrangement.Top
+                    ) {
+                        navBar.nav()
+                    }
 
-            Row(modifier = Modifier.fillMaxWidth()) {
-                // NavBar on the left
-                Column(
-                    modifier = Modifier.width(200.dp).fillMaxHeight().border(2.dp, Color.Gray),
-                    verticalArrangement = Arrangement.Top
-                ) {
-                    navBar.nav()
-                }
+                    // Main content area for videos in a manually created scrollable grid
+                    val scrollState = rememberScrollState()
+                    Column(
+                        modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(scrollState).background(Color(0x95b0df)),
+                        verticalArrangement = Arrangement.Top,
+                    ) {
+                        // Header
+                        Text(
+                            "Explore",
+                            style = MaterialTheme.typography.h4.copy(color = Color.White),
+                            modifier = Modifier.padding(16.dp)
 
-                // Main content area for videos in a manually created scrollable grid
-                val scrollState = rememberScrollState()
-                Column(
-                    modifier = Modifier.fillMaxSize().padding(16.dp).verticalScroll(scrollState).background(Color(0x95b0df)),
-                    verticalArrangement = Arrangement.Top,
-                ) {
-                    // Header
-                    Text(
-                        "Explore",
-                        style = MaterialTheme.typography.h4.copy(color = Color.White),
-                        modifier = Modifier.padding(16.dp)
+                            )
+                            // Create rows for the grid
+                            val numberOfRows = (videos.size + 2) / 3 // Assuming 3 columns
+                            for (rowIndex in 0 until numberOfRows) {
+                                Row(
+                                    horizontalArrangement = Arrangement.spacedBy(16.dp),
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    for (columnIndex in 0..3) {
+                                        val videoIndex = rowIndex * 3 + columnIndex
+                                        if (videoIndex < videos.size) {
+                                            VideoCard(video = videos[videoIndex])
+                                        } else {
+                                            Spacer(
+                                                modifier = Modifier.width(200.dp).padding(bottom = 16.dp)
+                                            ) // Fill space if no video
+                                        }
+                                    }
 
-                        )
-                        // Create rows for the grid
-                        val numberOfRows = (videos.size + 2) / 3 // Assuming 3 columns
+                                }
+                            }
+                        Text(
+                            "Uploads",
+                            style = MaterialTheme.typography.h6.copy(color = Color.White),
+                            modifier = Modifier.padding(16.dp))
                         for (rowIndex in 0 until numberOfRows) {
                             Row(
                                 horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -103,37 +133,12 @@ class ExplorePage : Page() {
                             ) {
                                 for (columnIndex in 0..3) {
                                     val videoIndex = rowIndex * 3 + columnIndex
-                                    if (videoIndex < videos.size) {
-                                        VideoCard(video = videos[videoIndex])
+                                    if (videoIndex < uploadedAudio.size) {
+                                        UploadedAudioCard(audio = uploadedAudio[videoIndex], playAudio)
                                     } else {
-                                        Spacer(
-                                            modifier = Modifier.width(200.dp).padding(bottom = 16.dp)
-                                        ) // Fill space if no video
+                                        Spacer(modifier = Modifier.width(200.dp).padding(bottom = 16.dp)) // Fill space if no video
                                     }
                                 }
-
-                            }
-                        }
-                        Text(
-                            "Uploads",
-                            style = MaterialTheme.typography.h6.copy(color = Color.White),
-                            modifier = Modifier.padding(16.dp)
-
-                    )
-                    for (rowIndex in 0 until numberOfRows) {
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(16.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            for (columnIndex in 0..3) {
-                                val videoIndex = rowIndex * 3 + columnIndex
-                                if (videoIndex < uploadedAudio.size) {
-                                    UploadedAudioCard(audio = uploadedAudio[videoIndex], playAudio)
-                                } else {
-                                    Spacer(modifier = Modifier.width(200.dp).padding(bottom = 16.dp)) // Fill space if no video
-                                }
-                            }
-
                             }
                         }
                     }

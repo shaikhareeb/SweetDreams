@@ -83,7 +83,7 @@ class NavBar {
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp).height(60.dp),
                 shape = RoundedCornerShape(8.dp)
             ) {
-                Text("Playlists", color = Color.White)
+                Text("Queue", color = Color.White)
             }
 
             Spacer(modifier = Modifier.height(8.dp))

@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import model.PlaylistManager
 import java.net.URL
 
 abstract class Page {
@@ -73,6 +74,12 @@ abstract class Page {
                     playAudio(audio.bloburl)
                 }) {
                     Text("Play Audio", color = Color.White)
+                }
+
+                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                    PlaylistManager.instance?.AddToQueue(audio);
+                }) {
+                    Text("+", color = Color.White)
                 }
             }
         }

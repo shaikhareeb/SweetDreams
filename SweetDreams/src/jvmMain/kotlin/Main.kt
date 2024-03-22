@@ -38,6 +38,11 @@ fun App() {
         audioManager.openClip(url)
         audioManager.startClip()
     }
+
+    playlists.playAudio = onReturn@{url: String ->
+        audioManager.openClip(url)
+        audioManager.startClip()
+    }
     user.playAudio = onReturn@{url: String ->
         audioManager.openClip(url)
         audioManager.startClip()
