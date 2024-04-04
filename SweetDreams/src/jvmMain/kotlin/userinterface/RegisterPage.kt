@@ -36,7 +36,7 @@ class RegisterPage : Page() {
             Text("Sign up for SweetDreams")
             TextFieldFormat(name = fname, isPwd = false, onNameChange = { if (it.length <= 50) fname = it }, "First Name")
             TextFieldFormat(name = lname, isPwd = false, onNameChange = { if (it.length <= 50) lname = it }, "Last Name")
-            TextFieldFormat(name = userName, isPwd = false, onNameChange = { if (it.length <= 50) userName = it }, "Username")
+            TextFieldFormat(name = userName, isPwd = false, onNameChange = { if (it.length <= 20) userName = it }, "Username")
             TextFieldFormat(name = email, isPwd = false, onNameChange = { if (it.length <= 50) email = it }, "Email")
             TextFieldFormat(name = pwd, isPwd = true, onNameChange = { if (it.length <= 50) pwd = it }, "Password")
             TextFieldFormat(name = pwdVerification, isPwd = true, onNameChange = { if (it.length <= 50) pwdVerification = it }, "Re-enter Password")

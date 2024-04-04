@@ -14,6 +14,9 @@ import androidx.compose.ui.unit.dp
 class SettingsPage: Page() {
     lateinit var navBar : NavBar
     lateinit var audioBar: AudioBar
+    lateinit var getName: () -> String
+    lateinit var getUsername: () -> String
+    lateinit var getUploadedCount: () -> String
     lateinit var onDelete : (String) -> String
     lateinit var onReset : (String) -> String
 
@@ -54,12 +57,20 @@ class SettingsPage: Page() {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+
+                    Text("About You: ", style = MaterialTheme.typography.h5)
+                    Spacer(modifier = Modifier.height(20.dp))
+                    Text("Name: " + getName(), style = MaterialTheme.typography.h6)
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text("Username: " + getUsername(), style = MaterialTheme.typography.h6)
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text("Number of Uploaded Audios: " + getUploadedCount(), style = MaterialTheme.typography.h6)
+                    Spacer(modifier = Modifier.height(20.dp))
                     Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                         errorText = onReset(pwd)
                     }) {
                         Text("Generate Password Reset Link", color = Color.White)
                     }
-
 
                     TextFieldFormat(
                         name = pwd,

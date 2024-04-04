@@ -75,6 +75,15 @@ fun App() {
     }
     register.onBack = {SetPage(1)}
 
+    settings.getName = onReturn@{
+        return@onReturn accountManager.getUserDisplayName()
+    }
+    settings.getUsername = onReturn@{
+        return@onReturn accountManager.getUsername()
+    }
+    settings.getUploadedCount = onReturn@{
+        return@onReturn uploadManager.getAudioLinks(accountManager.getUser()).size.toString()
+    }
     settings.onReset = onReturn@{pwd: String ->
         return@onReturn accountManager.forgotPassword()
     }

@@ -51,11 +51,27 @@ class AccountManager {
         if (pwd != pwd2) return "Passwords do not match. Please try again";
         var record = CreateRequest();
 
+        record.setDisplayName(fname + " " + lname)
+        record.setUid(uname)
         record.setEmail(email);
         record.setPassword(pwd);
 
         auth.createUser(record);
         return "";
+    }
+
+    fun getUserDisplayName() : String {
+        if (auth.getUserByEmail(this.email).displayName == null) {
+            return "Account Created Before Name Support"
+        }
+        return auth.getUserByEmail(this.email).displayName
+    }
+
+    fun getUsername() : String {
+        if (auth.getUserByEmail(this.email).uid == null || auth.getUserByEmail(this.email).uid.length > 20) {
+            return "Account Created Before Username Support"
+        }
+        return auth.getUserByEmail(this.email).uid
     }
 
     fun deleteUser(password: String): String {
