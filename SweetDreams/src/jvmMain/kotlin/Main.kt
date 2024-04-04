@@ -84,7 +84,7 @@ fun App() {
         return@onReturn res;
     }
     lockpage.onLogin = onReturn@{ s: String, s1: String ->
-        val userLoginSuccess = accountManager.validateUser(s, s1)
+        val userLoginSuccess = accountManager.validateCurrentUser(s, s1)
         if (userLoginSuccess) {
             SetPage(2)
         }

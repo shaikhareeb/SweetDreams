@@ -10,17 +10,23 @@ var currentAccounts = Array(1) { arrayOf("john","smith","john123","john@gmail.co
 class AccountManager {
     lateinit var auth: FirebaseAuth;
     lateinit var email: String;
+    lateinit var password: String;
 
     init {
         auth = FirebaseAuth.getInstance();
     }
 
-    fun setUser(email : String) {
+    fun setUser(email : String, password: String) {
         this.email = email;
+        this.password = password;
     }
 
     fun getUser(): String {
         return this.email
+    }
+
+    fun validateCurrentUser(email: String, password: String): Boolean {
+        return (email == this.email && password == this.password)
     }
 
     fun validateUser(email: String, password: String): Boolean {
@@ -32,7 +38,7 @@ class AccountManager {
             json,
             "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + apikey);
         if (result != "NULL"){
-            setUser(email);
+            setUser(email, password);
         }
         return result != "NULL";
     }
@@ -62,10 +68,10 @@ class AccountManager {
     }
 
     fun forgotPassword() : String {
-        return auth.generatePasswordResetLink(email)
+        return "Reset Password Link: ${auth.generatePasswordResetLink(this.email)}"
     }
 
     fun forgotPasswordEmail(mail: String) : String {
-        return auth.generatePasswordResetLink(mail)
+        return "Reset Password Link: ${auth.generatePasswordResetLink(mail)}"
     }
 }

@@ -3,6 +3,7 @@ package userinterface
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -17,7 +18,7 @@ import androidx.compose.ui.unit.dp
 class LoginPage : Page() {
     lateinit var onSignUp : () -> Unit
     lateinit var onLogin: (username: String, pwd: String) -> Boolean
-    lateinit var onForgotPwd: (email: String) -> Unit
+    lateinit var onForgotPwd: (email: String) -> String
     @Composable
     override fun Content(){
         var username by remember { mutableStateOf("") }
@@ -50,13 +51,15 @@ class LoginPage : Page() {
                     errorText = "Enter a valid email"
                     return@Button
                 }
-                onForgotPwd(username)
-                errorText = "Password reset link has been sent to your email."
+                errorText = onForgotPwd(username)
             }) {
                 Text("Forgot Password", color = Color.White)
             }
 
-            Text(errorText)
+            Spacer(modifier = Modifier.height(10.dp))
+            SelectionContainer {
+                Text(errorText)
+            }
         }
     }
 

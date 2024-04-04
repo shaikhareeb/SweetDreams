@@ -3,6 +3,7 @@ package userinterface
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -78,7 +79,10 @@ class SettingsPage: Page() {
                     }) {
                         Text("Reset Password", color = Color.White)
                     }
-                    Text(errorText)
+                    Spacer(modifier = Modifier.height(10.dp))
+                    SelectionContainer {
+                        Text(errorText)
+                    }
                 }
             }
         }
