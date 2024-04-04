@@ -77,8 +77,7 @@ abstract class Page {
                 }
 
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-                    println("File deleted from Firebase Storage with URL: ${URL(audio.bloburl)}")
-                    deleteAudio(audio.bloburl)
+                    deleteAudio(audio.title)
                 }) {
                     Text("Delete Audio", color = Color.White)
                 }

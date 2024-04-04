@@ -14,6 +14,16 @@ class UploadManager {
         println("File uploaded to Firebase Storage with URL: ${blob.mediaLink}")
     }
 
+    fun deleteAudioFile(url: String, user: String) {
+        val blobs = storage.list(Storage.BlobListOption.prefix("users/$user/uploads/")).iterateAll()
+        blobs.forEach { blob ->
+            if (blob.name.substringAfterLast('/') == url) {
+                println("Blob Match: ${blob.name}")
+                blob.delete()
+            }
+        }
+    }
+
     fun getAudioFiles(user: String): List<String> {
         val files = mutableListOf<String>()
 
