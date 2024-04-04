@@ -10,12 +10,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.colorspace.RenderIntent
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import model.AudioManager
 import model.PlaylistManager
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import youtube.youtubeData
+import java.awt.Desktop
 import java.net.URL
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.Clip
@@ -26,6 +28,8 @@ data class Video(
     val title: String,
     val description: String,
     val thumbnail: String, // Placeholder for thumbnail URL or resource
+    val playerId: String,
+    val videoId: Int,
     val bloburl: String = "null"
 )
 class ExplorePage : Page() {
@@ -44,7 +48,7 @@ class ExplorePage : Page() {
         videos = mutableListOf();
         var index1 = 0;
         for (data in thumbnails) {
-            var newVid = data?.let { Video(index1, it.title, data.description, data.thumbnail) };
+            var newVid = data?.let { Video(index1, it.title, data.description, data.thumbnail, data.playerId, data.id) };
             index1 ++;
             if (newVid != null) {
                 videos.add(newVid)
@@ -53,7 +57,7 @@ class ExplorePage : Page() {
 
         var index = 0;
         for (i in 0..10) {
-            var newVid = Video(index, "video", "blah", "blah")
+            var newVid = Video(index, "video", "blah", "blah", "blah", 0)
             index ++;
             if (newVid != null) {
                 videos.add(newVid)
@@ -169,6 +173,11 @@ class ExplorePage : Page() {
 
 
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                    // SOURCE CODE CITATION: The code for opening links in the Desktop browser is provided by the following StackOverflow article: https://stackoverflow.com/questions/68306576/open-a-link-in-browser-using-compose-for-desktop
+                    var desktop = Desktop.getDesktop()
+                    if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                        desktop.browse(URL("https://www.youtube.com/watch?v=${video.playerId}").toURI())
+                    }
                 }) {
                     Text("Play Video", color = Color.White)
                 }

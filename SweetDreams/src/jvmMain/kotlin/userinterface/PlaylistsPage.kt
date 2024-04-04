@@ -15,6 +15,7 @@ import model.AudioManager
 import model.PlaylistManager
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import youtube.youtubeData
+import java.awt.Desktop
 import java.net.URL
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.Clip
@@ -122,7 +123,15 @@ class PlaylistsPage : Page() {
 
 
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-                    playAudio(video.bloburl)
+                    if (video.bloburl == "null") {
+                        // SOURCE CODE CITATION: The code for opening links in the Desktop browser is provided by the following StackOverflow article: https://stackoverflow.com/questions/68306576/open-a-link-in-browser-using-compose-for-desktop
+                        var desktop = Desktop.getDesktop()
+                        if (desktop != null && desktop.isSupported(Desktop.Action.BROWSE)) {
+                            desktop.browse(URL("https://www.youtube.com/watch?v=${video.playerId}").toURI())
+                        }
+                    } else {
+                        playAudio(video.bloburl)
+                    }
                 }) {
                     Text("Play Video", color = Color.White)
                 }

@@ -60,10 +60,10 @@ fun App() {
             val uploads = uploadManager.getAudioFiles(u)
             val bloblinks = uploadManager.getAudioLinks(u)
             explore.uploadedAudio = uploads.mapIndexed { index, upload ->
-                Video(index + 1, upload, "desc", "thumbnail", bloblinks.get(index)) // Assuming id starts from 1
+                Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
             }
             user.uploadedAudio = uploads.mapIndexed { index, upload ->
-                Video(index + 1, upload, "desc", "thumbnail", bloblinks.get(index)) // Assuming id starts from 1
+                Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
             }
             SetPage(2)
         }
@@ -110,10 +110,10 @@ fun App() {
         val uploads = uploadManager.getAudioFiles(u)
         val bloblinks = uploadManager.getAudioLinks(u)
         explore.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", "thumbnail", bloblinks.get(index)) // Assuming id starts from 1
+            Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
         }
         user.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", "thumbnail", bloblinks.get(index)) // Assuming id starts from 1
+            Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
         }
     }
 
