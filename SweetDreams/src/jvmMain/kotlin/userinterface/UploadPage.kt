@@ -124,7 +124,7 @@ class UploadPage: Page() {
 
                         if (openValue == JFileChooser.APPROVE_OPTION) {
                             uploadFilePath = fileChooser.selectedFile.absolutePath
-                            if (uploadFilePath.endsWith(".wav") || uploadFilePath.endsWith(".mp3")) {
+                            if (uploadFilePath.endsWith(".wav")) {
                                 onUpload(uploadFilePath)
                                 badFileType = false
                             } else {
@@ -139,7 +139,7 @@ class UploadPage: Page() {
                     if (uploadFilePath == "" && fileChooserOpened) {
                         Text("You have not selected a file")
                     } else if (uploadFilePath != "" && badFileType) {
-                        Text("The only supported file types are .mp3 and .wav")
+                        Text("The only currently supported file type is .wav")
                     } else if (uploadFilePath != "") {
                         Text("Selected File Path: " + uploadFilePath)
                     }
