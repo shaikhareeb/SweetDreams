@@ -14,7 +14,7 @@ data class youtubeData (
 
 fun GetYoutubeVideo(videoId:String) : JSONObject{
     var url = "https://www.googleapis.com/youtube/v3/videos?";
-    url += "key=AIzaSyCwu-oCqEIfcEJOTBrNAIK2wmRyLXTXeBw";
+    url += "key=AIzaSyCgMGMaylmSaFPQAhu36frrK_dJXDFla3A";
     url += "&id=$videoId";
     url += "&part=snippet"
 
@@ -24,7 +24,7 @@ fun GetYoutubeVideo(videoId:String) : JSONObject{
 
 fun GetSearchList(search : String) : JSONArray{
     var url = "https://www.googleapis.com/youtube/v3/search?";
-    url += "key=AIzaSyCwu-oCqEIfcEJOTBrNAIK2wmRyLXTXeBw";
+    url += "key=AIzaSyCgMGMaylmSaFPQAhu36frrK_dJXDFla3A";
     url += "&q=$search";
     url += "&type=video"
     url += "&maxResults=5"
@@ -54,7 +54,7 @@ fun getSearchData(search : String) : Array<youtubeData?> {
 
 fun Initialize() {
     var url = "https://www.googleapis.com/youtube/v3/search?";
-    url += "key=AIzaSyCwu-oCqEIfcEJOTBrNAIK2wmRyLXTXeBw";
+    url += "key=AIzaSyCgMGMaylmSaFPQAhu36frrK_dJXDFla3A";
     url += "&q=joji";
     url += "&type=video"
 
