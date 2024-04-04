@@ -34,6 +34,7 @@ class ExplorePage : Page() {
     lateinit var uploadedAudio: List<Video>
     lateinit var thumbnails : Array<youtubeData?>
     lateinit var playAudio: (String) -> Unit
+    lateinit var deleteAudio: (String) -> Unit
 
     // Sample list of videos
     lateinit var videos: MutableList<Video>
@@ -134,7 +135,7 @@ class ExplorePage : Page() {
                                 for (columnIndex in 0..3) {
                                     val videoIndex = rowIndex * 3 + columnIndex
                                     if (videoIndex < uploadedAudio.size) {
-                                        UploadedAudioCard(audio = uploadedAudio[videoIndex], playAudio)
+                                        UploadedAudioCard(audio = uploadedAudio[videoIndex], playAudio, deleteAudio)
                                     } else {
                                         Spacer(modifier = Modifier.width(200.dp).padding(bottom = 16.dp)) // Fill space if no video
                                     }

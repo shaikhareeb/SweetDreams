@@ -18,6 +18,7 @@ class UserPage: Page() {
     lateinit var audioBar: AudioBar
     lateinit var uploadedAudio: List<Video>
     lateinit var playAudio: (String) -> Unit
+    lateinit var deleteAudio: (String) -> Unit
 
     @Composable
     override fun Content() {
@@ -72,7 +73,7 @@ class UserPage: Page() {
                             for (columnIndex in 0..3) {
                                 val videoIndex = rowIndex * 3 + columnIndex
                                 if (videoIndex < uploadedAudio.size) {
-                                    UploadedAudioCard(audio = uploadedAudio[videoIndex], playAudio)
+                                    UploadedAudioCard(audio = uploadedAudio[videoIndex], playAudio, deleteAudio)
                                 } else {
                                     Spacer(
                                         modifier = Modifier.width(200.dp).padding(bottom = 16.dp)

@@ -38,6 +38,8 @@ fun App() {
         audioManager.openClip(url)
         audioManager.startClip()
     }
+    explore.deleteAudio = onReturn@{url: String ->
+    }
 
     playlists.playAudio = onReturn@{url: String ->
         audioManager.openClip(url)
@@ -46,6 +48,8 @@ fun App() {
     user.playAudio = onReturn@{url: String ->
         audioManager.openClip(url)
         audioManager.startClip()
+    }
+    user.deleteAudio = onReturn@{url: String ->
     }
 
     login.onSignUp = {SetPage(0)};

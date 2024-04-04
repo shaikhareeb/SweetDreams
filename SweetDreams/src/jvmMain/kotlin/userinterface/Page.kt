@@ -49,7 +49,7 @@ abstract class Page {
     }
 
     @Composable
-    fun UploadedAudioCard(audio: Video, playAudio: (String) -> Unit) {
+    fun UploadedAudioCard(audio: Video, playAudio: (String) -> Unit, deleteAudio: (String) -> Unit) {
         Card(
             modifier = Modifier.width(200.dp).padding(bottom = 16.dp), // Set width for the card
             backgroundColor = Color(0xFFF2F1FB),
@@ -74,6 +74,13 @@ abstract class Page {
                     playAudio(audio.bloburl)
                 }) {
                     Text("Play Audio", color = Color.White)
+                }
+
+                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                    println("File deleted from Firebase Storage with URL: ${URL(audio.bloburl)}")
+                    deleteAudio(audio.bloburl)
+                }) {
+                    Text("Delete Audio", color = Color.White)
                 }
 
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
