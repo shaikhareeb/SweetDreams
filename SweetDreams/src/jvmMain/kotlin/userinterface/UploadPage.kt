@@ -111,6 +111,7 @@ class UploadPage: Page() {
 
                     var uploadFilePath by remember { mutableStateOf("") }
                     var fileChooserOpened by remember { mutableStateOf(false) }
+                    var badFileType by remember { mutableStateOf(false) }
 
                     // SOURCE CODE CITATION: This code was taken/inspired by the following Java file chooser tutorial: https://www.geeksforgeeks.org/java-swing-jfilechooser/
                     if (fileChooseOpen) {
@@ -123,7 +124,12 @@ class UploadPage: Page() {
 
                         if (openValue == JFileChooser.APPROVE_OPTION) {
                             uploadFilePath = fileChooser.selectedFile.absolutePath
-                            onUpload(uploadFilePath)
+                            if (uploadFilePath.endsWith(".wav") || uploadFilePath.endsWith(".mp3")) {
+                                onUpload(uploadFilePath)
+                                badFileType = false
+                            } else {
+                                badFileType = true
+                            }
                         } else {
                             uploadFilePath = ""
                         }
@@ -132,6 +138,8 @@ class UploadPage: Page() {
 
                     if (uploadFilePath == "" && fileChooserOpened) {
                         Text("You have not selected a file")
+                    } else if (uploadFilePath != "" && badFileType) {
+                        Text("The only supported file types are .mp3 and .wav")
                     } else if (uploadFilePath != "") {
                         Text("Selected File Path: " + uploadFilePath)
                     }
