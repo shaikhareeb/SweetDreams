@@ -10,6 +10,10 @@ class AudioManager {
     var clip = AudioSystem.getClip()
     var audioInputStream = AudioSystem.getAudioInputStream(Thread.currentThread().contextClassLoader.getResource("sample_wav_file.wav"))
 
+    init {
+        AudioManager.instance = this
+    }
+
     fun openClip(url: String) {
         clip.close()
         audioInputStream = AudioSystem.getAudioInputStream(URL(url))
@@ -25,6 +29,10 @@ class AudioManager {
 //        })
     }
 
+    fun isPlaying(): Boolean {
+        return clip.isRunning
+    }
+
     fun startClip() {
         println("Try to start the current clip")
         clip.start()
@@ -37,5 +45,9 @@ class AudioManager {
     fun pauseClip() {
         println("Try to pause the current clip")
         clip.stop()
+    }
+
+    companion object {
+        var instance: AudioManager? = null;
     }
 }

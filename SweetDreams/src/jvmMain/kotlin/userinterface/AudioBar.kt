@@ -13,6 +13,16 @@ class AudioBar {
     lateinit var onPause: () -> Unit
     lateinit var onPlayQueue: () -> Unit
 
+    init {
+        val t = object: Thread() {
+            override fun run() {
+            print("running thread")
+            }
+        }
+
+        t.start()
+    }
+
     @Composable
     fun audioplayer() {
         Row(modifier = Modifier.padding(horizontal = 250.dp), horizontalArrangement = Arrangement.Center) {
