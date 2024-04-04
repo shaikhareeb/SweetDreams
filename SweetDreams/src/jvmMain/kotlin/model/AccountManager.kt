@@ -58,11 +58,16 @@ class AccountManager {
         return "";
     }
 
-    fun deleteUser(uid: String): String {
+    fun deleteUser(password: String): String {
+        if (password != this.password) {
+            return "Password is incorrect!"
+        }
+        var uid = auth.getUserByEmail(this.email)
+
         try {
-            auth.deleteUser(uid)
+            auth.deleteUser(uid.uid)
         } catch (e: HttpResponseException) {
-            return "Wrong user id or not possible to delete account"
+            return "It is not currently possible to delete your account!"
         }
         return ""
     }

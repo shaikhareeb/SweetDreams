@@ -20,8 +20,6 @@ class SettingsPage: Page() {
 
     @Composable
     override fun Content() {
-        var sliderPosition = 100.toFloat()
-        var uid by remember { mutableStateOf("") }
         var pwd by remember { mutableStateOf("") }
         var errorText by remember { mutableStateOf("") }
         Scaffold(
@@ -56,29 +54,25 @@ class SettingsPage: Page() {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-
-                    TextFieldFormat(
-                        name = pwd,
-                        isPwd = false,
-                        onNameChange = { if (it.length <= 50) pwd = it },
-                        "New Password"
-                    )
-                    TextFieldFormat(
-                        name = uid,
-                        isPwd = false,
-                        onNameChange = { if (it.length <= 50) uid = it },
-                        "Re-enter password to delete"
-                    )
-                    Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-                        errorText = onDelete(uid)
-                    }) {
-                        Text("Delete Account", color = Color.White)
-                    }
                     Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                         errorText = onReset(pwd)
                     }) {
-                        Text("Reset Password", color = Color.White)
+                        Text("Generate Password Reset Link", color = Color.White)
                     }
+
+
+                    TextFieldFormat(
+                        name = pwd,
+                        isPwd = true,
+                        onNameChange = { if (it.length <= 50) pwd = it },
+                        "Enter Password to Delete Account"
+                    )
+                    Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                        errorText = onDelete(pwd)
+                    }) {
+                        Text("Delete Account (Brings You to Login)", color = Color.White)
+                    }
+
                     Spacer(modifier = Modifier.height(10.dp))
                     SelectionContainer {
                         Text(errorText)
