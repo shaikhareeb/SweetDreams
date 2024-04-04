@@ -3,10 +3,7 @@ package userinterface
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,10 +55,10 @@ class UploadPage: Page() {
         {
 
 
-            Row(modifier = Modifier.fillMaxSize().border(2.dp, Color.Gray)) {
+            Row(modifier = Modifier.fillMaxSize()) {
                 // NavBar on the left with its own outline
                 Column(
-                    modifier = Modifier.width(200.dp).fillMaxHeight().border(2.dp, Color.Gray),
+                    modifier = Modifier.width(200.dp).fillMaxHeight(),
                     verticalArrangement = Arrangement.Top
                 ) {
                     navBar.nav()
@@ -69,17 +66,22 @@ class UploadPage: Page() {
 
                 // Main content area on the right with its own outline
                 Column(
-                    modifier = Modifier.fillMaxSize().padding(16.dp).border(2.dp, Color.Gray),
+                    modifier = Modifier.fillMaxSize().background(Color(0xFF93AEDE)),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text("Upload Page")
-                    Text("Add a new lullaby from Youtube to your SweetDreams account")
+                    Text("Upload Your Favourite Audios Here!", style = MaterialTheme.typography.h5)
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text("Please make sure they are in .wav format", style = MaterialTheme.typography.h6)
+                    Spacer(modifier = Modifier.height(10.dp))
+                    //Text("Upload Page")
+                    //Text("Add a new lullaby from Youtube to your SweetDreams account")
                     var link by remember { mutableStateOf("") }
                     var tags by remember { mutableStateOf("") }
                     var errorText by remember { mutableStateOf("") }
                     var fileChooseOpen by remember { mutableStateOf(false) }
 
+                    /*
                     TextFieldFormat(
                         name = link,
                         isPwd = false,
@@ -101,7 +103,7 @@ class UploadPage: Page() {
                         Text("Add Youtube-Linked Lullaby", color = Color.White)
                     }
 
-                    Text(errorText)
+                    Text(errorText)*/
 
                     Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                         fileChooseOpen = true
