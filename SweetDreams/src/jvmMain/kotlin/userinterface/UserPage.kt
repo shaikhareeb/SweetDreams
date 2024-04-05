@@ -17,7 +17,7 @@ class UserPage: Page() {
     lateinit var navBar : NavBar
     lateinit var audioBar: AudioBar
     lateinit var uploadedAudio: List<Video>
-    lateinit var playAudio: (String) -> Unit
+    lateinit var playAudio: (Video) -> Unit
     lateinit var deleteAudio: (String) -> Unit
 
     @Composable

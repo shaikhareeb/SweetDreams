@@ -25,7 +25,7 @@ class PlaylistsPage : Page() {
     lateinit var navBar: NavBar
     lateinit var audioBar: AudioBar
     lateinit var thumbnails : Array<youtubeData?>
-    lateinit var playAudio: (String) -> Unit
+    lateinit var playAudio: (Video) -> Unit
 
     init {
     }
@@ -130,7 +130,7 @@ class PlaylistsPage : Page() {
                             desktop.browse(URL("https://www.youtube.com/watch?v=${video.playerId}").toURI())
                         }
                     } else {
-                        playAudio(video.bloburl)
+                        playAudio(video)
                     }
                 }) {
                     Text("Play Video", color = Color.White)

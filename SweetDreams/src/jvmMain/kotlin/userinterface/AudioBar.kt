@@ -3,10 +3,16 @@ package userinterface
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import kotlinx.coroutines.delay
+import model.AudioManager
+import model.PlaylistManager
 
 class AudioBar {
     lateinit var onPlay: () -> Unit
@@ -14,46 +20,89 @@ class AudioBar {
     lateinit var onPlayQueue: () -> Unit
 
     init {
-        val t = object: Thread() {
-            override fun run() {
-            print("running thread")
-            }
-        }
 
-        t.start()
+    }
+
+    private fun playQueue() {
+        var list = PlaylistManager.instance?.GetPlaylist();
+        if (list != null && list.size != 0) {
+            println("Now playing queue");
+            AudioManager.instance?.loadPlaylist(list)
+            AudioManager.instance?.loadTrack(0);
+            AudioManager.instance?.play();
+        } else {
+            println("Queue is empty");
+        }
+    }
+
+    private fun pause(){
+        AudioManager.instance?.pause();
+    }
+
+    private fun play(){
+        AudioManager.instance?.play();
     }
 
     @Composable
     fun audioplayer() {
-        Row(modifier = Modifier.padding(horizontal = 250.dp), horizontalArrangement = Arrangement.Center) {
-            Button(
-                onClick = {onPlay()},
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(60.dp),
-                shape = RoundedCornerShape(8.dp) // Rounded corners
-            ) {
-                Text("Play", color = Color.White)
+        var isPlaying by remember { mutableStateOf(false) }
+        var currentPosition by remember { mutableStateOf(0f) }
+        var textState by remember { mutableStateOf("Playing:") }
+
+        LaunchedEffect(AudioManager.instance) {
+            while (true) {
+                if (AudioManager.instance != null) {;
+                    val audioPlayer = AudioManager.instance!!;
+                    if (audioPlayer.duration.toDouble() != 0.0) {
+                        currentPosition = (audioPlayer.currentPosition.toFloat() / audioPlayer.duration)
+                    }
+                    if (audioPlayer.isTrackEnded() && isPlaying) {
+                        audioPlayer.next()
+                        currentPosition = 0f
+                    }
+                }
+                delay(100L)
             }
+        }
+        Column {
+            Slider(
+                value = currentPosition,
+                onValueChange = { newPosition ->
+                    currentPosition = newPosition
+                    val newPos = (newPosition * AudioManager.instance?.duration!!).toLong()
+                    AudioManager.instance?.seek(newPos)
+                },
+                valueRange = 0f..1f,
+                modifier = Modifier.fillMaxWidth().requiredHeight(25.dp),
+            )
+            Row(modifier = Modifier.padding(horizontal = 250.dp), horizontalArrangement = Arrangement.Center) {
+                Button(
+                    onClick = { play(); isPlaying = true },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                    modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(30.dp),
+                    shape = RoundedCornerShape(8.dp) // Rounded corners
+                ) {
+                    Text("Play", color = Color.White)
+                }
 
-            Button(
-                onClick = {onPause()},
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(60.dp),
-                shape = RoundedCornerShape(8.dp) // Rounded corners
-            ) {
-                Text("Pause", color = Color.White)
+                Button(
+                    onClick = { pause(); isPlaying = false },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                    modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(30.dp),
+                    shape = RoundedCornerShape(8.dp) // Rounded corners
+                ) {
+                    Text("Pause", color = Color.White)
+                }
+
+                Button(
+                    onClick = { playQueue(); isPlaying = true; },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                    modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(30.dp),
+                    shape = RoundedCornerShape(8.dp) // Rounded corners
+                ) {
+                    Text("Play Queue", color = Color.White)
+                }
             }
-
-            Button(
-                onClick = {onPlayQueue()},
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(60.dp),
-                shape = RoundedCornerShape(8.dp) // Rounded corners
-            ) {
-                Text("Play Queue", color = Color.White)
-            }
-
-
         }
     }
 }

@@ -37,23 +37,23 @@ class ExplorePage : Page() {
     lateinit var audioBar: AudioBar
     lateinit var uploadedAudio: List<Video>
     lateinit var thumbnails : Array<youtubeData?>
-    lateinit var playAudio: (String) -> Unit
+    lateinit var playAudio: (Video) -> Unit
     lateinit var deleteAudio: (String) -> Unit
 
     // Sample list of videos
     lateinit var videos: MutableList<Video>
 
     init {
-        thumbnails = youtube.getSearchData("Lullabies");
+        //thumbnails = youtube.getSearchData("Lullabies");
         videos = mutableListOf();
         var index1 = 0;
-        for (data in thumbnails) {
-            var newVid = data?.let { Video(index1, it.title, data.description, data.thumbnail, data.playerId, data.id) };
-            index1 ++;
-            if (newVid != null) {
-                videos.add(newVid)
-            };
-        }
+//        for (data in thumbnails) {
+//            var newVid = data?.let { Video(index1, it.title, data.description, data.thumbnail, data.playerId, data.id) };
+//            index1 ++;
+//            if (newVid != null) {
+//                videos.add(newVid)
+//            };
+//        }
 
         var index = 0;
         for (i in 0..10) {

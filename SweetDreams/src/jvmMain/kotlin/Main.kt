@@ -34,9 +34,10 @@ fun App() {
     var uploadManager = UploadManager()
     var audioManager = AudioManager()
 
-    explore.playAudio = onReturn@{url: String ->
-        audioManager.openClip(url)
-        audioManager.startClip()
+    explore.playAudio = onReturn@{video: Video ->
+        AudioManager.instance?.loadSingleClip(video);
+        AudioManager.instance?.loadTrack(0);
+        AudioManager.instance?.play();
     }
     explore.deleteAudio = onReturn@{url: String ->
         uploadManager.deleteAudioFile(url, accountManager.getUser())
@@ -52,13 +53,15 @@ fun App() {
         }
     }
 
-    playlists.playAudio = onReturn@{url: String ->
-        audioManager.openClip(url)
-        audioManager.startClip()
+    playlists.playAudio = onReturn@{video: Video ->
+        AudioManager.instance?.loadSingleClip(video);
+        AudioManager.instance?.loadTrack(0);
+        AudioManager.instance?.play();
     }
-    user.playAudio = onReturn@{url: String ->
-        audioManager.openClip(url)
-        audioManager.startClip()
+    user.playAudio = onReturn@{video: Video ->
+        AudioManager.instance?.loadSingleClip(video);
+        AudioManager.instance?.loadTrack(0);
+        AudioManager.instance?.play();
     }
     user.deleteAudio = onReturn@{url: String ->
         uploadManager.deleteAudioFile(url, accountManager.getUser())
@@ -140,20 +143,20 @@ fun App() {
     }
 
     audiobar.onPlay = {
-        audioManager.startClip()
+        //audioManager.startClip()
     }
     audiobar.onPause = {
-        audioManager.pauseClip()
+        //audioManager.pauseClip()
     }
 
     audiobar.onPlayQueue = {
-        val playlist = PlaylistManager.instance?.GetPlaylist();
-        if (playlist != null) {
-            for (i in playlist.size - 1 downTo 0) {
-                audioManager.openClip(playlist[i].bloburl)
-                audioManager.startClip()
-            }
-        }
+//        val playlist = PlaylistManager.instance?.GetPlaylist();
+//        if (playlist != null) {
+//            for (i in playlist.size - 1 downTo 0) {
+//                audioManager.openClip(playlist[i].bloburl)
+//                audioManager.startClip()
+//            }
+//        }
 
     }
 
