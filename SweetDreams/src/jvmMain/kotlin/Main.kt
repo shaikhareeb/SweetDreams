@@ -91,6 +91,8 @@ fun App() {
                 Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
             }
             SetPage(2)
+
+            UploadManager.instance?.getPlaylist();
         }
         return@onReturn userLoginSuccess;
     }

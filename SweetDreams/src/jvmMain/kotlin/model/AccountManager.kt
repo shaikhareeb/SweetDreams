@@ -4,6 +4,7 @@ import com.google.api.client.http.HttpResponseException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserRecord.CreateRequest
 import org.json.JSONObject
+import userinterface.AudioBar
 
 var currentAccounts = Array(1) { arrayOf("john","smith","john123","john@gmail.com","johnpwd") }
 
@@ -14,6 +15,11 @@ class AccountManager {
 
     init {
         auth = FirebaseAuth.getInstance();
+        instance = this;
+    }
+
+    companion object {
+        var instance: AccountManager? = null;
     }
 
     fun setUser(email : String, password: String) {
