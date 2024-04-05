@@ -18,21 +18,33 @@ class AudioBar {
     lateinit var onPlay: () -> Unit
     lateinit var onPause: () -> Unit
     lateinit var onPlayQueue: () -> Unit
+    var isQueuePlaying: Boolean = false
+    var isPlaying: Boolean = false
 
     init {
         instance = this;
     }
 
     private fun playQueue() {
-        var list = PlaylistManager.instance?.GetPlaylist();
-        if (list != null && list.size != 0) {
-            println("Now playing queue");
-            AudioManager.instance?.loadPlaylist(list)
-            AudioManager.instance?.loadTrack(0);
-            AudioManager.instance?.play();
+        if (!isQueuePlaying) {
+            var list = PlaylistManager.instance?.GetPlaylist();
+            if (list != null && list.size != 0) {
+                println("Now playing queue");
+                isQueuePlaying = true
+                AudioManager.instance?.loadPlaylist(list)
+                AudioManager.instance?.playTrackAtIndex(0);
+            } else {
+                println("Queue is empty");
+            }
         } else {
-            println("Queue is empty");
+            isQueuePlaying = false
+            var list = PlaylistManager.instance?.GetPlaylist();
+            if (list != null && list.size != 0) {
+                AudioManager.instance?.loadPlaylist(list)
+                AudioManager.instance?.resetSlider()
+            }
         }
+
     }
 
     private fun pause(){
@@ -49,7 +61,6 @@ class AudioBar {
 
     @Composable
     fun audioplayer() {
-        var isPlaying by remember { mutableStateOf(false) }
         var currentPosition by remember { mutableStateOf(0f) }
         var textState by remember { mutableStateOf("Nothing is playing") }
 
@@ -68,7 +79,7 @@ class AudioBar {
                     }
                 }
                 delay(100L)
-                textState = AudioManager.instance!!.getClipName;
+                textState = if (!isQueuePlaying) "Nothing is playing" else AudioManager.instance!!.getClipName;
             }
         }
         Column {
@@ -94,15 +105,17 @@ class AudioBar {
                         else play();
                         isPlaying = !isPlaying;
                               },
+                    //enabled = isQueuePlaying,
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
                     modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(30.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
                 ) {
-                    Text("▶/⏸", color = Color.White)
+                    Text("⏯", color = Color.White)
                 }
 
                 Button(
                     onClick = { AudioManager.instance!!.previous(); play(); isPlaying = true },
+                    //enabled = isQueuePlaying,
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
                     modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(30.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
@@ -112,6 +125,7 @@ class AudioBar {
 
                 Button(
                     onClick = { AudioManager.instance!!.next(); play(); isPlaying = true },
+                    //enabled = isQueuePlaying,
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
                     modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(30.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
@@ -121,11 +135,12 @@ class AudioBar {
 
                 Button(
                     onClick = { playQueue(); isPlaying = true; },
+                    enabled = PlaylistManager.instance?.GetPlaylist()?.size != 0,
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
                     modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(30.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
                 ) {
-                    Text("Start Queue", color = Color.White)
+                    Text(if (isQueuePlaying) "Stop Queue" else "Play Queue", color = Color.White)
                 }
             }
         }

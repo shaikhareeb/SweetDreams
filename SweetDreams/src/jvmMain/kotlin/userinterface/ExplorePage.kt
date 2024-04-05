@@ -181,11 +181,11 @@ class ExplorePage : Page() {
                 }) {
                     Text("Play Video", color = Color.White)
                 }
-                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-                    PlaylistManager.instance?.AddToQueue(video);
-                }) {
-                    Text("+", color = Color.White)
-                }
+//                Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+//                    PlaylistManager.instance?.AddToQueue(video);
+//                }) {
+//                    Text("+", color = Color.White)
+//                }
             }
         }
     }

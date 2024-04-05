@@ -27,6 +27,7 @@ class PlaylistsPage : Page() {
     lateinit var audioBar: AudioBar
     lateinit var thumbnails : Array<youtubeData?>
     lateinit var playAudio: (Video) -> Unit
+    lateinit var onDelete: (Video) -> Unit
 
     init {
     }
@@ -136,7 +137,7 @@ class PlaylistsPage : Page() {
                     Text("Play Video", color = Color.White)
                 }
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-                    PlaylistManager.instance?.RemoveFromQueue(video);
+                    onDelete(video)
                 }) {
                     Text("-", color = Color.White)
                 }

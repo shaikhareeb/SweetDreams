@@ -88,6 +88,11 @@ class AudioManager {
             loadTrack(currentTrackIndex)
             pausePosition = 0
             play()
+        } else {
+            currentTrackIndex = 0
+            loadTrack(currentTrackIndex)
+            pausePosition = 0
+            play()
         }
     }
 
@@ -102,10 +107,21 @@ class AudioManager {
             loadTrack(currentTrackIndex)
             pausePosition = 0
             play()
+        } else {
+            currentTrackIndex = 0
+            loadTrack(currentTrackIndex)
+            pausePosition = 0
+            play()
         }
     }
     public fun isTrackEnded(): Boolean {
         return currentPosition >= duration
+    }
+
+    public fun resetSlider(){
+        currentTrackIndex = 0
+        loadTrack(currentTrackIndex)
+        pausePosition = 0
     }
 
     public fun playTrackAtIndex(index: Int) {

@@ -60,6 +60,10 @@ fun App() {
         AudioManager.instance?.loadTrack(0);
         AudioBar.instance?.play();
     }
+    playlists.onDelete = onReturn@{video: Video ->
+        PlaylistManager.instance?.RemoveFromQueue(video);
+        SetPage(5)
+    }
     user.playAudio = onReturn@{video: Video ->
         AudioManager.instance?.loadSingleClip(video);
         AudioManager.instance?.loadTrack(0);
