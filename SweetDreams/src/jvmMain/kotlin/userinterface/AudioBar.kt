@@ -99,7 +99,8 @@ class AudioBar {
             Row(modifier = Modifier.padding(horizontal = 200.dp), horizontalArrangement = Arrangement.Center) {
                 Text(
                     text = textState,
-                    modifier = Modifier.absoluteOffset(x = (-75).dp)
+                    modifier = Modifier.absoluteOffset(x = (-75).dp),
+                    style = MaterialTheme.typography.h6
                 )
                 Button(
                     onClick = {

@@ -47,11 +47,11 @@ class LockPage: Page() {
                 var errorText by remember { mutableStateOf("") }
 
                 if (AudioManager.instance?.GetCurrentVideo() != null) {
-                    Text("Playing lullabies...")
+                    Text("Playing lullabies...", style = MaterialTheme.typography.h6)
                     Spacer(modifier = Modifier.height(20.dp))
                     VideoCard(AudioManager.instance?.GetCurrentVideo()!!)
                 } else {
-                    Text("No lullabies playing!")
+                    Text("No lullabies playing!", style = MaterialTheme.typography.h6)
                 }
                 Spacer(modifier = Modifier.height(20.dp))
                 TextFieldFormat(

@@ -147,7 +147,7 @@ class PlaylistsPage : Page() {
                         audioBar.isQueuePlaying = false
                         AudioManager.instance?.resetSlider()
                     }
-                    onDelete(video, audioBar.isPlaying)
+                    onDelete(video, audioBar.isQueuePlaying)
                 }) {
                     Text("-", color = Color.White)
                 }

@@ -60,11 +60,13 @@ fun App() {
         AudioManager.instance?.loadTrack(0);
         AudioBar.instance?.play();
     }
-    playlists.onDelete = onReturn@{video: Video, isPlaying: Boolean ->
+    playlists.onDelete = onReturn@{video: Video, isQPlaying: Boolean ->
         PlaylistManager.instance?.RemoveFromQueue(video);
-        if (isPlaying) AudioManager.instance?.loadPlaylist(PlaylistManager.instance!!.GetPlaylist())
-        if (PlaylistManager.instance!!.GetPlaylist().size != 0) {
-            AudioManager.instance?.playTrackAtIndex(0)
+        if (isQPlaying) {
+            AudioManager.instance?.loadPlaylist(PlaylistManager.instance!!.GetPlaylist())
+            if (PlaylistManager.instance!!.GetPlaylist().size != 0) {
+                AudioManager.instance?.playTrackAtIndex(0)
+            }
         }
         SetPage(5)
     }
