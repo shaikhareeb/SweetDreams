@@ -53,7 +53,7 @@ class SettingsPage: Page() {
 
                 // Main content area on the right with its own outline
                 Column(
-                    modifier = Modifier.fillMaxSize().padding(16.dp).border(2.dp, Color.Gray),
+                    modifier = Modifier.fillMaxSize().background(Color(0xFF93AEDE)),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {

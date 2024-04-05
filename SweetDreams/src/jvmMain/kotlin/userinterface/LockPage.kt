@@ -39,7 +39,7 @@ class LockPage: Page() {
         )
         {
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxSize().background(Color(0xFF93AEDE)),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
