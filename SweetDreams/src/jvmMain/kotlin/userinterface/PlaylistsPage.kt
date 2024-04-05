@@ -41,7 +41,7 @@ class PlaylistsPage : Page() {
                     modifier = Modifier
                         .fillMaxHeight(0.1F)
                         .fillMaxWidth()
-                        .border(2.dp, Color.Black)
+                        .border(2.dp, Color.Gray)
                         .background(Color(0xFF93AEDE))
                         .padding(vertical = 8.dp, horizontal = 8.dp),
                 ) {
@@ -137,6 +137,10 @@ class PlaylistsPage : Page() {
                     Text("Play Video", color = Color.White)
                 }
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
+                    if (PlaylistManager.instance!!.GetPlaylist().size == 1) {
+                        audioBar.isQueuePlaying = false
+                        AudioManager.instance?.resetSlider()
+                    }
                     onDelete(video)
                 }) {
                     Text("-", color = Color.White)

@@ -32,7 +32,7 @@ class SettingsPage: Page() {
                     modifier = Modifier
                         .fillMaxHeight(0.1F)
                         .fillMaxWidth()
-                        .border(2.dp, Color.Black)
+                        .border(2.dp, Color.Gray)
                         .background(Color(0xFF93AEDE))
                         .padding(vertical = 8.dp, horizontal = 8.dp),
                 ) {

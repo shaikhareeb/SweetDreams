@@ -62,6 +62,10 @@ fun App() {
     }
     playlists.onDelete = onReturn@{video: Video ->
         PlaylistManager.instance?.RemoveFromQueue(video);
+        AudioManager.instance?.loadPlaylist(PlaylistManager.instance!!.GetPlaylist())
+        if (PlaylistManager.instance!!.GetPlaylist().size != 0) {
+            AudioManager.instance?.playTrackAtIndex(0)
+        }
         SetPage(5)
     }
     user.playAudio = onReturn@{video: Video ->
@@ -81,6 +85,11 @@ fun App() {
         user.uploadedAudio = uploads.mapIndexed { index, upload ->
             Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
         }
+        SetPage(3)
+    }
+
+    user.onAdd = onReturn@{video: Video ->
+        PlaylistManager.instance?.AddToQueue(video);
         SetPage(3)
     }
 

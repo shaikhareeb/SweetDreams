@@ -20,6 +20,7 @@ class AudioBar {
     lateinit var onPlayQueue: () -> Unit
     var isQueuePlaying: Boolean = false
     var isPlaying: Boolean = false
+    var textState : String = "Nothing is playing"
 
     init {
         instance = this;
@@ -31,6 +32,7 @@ class AudioBar {
             if (list != null && list.size != 0) {
                 println("Now playing queue");
                 isQueuePlaying = true
+                textState = AudioManager.instance!!.getClipName;
                 AudioManager.instance?.loadPlaylist(list)
                 AudioManager.instance?.playTrackAtIndex(0);
             } else {
@@ -38,6 +40,8 @@ class AudioBar {
             }
         } else {
             isQueuePlaying = false
+            AudioManager.instance?.setClipName("Nothing is playing")
+            textState = AudioManager.instance!!.getClipName;
             var list = PlaylistManager.instance?.GetPlaylist();
             if (list != null && list.size != 0) {
                 AudioManager.instance?.loadPlaylist(list)
@@ -62,9 +66,6 @@ class AudioBar {
     @Composable
     fun audioplayer() {
         var currentPosition by remember { mutableStateOf(0f) }
-        var textState by remember { mutableStateOf("Nothing is playing") }
-
-        textState = AudioManager.instance!!.getClipName;
 
         LaunchedEffect(AudioManager.instance) {
             while (true) {
@@ -79,7 +80,8 @@ class AudioBar {
                     }
                 }
                 delay(100L)
-                textState = if (!isQueuePlaying) "Nothing is playing" else AudioManager.instance!!.getClipName;
+                if (!isQueuePlaying) AudioManager.instance!!.setClipName("Nothing is playing");
+                textState = AudioManager.instance!!.getClipName;
             }
         }
         Column {

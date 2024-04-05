@@ -1,16 +1,14 @@
 package userinterface
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.colorspace.RenderIntent
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import model.AudioManager
@@ -21,6 +19,7 @@ import java.awt.Desktop
 import java.net.URL
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.Clip
+import kotlin.random.Random
 
 // Assume Video data class and NavBar class are defined elsewhere
 data class Video(
@@ -75,7 +74,7 @@ class ExplorePage : Page() {
                     modifier = Modifier
                         .fillMaxHeight(0.1F)
                         .fillMaxWidth()
-                        .border(2.dp, Color.Black)
+                        .border(2.dp, Color.Gray)
                         .background(Color(0xFF93AEDE))
                         .padding(vertical = 8.dp, horizontal = 8.dp),
                 ) {
@@ -128,24 +127,23 @@ class ExplorePage : Page() {
                                 }
                             }
                         Text(
-                            "Uploads",
-                            style = MaterialTheme.typography.h6.copy(color = Color.White),
+                            "",
                             modifier = Modifier.padding(16.dp))
-                        for (rowIndex in 0 until numberOfRows) {
-                            Row(
-                                horizontalArrangement = Arrangement.spacedBy(16.dp),
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                for (columnIndex in 0..3) {
-                                    val videoIndex = rowIndex * 3 + columnIndex
-                                    if (videoIndex < uploadedAudio.size) {
-                                        UploadedAudioCard(audio = uploadedAudio[videoIndex], playAudio, deleteAudio)
-                                    } else {
-                                        Spacer(modifier = Modifier.width(200.dp).padding(bottom = 16.dp)) // Fill space if no video
-                                    }
-                                }
-                            }
-                        }
+//                        for (rowIndex in 0 until numberOfRows) {
+//                            Row(
+//                                horizontalArrangement = Arrangement.spacedBy(16.dp),
+//                                modifier = Modifier.fillMaxWidth()
+//                            ) {
+//                                for (columnIndex in 0..3) {
+//                                    val videoIndex = rowIndex * 3 + columnIndex
+//                                    if (videoIndex < uploadedAudio.size) {
+//                                        UploadedAudioCard(audio = uploadedAudio[videoIndex], playAudio, deleteAudio)
+//                                    } else {
+//                                        Spacer(modifier = Modifier.width(200.dp).padding(bottom = 16.dp)) // Fill space if no video
+//                                    }
+//                                }
+//                            }
+//                        }
                     }
                 }
             }
@@ -162,9 +160,16 @@ class ExplorePage : Page() {
             Column(modifier = Modifier.padding(8.dp)) {
                 // Placeholder for video thumbnail
                 Box(
-                    modifier = Modifier.height(180.dp).fillMaxWidth().border(1.dp, Color.Gray),
+                    modifier = Modifier.height(180.dp).fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
+                    val randomNumber = Random.nextInt(1, 14)
+                    Image(
+                        painter = painterResource("img$randomNumber.webp"), // Replace with your image path
+                        contentDescription = "Logo",
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = video.title, style = MaterialTheme.typography.h6)

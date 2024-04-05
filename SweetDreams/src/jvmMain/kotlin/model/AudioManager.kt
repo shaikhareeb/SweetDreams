@@ -139,6 +139,10 @@ class AudioManager {
 
     val getClipName: String
         get() = clipName;
+    fun setClipName(newName: String) {
+        clipName = newName
+    }
+
 
     val currentPosition: Long
         get() = clip?.microsecondPosition ?: 0

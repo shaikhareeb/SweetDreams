@@ -49,7 +49,7 @@ abstract class Page {
     }
 
     @Composable
-    fun UploadedAudioCard(audio: Video, playAudio: (Video) -> Unit, deleteAudio: (String) -> Unit) {
+    fun UploadedAudioCard(audio: Video, playAudio: (Video) -> Unit, deleteAudio: (String) -> Unit, onAdd: (Video) -> Unit) {
         Card(
             modifier = Modifier.width(200.dp).padding(bottom = 16.dp), // Set width for the card
             backgroundColor = Color(0xFFF2F1FB),
@@ -83,7 +83,7 @@ abstract class Page {
                 }
 
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-                    PlaylistManager.instance?.AddToQueue(audio);
+                    onAdd(audio)
                 }) {
                     Text("+", color = Color.White)
                 }
