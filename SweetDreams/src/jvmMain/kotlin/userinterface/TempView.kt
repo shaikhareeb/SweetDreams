@@ -1,4 +1,0 @@
-package userinterface
-
-class TempView {
-}
