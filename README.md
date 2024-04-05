@@ -53,5 +53,7 @@ A citation for opening links in Desktop browsers as per this StackOverflow link 
 
 A citation for deleting audio files via removing blobs from GCP from this StackOverflow link (https://stackoverflow.com/questions/53657627/deleting-multiple-blobs-from-google-cloud-storage-efficiently) is included in UploadManager.kt 
 
+Certain emojis and unicode values used in the source code are from https://www.iemoji.com/.
+
 # Copyright & License
 
