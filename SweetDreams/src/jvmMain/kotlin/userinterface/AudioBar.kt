@@ -51,7 +51,9 @@ class AudioBar {
     fun audioplayer() {
         var isPlaying by remember { mutableStateOf(false) }
         var currentPosition by remember { mutableStateOf(0f) }
-        var textState by remember { mutableStateOf("Playing:") }
+        var textState by remember { mutableStateOf("Nothing is playing") }
+
+        textState = AudioManager.instance!!.getClipName;
 
         LaunchedEffect(AudioManager.instance) {
             while (true) {
@@ -66,6 +68,7 @@ class AudioBar {
                     }
                 }
                 delay(100L)
+                textState = AudioManager.instance!!.getClipName;
             }
         }
         Column {
@@ -79,7 +82,12 @@ class AudioBar {
                 valueRange = 0f..1f,
                 modifier = Modifier.fillMaxWidth().requiredHeight(25.dp),
             )
-            Row(modifier = Modifier.padding(horizontal = 250.dp), horizontalArrangement = Arrangement.Center) {
+
+            Row(modifier = Modifier.padding(horizontal = 200.dp), horizontalArrangement = Arrangement.Center) {
+                Text(
+                    text = textState,
+                    modifier = Modifier.absoluteOffset(x = (-75).dp)
+                )
                 Button(
                     onClick = {
                         if (isPlaying) pause();

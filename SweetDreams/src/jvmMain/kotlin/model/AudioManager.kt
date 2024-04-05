@@ -17,6 +17,7 @@ class AudioManager {
     private var currentTrackIndex = 0
     private var clip: Clip? = null
     private var pausePosition: Long = 0
+    private var clipName: String = "Nothing is playing"
 
     init {
         AudioManager.instance = this
@@ -42,6 +43,7 @@ class AudioManager {
                 val audioInputStream = AudioSystem.getAudioInputStream(URL(playlist[index].bloburl))
                 open(audioInputStream)
                 println("Loaded Track " + playlist[index].title);
+                clipName = playlist[index].title;
             } catch (e : Exception){
                 println(e);
             }
@@ -110,6 +112,9 @@ class AudioManager {
 
     val isPlaying: Boolean
         get() = clip?.isRunning ?: false
+
+    val getClipName: String
+        get() = clipName;
 
     val currentPosition: Long
         get() = clip?.microsecondPosition ?: 0

@@ -93,7 +93,6 @@ class PlaylistsPage : Page() {
                                             ) // Fill space if no video
                                         }
                                     }
-
                                 }
                             }
                         }
