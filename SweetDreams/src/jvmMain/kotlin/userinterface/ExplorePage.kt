@@ -8,6 +8,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.colorspace.RenderIntent
+import androidx.compose.ui.graphics.toComposeImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -17,6 +19,7 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 import youtube.youtubeData
 import java.awt.Desktop
 import java.net.URL
+import javax.imageio.ImageIO
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.Clip
 import kotlin.random.Random
@@ -43,25 +46,25 @@ class ExplorePage : Page() {
     lateinit var videos: MutableList<Video>
 
     init {
-        //thumbnails = youtube.getSearchData("Lullabies");
+        thumbnails = youtube.getSearchData("Lullabies");
         videos = mutableListOf();
         var index1 = 0;
-//        for (data in thumbnails) {
-//            var newVid = data?.let { Video(index1, it.title, data.description, data.thumbnail, data.playerId, data.id) };
-//            index1 ++;
-//            if (newVid != null) {
-//                videos.add(newVid)
-//            };
-//        }
-
-        var index = 0;
-        for (i in 0..10) {
-            var newVid = Video(index, "video", "blah", "blah", "blah", 0)
-            index ++;
+        for (data in thumbnails) {
+            var newVid = data?.let { Video(index1, it.title, data.description, data.thumbnail, data.playerId, data.id) };
+            index1 ++;
             if (newVid != null) {
                 videos.add(newVid)
             };
         }
+
+//        var index = 0;
+//        for (i in 0..10) {
+//            var newVid = Video(index, "video", "blah", "blah", "blah", 0)
+//            index ++;
+//            if (newVid != null) {
+//                videos.add(newVid)
+//            };
+//        }
 
     }
 
@@ -163,13 +166,22 @@ class ExplorePage : Page() {
                     modifier = Modifier.height(180.dp).fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
-                    val randomNumber = Random.nextInt(1, 14)
-                    Image(
-                        painter = painterResource("img$randomNumber.webp"), // Replace with your image path
-                        contentDescription = "Logo",
-                        modifier = Modifier
-                            .fillMaxSize()
-                    )
+                    println("Video thumbnail name is: ${video.thumbnail}")
+                    if (video.thumbnail == "thumbnail" || video.thumbnail == "no_image") {
+                        val randomNumber = (video.title.length % 13) + 1
+                        Image(
+                            painter = painterResource("img$randomNumber.webp"), // Replace with your image path
+                            contentDescription = "Logo",
+                            modifier = Modifier
+                                .fillMaxSize()
+                        )
+                    } else {
+                        Image(
+                            bitmap = ImageIO.read(URL(video.thumbnail)).toComposeImageBitmap(),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop
+                        )
+                    }
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = video.title, style = MaterialTheme.typography.h6)

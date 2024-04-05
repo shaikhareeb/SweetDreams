@@ -27,7 +27,7 @@ import javax.sound.sampled.Clip
 class PlaylistsPage : Page() {
     lateinit var navBar: NavBar
     lateinit var audioBar: AudioBar
-    lateinit var thumbnails : Array<youtubeData?>
+//    lateinit var thumbnails : Array<youtubeData?>
     lateinit var playAudio: (Video) -> Unit
     lateinit var onDelete: (Video, Boolean) -> Unit
 
@@ -146,11 +146,7 @@ class PlaylistsPage : Page() {
                         playAudio(video)
                     }
                 }) {
-<<<<<<< Updated upstream
-                    Text("Play Video", color = Color.White)
-=======
                     Text("Play Audio", color = Color.White)
->>>>>>> Stashed changes
                 }
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                     if (PlaylistManager.instance!!.GetPlaylist().size == 1) {
