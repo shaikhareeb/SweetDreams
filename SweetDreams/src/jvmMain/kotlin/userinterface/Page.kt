@@ -1,5 +1,6 @@
 package userinterface
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -10,10 +11,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import model.PlaylistManager
 import java.net.URL
+import kotlin.random.Random
 
 abstract class Page {
     var currentLullabies = Array(1) { arrayOf("https://www.youtube.com/watch?v=2SmUkXtQIPc&ab_channel=BestBabyLullabies", "youtube,whitenoise") }
@@ -58,15 +61,21 @@ abstract class Page {
             Column(modifier = Modifier.padding(8.dp)) {
                 // Placeholder for audio thumbnail
                 Box(
-                    modifier = Modifier.height(180.dp).fillMaxWidth().border(1.dp, Color.Gray),
+                    modifier = Modifier.height(180.dp).fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text(text = audio.thumbnail, style = MaterialTheme.typography.h6)
+                    val randomNumber = Random.nextInt(1, 14)
+                    Image(
+                        painter = painterResource("img$randomNumber.webp"), // Replace with your image path
+                        contentDescription = "Logo",
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = audio.title, style = MaterialTheme.typography.h6)
                 Spacer(modifier = Modifier.height(4.dp))
-                Text(text = audio.description, style = MaterialTheme.typography.body2)
+                // Text(text = audio.description, style = MaterialTheme.typography.body2)
 
 
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {

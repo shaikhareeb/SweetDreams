@@ -1,15 +1,13 @@
 package userinterface
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import model.AudioManager
 import model.PlaylistManager
@@ -20,6 +18,7 @@ import java.awt.Desktop
 import java.net.URL
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.Clip
+import kotlin.random.Random
 
 // Assume Video data class and NavBar class are defined elsewhere
 class PlaylistsPage : Page() {
@@ -27,7 +26,7 @@ class PlaylistsPage : Page() {
     lateinit var audioBar: AudioBar
     lateinit var thumbnails : Array<youtubeData?>
     lateinit var playAudio: (Video) -> Unit
-    lateinit var onDelete: (Video) -> Unit
+    lateinit var onDelete: (Video, Boolean) -> Unit
 
     init {
     }
@@ -113,14 +112,21 @@ class PlaylistsPage : Page() {
             Column(modifier = Modifier.padding(8.dp)) {
                 // Placeholder for video thumbnail
                 Box(
-                    modifier = Modifier.height(180.dp).fillMaxWidth().border(1.dp, Color.Gray),
+                    modifier = Modifier.height(180.dp).fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
+                    val randomNumber = Random.nextInt(1, 14)
+                    Image(
+                        painter = painterResource("img$randomNumber.webp"), // Replace with your image path
+                        contentDescription = "Logo",
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = video.title, style = MaterialTheme.typography.h6)
                 Spacer(modifier = Modifier.height(4.dp))
-                Text(text = video.description, style = MaterialTheme.typography.body2)
+                // Text(text = video.description, style = MaterialTheme.typography.body2)
 
 
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
@@ -141,7 +147,7 @@ class PlaylistsPage : Page() {
                         audioBar.isQueuePlaying = false
                         AudioManager.instance?.resetSlider()
                     }
-                    onDelete(video)
+                    onDelete(video, audioBar.isPlaying)
                 }) {
                     Text("-", color = Color.White)
                 }

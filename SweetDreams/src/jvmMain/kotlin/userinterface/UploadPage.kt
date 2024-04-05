@@ -143,7 +143,7 @@ class UploadPage: Page() {
                     } else if (uploadFilePath != "" && badFileType) {
                         Text("The only currently supported file type is .wav")
                     } else if (uploadFilePath != "") {
-                        Text("Selected File Path: " + uploadFilePath)
+                        Text("Successfully imprted: " + uploadFilePath)
                     }
                 }
             }

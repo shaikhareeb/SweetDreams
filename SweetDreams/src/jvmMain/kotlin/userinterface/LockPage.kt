@@ -1,5 +1,6 @@
 package userinterface
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -9,12 +10,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import model.AccountManager
 import model.AudioManager
 import model.PlaylistManager
 import java.awt.Desktop
 import java.net.URL
+import kotlin.random.Random
 
 
 class LockPage: Page() {
@@ -45,6 +48,7 @@ class LockPage: Page() {
 
                 if (AudioManager.instance?.GetCurrentVideo() != null) {
                     Text("Playing lullabies...")
+                    Spacer(modifier = Modifier.height(20.dp))
                     VideoCard(AudioManager.instance?.GetCurrentVideo()!!)
                 } else {
                     Text("No lullabies playing!")
@@ -86,9 +90,16 @@ class LockPage: Page() {
             Column(modifier = Modifier.padding(8.dp)) {
                 // Placeholder for video thumbnail
                 Box(
-                    modifier = Modifier.height(180.dp).fillMaxWidth().border(1.dp, Color.Gray),
+                    modifier = Modifier.height(180.dp).fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
+                    val randomNumber = Random.nextInt(1, 14)
+                    Image(
+                        painter = painterResource("img$randomNumber.webp"), // Replace with your image path
+                        contentDescription = "Logo",
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = video.title, style = MaterialTheme.typography.h6)
