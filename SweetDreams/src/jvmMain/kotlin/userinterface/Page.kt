@@ -3,7 +3,6 @@ package userinterface
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -11,7 +10,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -21,7 +19,6 @@ import javax.imageio.ImageIO
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.toComposeImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 
 abstract class Page {
     var currentLullabies = Array(1) { arrayOf("https://www.youtube.com/watch?v=2SmUkXtQIPc&ab_channel=BestBabyLullabies", "youtube,whitenoise") }
@@ -73,19 +70,11 @@ abstract class Page {
                     modifier = Modifier.height(180.dp).fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
-                    if (audio.thumbnail == "no_image") {
-                        Image(
-                            painter = painterResource("img1.webp"),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop,
-                        )
-                    } else {
-                        Image(
-                            bitmap = loadImage(audio.thumbnail),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop
-                        )
-                    }
+                    Image(
+                        bitmap = loadImage(audio.thumbnail),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop
+                    )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = audio.title, style = MaterialTheme.typography.h6)

@@ -101,21 +101,11 @@ class LockPage: Page() {
                     modifier = Modifier.height(180.dp).fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
-                    if (video.thumbnail == "thumbnail" || video.thumbnail == "no_image") {
-                        val randomNumber = (video.title.length % 13) + 1
-                        Image(
-                            painter = painterResource("img$randomNumber.webp"), // Replace with your image path
-                            contentDescription = "Logo",
-                            modifier = Modifier
-                                .fillMaxSize()
-                        )
-                    } else {
-                        Image(
-                            bitmap = loadImage(video.thumbnail),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop
-                        )
-                    }
+                    Image(
+                        bitmap = loadImage(video.thumbnail),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop
+                    )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = video.title, style = MaterialTheme.typography.h6)

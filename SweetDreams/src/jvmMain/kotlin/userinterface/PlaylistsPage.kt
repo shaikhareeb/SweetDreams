@@ -22,7 +22,6 @@ import java.net.URL
 import javax.imageio.ImageIO
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.Clip
-import kotlin.random.Random
 
 // Assume Video data class and NavBar class are defined elsewhere
 class PlaylistsPage : Page() {
@@ -123,22 +122,11 @@ class PlaylistsPage : Page() {
                     modifier = Modifier.height(180.dp).fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
-                    println("Video thumbnail name is: ${video.thumbnail}")
-                    if (video.thumbnail == "thumbnail" || video.thumbnail == "no_image") {
-                        val randomNumber = (video.title.length % 13) + 1
-                        Image(
-                            painter = painterResource("img$randomNumber.webp"), // Replace with your image path
-                            contentDescription = "Logo",
-                            modifier = Modifier
-                                .fillMaxSize()
-                        )
-                    } else {
-                        Image(
-                            bitmap = loadImage(video.thumbnail),
-                            contentDescription = null,
-                            contentScale = ContentScale.Crop
-                        )
-                    }
+                    Image(
+                        bitmap = loadImage(video.thumbnail),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop
+                    )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(text = video.title, style = MaterialTheme.typography.h6)
@@ -157,7 +145,7 @@ class PlaylistsPage : Page() {
                         playAudio(video)
                     }
                 }) {
-                    Text("Play Audio/Video", color = Color.White)
+                    Text("Play Video", color = Color.White)
                 }
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                     if (PlaylistManager.instance!!.GetPlaylist().size == 1) {
