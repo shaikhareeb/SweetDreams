@@ -37,7 +37,7 @@ fun App() {
     explore.playAudio = onReturn@{video: Video ->
         AudioManager.instance?.loadSingleClip(video);
         AudioManager.instance?.loadTrack(0);
-        AudioManager.instance?.play();
+        AudioBar.instance?.play();
     }
     explore.deleteAudio = onReturn@{url: String ->
         uploadManager.deleteAudioFile(url, accountManager.getUser())
@@ -56,12 +56,12 @@ fun App() {
     playlists.playAudio = onReturn@{video: Video ->
         AudioManager.instance?.loadSingleClip(video);
         AudioManager.instance?.loadTrack(0);
-        AudioManager.instance?.play();
+        AudioBar.instance?.play();
     }
     user.playAudio = onReturn@{video: Video ->
         AudioManager.instance?.loadSingleClip(video);
         AudioManager.instance?.loadTrack(0);
-        AudioManager.instance?.play();
+        AudioBar.instance?.play();
     }
     user.deleteAudio = onReturn@{url: String ->
         uploadManager.deleteAudioFile(url, accountManager.getUser())

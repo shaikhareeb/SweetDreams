@@ -20,7 +20,7 @@ class AudioBar {
     lateinit var onPlayQueue: () -> Unit
 
     init {
-
+        instance = this;
     }
 
     private fun playQueue() {
@@ -39,8 +39,12 @@ class AudioBar {
         AudioManager.instance?.pause();
     }
 
-    private fun play(){
+    public fun play(){
         AudioManager.instance?.play();
+    }
+
+    companion object {
+        var instance: AudioBar? = null;
     }
 
     @Composable
@@ -77,21 +81,34 @@ class AudioBar {
             )
             Row(modifier = Modifier.padding(horizontal = 250.dp), horizontalArrangement = Arrangement.Center) {
                 Button(
-                    onClick = { play(); isPlaying = true },
+                    onClick = {
+                        if (isPlaying) pause();
+                        else play();
+                        isPlaying = !isPlaying;
+                              },
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                    modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(30.dp),
+                    modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(30.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
                 ) {
                     Text("Play", color = Color.White)
                 }
 
                 Button(
-                    onClick = { pause(); isPlaying = false },
+                    onClick = { AudioManager.instance!!.previous(); play(); isPlaying = true },
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                    modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(30.dp),
+                    modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(30.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
                 ) {
-                    Text("Pause", color = Color.White)
+                    Text("Prev", color = Color.White)
+                }
+
+                Button(
+                    onClick = { AudioManager.instance!!.next(); play(); isPlaying = true },
+                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                    modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(30.dp),
+                    shape = RoundedCornerShape(8.dp) // Rounded corners
+                ) {
+                    Text("Next", color = Color.White)
                 }
 
                 Button(
