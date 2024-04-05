@@ -49,5 +49,9 @@ A citation for a small snippet of code used for the basic setup of a audio strea
 
 A citation for the general scaffolding structure used for the pages of this project from this StackOverflow link (https://stackoverflow.com/questions/72081206/kotlin-jetpack-compose-how-to-remove-dp-or-sizefrom-the-modifier-fillmaxheight) is included in UserPage.kt
 
+A citation for opening links in Desktop browsers as per this StackOverflow link (https://stackoverflow.com/questions/68306576/open-a-link-in-browser-using-compose-for-desktop) is included in PlaylistsPage.kt and ExplorePage.kt
+
+A citation for deleting audio files via removing blobs from GCP from this StackOverflow link (https://stackoverflow.com/questions/53657627/deleting-multiple-blobs-from-google-cloud-storage-efficiently) is included in UploadManager.kt 
+
 # Copyright & License
 
