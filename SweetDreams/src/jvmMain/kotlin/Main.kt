@@ -177,6 +177,7 @@ fun App() {
     upload.navBar = navbar
     settings.navBar = navbar
 
+    lockpage.audioBar = audiobar
     explore.audioBar = audiobar
     user.audioBar = audiobar
     playlists.audioBar = audiobar
