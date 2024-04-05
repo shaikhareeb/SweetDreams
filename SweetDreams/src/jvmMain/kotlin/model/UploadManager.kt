@@ -22,12 +22,17 @@ class UploadManager {
         var instance: UploadManager? = null;
     }
 
-    fun uploadAudioFile(filePath: String, user: String) {
-        val file = File(filePath)
-        val blob = storage.create("users/$user/uploads/${file.name}", file.inputStream())
+    fun uploadFiles(audioFilePath: String, imageFilePath: String, user: String) {
+        val audioFile = File(audioFilePath)
+        val imageFile = File(imageFilePath)
+        val folderName = audioFile.nameWithoutExtension
+        val audioBlob = storage.create("users/$user/uploads/$folderName/${audioFile.name}", audioFile.inputStream())
+        val imageBlob = storage.create("users/$user/uploads/$folderName/${imageFile.name}", imageFile.inputStream())
 
-        println("File uploaded to Firebase Storage with URL: ${blob.mediaLink}")
+        println("Audio File uploaded to Firebase Storage with URL: ${audioBlob.mediaLink}")
+        println("Image File uploaded to Firebase Storage with URL: ${imageBlob.mediaLink}")
     }
+
 
     fun updatePlaylist() {
         val user = AccountManager.instance?.getUser();
@@ -38,7 +43,7 @@ class UploadManager {
         println("Updated playlist on firebase ${blob.mediaLink}" );
     }
 
-    fun getPlaylist(){
+    fun getPlaylist() {
         try{
             val user = AccountManager.instance?.getUser();
             val playlist = storage.get("users/$user/Playlist");
@@ -65,14 +70,13 @@ class UploadManager {
         println("Done");
     }
 
-    // SOURCE CODE CITATION: The delete audio file code was inspired/taken from the following StackOverflow article: https://stackoverflow.com/questions/53657627/deleting-multiple-blobs-from-google-cloud-storage-efficiently 
-    fun deleteAudioFile(url: String, user: String) {
-        val blobs = storage.list(Storage.BlobListOption.prefix("users/$user/uploads/")).iterateAll()
-        blobs.forEach { blob ->
-            if (blob.name.substringAfterLast('/') == url) {
-                println("Blob Match: ${blob.name}")
-                blob.delete()
-            }
+    // SOURCE CODE CITATION: The delete audio file code was inspired/taken from the following StackOverflow article: https://stackoverflow.com/questions/53657627/deleting-multiple-blobs-from-google-cloud-storage-efficiently
+    fun deleteFiles(url: String, user: String) {
+        val folderName = File(url).nameWithoutExtension
+        val blobs = storage.list(Storage.BlobListOption.prefix("users/$user/uploads/$folderName/")).iterateAll()
+        for (blob in blobs) {
+            println("Deleted: $blob")
+            blob.delete()
         }
     }
 
@@ -82,7 +86,9 @@ class UploadManager {
         val blobs = storage.list(Storage.BlobListOption.prefix("users/$user/uploads/")).iterateAll()
         blobs.forEach { blob ->
             val fileName = blob.name.substringAfterLast('/')
-            files.add(fileName)
+            if (fileName.endsWith(".wav")) {
+                files.add(fileName)
+            }
         }
 
         return files
@@ -93,9 +99,27 @@ class UploadManager {
 
         val blobs = storage.list(Storage.BlobListOption.prefix("users/$user/uploads/")).iterateAll()
         blobs.forEach { blob ->
-            files.add(blob.mediaLink)
+            val fileName = blob.name.substringAfterLast('/')
+            if (fileName.endsWith(".wav")) {
+                files.add(blob.mediaLink)
+            }
         }
 
+        return files
+    }
+
+    fun getImageLinks(user: String): List<String> {
+        val files = mutableListOf<String>()
+
+        val blobs = storage.list(Storage.BlobListOption.prefix("users/$user/uploads/")).iterateAll()
+        blobs.forEach { blob ->
+            val fileName = blob.name.substringAfterLast('/')
+            if (fileName.endsWith(".jpg")) {
+                files.add(blob.mediaLink)
+            }
+        }
+
+        println(files)
         return files
     }
 }

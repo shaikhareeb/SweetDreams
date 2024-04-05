@@ -41,16 +41,18 @@ fun App() {
         AudioBar.instance?.play();
     }
     explore.deleteAudio = onReturn@{url: String ->
-        uploadManager.deleteAudioFile(url, accountManager.getUser())
+        uploadManager.deleteFiles(url, accountManager.getUser())
 
         val u = accountManager.getUser()
         val uploads = uploadManager.getAudioFiles(u)
         val bloblinks = uploadManager.getAudioLinks(u)
+        val imageLinks = uploadManager.getImageLinks(u)
+
         explore.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
         }
         user.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
         }
         SetPage(2)
     }
@@ -76,16 +78,18 @@ fun App() {
         AudioBar.instance?.play();
     }
     user.deleteAudio = onReturn@{url: String ->
-        uploadManager.deleteAudioFile(url, accountManager.getUser())
+        uploadManager.deleteFiles(url, accountManager.getUser())
 
         val u = accountManager.getUser()
         val uploads = uploadManager.getAudioFiles(u)
         val bloblinks = uploadManager.getAudioLinks(u)
+        val imageLinks = uploadManager.getImageLinks(u)
+
         explore.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
         }
         user.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
         }
         SetPage(3)
     }
@@ -102,11 +106,13 @@ fun App() {
             val u = accountManager.getUser()
             val uploads = uploadManager.getAudioFiles(u)
             val bloblinks = uploadManager.getAudioLinks(u)
+            val imageLinks = uploadManager.getImageLinks(u)
+
             explore.uploadedAudio = uploads.mapIndexed { index, upload ->
-                Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+                Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
             }
             user.uploadedAudio = uploads.mapIndexed { index, upload ->
-                Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+                Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
             }
             SetPage(2)
 
@@ -149,16 +155,18 @@ fun App() {
         return@onReturn userLoginSuccess;
     }
 
-    upload.onUpload = {filepath: String ->
+    upload.onUpload = {audioFilePath: String, imageFilePath: String ->
         val u = accountManager.getUser()
-        uploadManager.uploadAudioFile(filepath, u)
+        uploadManager.uploadFiles(audioFilePath, imageFilePath, u)
         val uploads = uploadManager.getAudioFiles(u)
         val bloblinks = uploadManager.getAudioLinks(u)
+        val imageLinks = uploadManager.getImageLinks(u)
+
         explore.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
         }
         user.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
         }
     }
 

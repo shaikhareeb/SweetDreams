@@ -17,7 +17,7 @@ import javax.swing.filechooser.FileSystemView
 
 class UploadPage: Page() {
     lateinit var navBar : NavBar
-    lateinit var onUpload: (filepath: String) -> Unit
+    lateinit var onUpload: (audioFilePath: String, imageFilePath: String) -> Unit
     lateinit var audioBar: AudioBar
     @Composable
     override fun Content() {
@@ -74,76 +74,98 @@ class UploadPage: Page() {
                     Spacer(modifier = Modifier.height(10.dp))
                     Text("Please make sure they are in .wav format", style = MaterialTheme.typography.h6)
                     Spacer(modifier = Modifier.height(10.dp))
-                    //Text("Upload Page")
-                    //Text("Add a new lullaby from Youtube to your SweetDreams account")
-                    var link by remember { mutableStateOf("") }
-                    var tags by remember { mutableStateOf("") }
-                    var errorText by remember { mutableStateOf("") }
-                    var fileChooseOpen by remember { mutableStateOf(false) }
+                    var audioFilePath by remember { mutableStateOf("") }
+                    var imageFilePath by remember { mutableStateOf("") }
+                    var audioChooseOpen by remember { mutableStateOf(false) }
+                    var imageChooseOpen by remember { mutableStateOf(false) }
+                    var audioChooserOpened by remember { mutableStateOf(false) }
+                    var imageChooserOpened by remember { mutableStateOf(false) }
+                    var badAudioFileType by remember { mutableStateOf(false) }
+                    var badImageFileType by remember { mutableStateOf(false) }
 
-                    /*
-                    TextFieldFormat(
-                        name = link,
-                        isPwd = false,
-                        onNameChange = { if (it.length <= 50) link = it },
-                        "Youtube Link"
-                    )
-                    TextFieldFormat(
-                        name = tags,
-                        isPwd = false,
-                        onNameChange = { if (it.length <= 50) tags = it },
-                        "Tags String (comma seperated)"
-                    )
-                    Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-                        val tryReturning = onSignup(link, tags);
-                        if (tryReturning != "") {
-                            errorText = tryReturning
+                    Button(
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                        onClick = {
+                            // Open file chooser for audio
+                            audioChooseOpen = true
                         }
-                    }) {
-                        Text("Add Youtube-Linked Lullaby", color = Color.White)
+                    ) {
+                        Text("Upload Audio from Desktop", color = Color.White)
                     }
 
-                    Text(errorText)*/
-
-                    Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-                        fileChooseOpen = true
-                    }) {
-                        Text("Upload Local File from Desktop", color = Color.White)
+                    Button(
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
+                        onClick = {
+                            // Open file chooser for image
+                            imageChooseOpen = true
+                        }
+                    ) {
+                        Text("Upload Image from Desktop", color = Color.White)
                     }
-
-                    var uploadFilePath by remember { mutableStateOf("") }
-                    var fileChooserOpened by remember { mutableStateOf(false) }
-                    var badFileType by remember { mutableStateOf(false) }
 
                     // SOURCE CODE CITATION: This code was taken/inspired by the following Java file chooser tutorial: https://www.geeksforgeeks.org/java-swing-jfilechooser/
-                    if (fileChooseOpen) {
-                        fileChooserOpened = true;
+                    if (audioChooseOpen) {
+                        audioChooserOpened = true
                         val fileChooser = JFileChooser(FileSystemView.getFileSystemView().homeDirectory)
 
-                        val openValue: Int = fileChooser.showOpenDialog(null);
-                        val allowedTypes = FileNameExtensionFilter("Audio files", "mp3", "wav")
+                        val openValue: Int = fileChooser.showOpenDialog(null)
+                        val allowedTypes = FileNameExtensionFilter("Audio files", "wav")
                         fileChooser.addChoosableFileFilter(allowedTypes)
 
                         if (openValue == JFileChooser.APPROVE_OPTION) {
-                            uploadFilePath = fileChooser.selectedFile.absolutePath
-                            if (uploadFilePath.endsWith(".wav")) {
-                                onUpload(uploadFilePath)
-                                badFileType = false
-                            } else {
-                                badFileType = true
-                            }
+                            audioFilePath = fileChooser.selectedFile.absolutePath
+                            badAudioFileType = !audioFilePath.endsWith(".wav")
                         } else {
-                            uploadFilePath = ""
+                            audioFilePath = ""
                         }
-                        fileChooseOpen = false;
+                        audioChooseOpen = false
                     }
 
-                    if (uploadFilePath == "" && fileChooserOpened) {
-                        Text("You have not selected a file")
-                    } else if (uploadFilePath != "" && badFileType) {
-                        Text("The only currently supported file type is .wav")
-                    } else if (uploadFilePath != "") {
-                        Text("Successfully imprted: " + uploadFilePath, style = MaterialTheme.typography.h6)
+                    if (audioFilePath == "" && audioChooserOpened) {
+                        Text("You have not selected an audio file")
+                    } else if (audioFilePath != "" && badAudioFileType) {
+                        Text("The only currently supported audio file type is .wav")
+                    } else if (audioFilePath != "") {
+                        Text("Selected Audio File Path: $audioFilePath")
+                    }
+
+                    // Handle image file selection
+                    if (imageChooseOpen) {
+                        imageChooserOpened = true
+                        val fileChooser = JFileChooser(FileSystemView.getFileSystemView().homeDirectory)
+
+                        val openValue: Int = fileChooser.showOpenDialog(null)
+                        val allowedTypes = FileNameExtensionFilter("Image files", "jpg")
+                        fileChooser.addChoosableFileFilter(allowedTypes)
+
+                        if (openValue == JFileChooser.APPROVE_OPTION) {
+                            imageFilePath = fileChooser.selectedFile.absolutePath
+                            badImageFileType = !imageFilePath.endsWith(".jpg")
+                        } else {
+                            imageFilePath = ""
+                        }
+                        imageChooseOpen = false
+                    }
+
+                    if (imageFilePath == "" && imageChooserOpened) {
+                        Text("You have not selected an image file")
+                    } else if (imageFilePath != "" && badImageFileType) {
+                        Text("The only currently supported image file type is .jpg")
+                    } else if (imageFilePath != "") {
+                        Text("Selected Image File Path: $imageFilePath")
+                    }
+
+                    // Upload button should be enabled only if both audio and image are selected
+                    val uploadEnabled = audioFilePath.isNotBlank() && imageFilePath.isNotBlank() && !badAudioFileType && !badImageFileType
+
+                    Button(
+                        enabled = uploadEnabled,
+                        colors = ButtonDefaults.buttonColors(backgroundColor = if (uploadEnabled) Color(0xFF8893D0) else Color.Gray),
+                        onClick = {
+                            onUpload(audioFilePath, imageFilePath)
+                        }
+                    ) {
+                        Text("Upload", color = Color.White)
                     }
                 }
             }

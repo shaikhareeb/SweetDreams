@@ -10,6 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.toComposeImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import model.AccountManager
@@ -17,6 +20,7 @@ import model.AudioManager
 import model.PlaylistManager
 import java.awt.Desktop
 import java.net.URL
+import javax.imageio.ImageIO
 import kotlin.random.Random
 
 
@@ -80,6 +84,10 @@ class LockPage: Page() {
         }
         }
 
+    private fun loadImage(url: String): ImageBitmap {
+        return ImageIO.read(URL(url)).toComposeImageBitmap()
+    }
+
     @Composable
     fun VideoCard(video: Video) {
         Card(
@@ -93,12 +101,10 @@ class LockPage: Page() {
                     modifier = Modifier.height(180.dp).fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
-                    val randomNumber = Random.nextInt(1, 14)
                     Image(
-                        painter = painterResource("img$randomNumber.webp"), // Replace with your image path
-                        contentDescription = "Logo",
-                        modifier = Modifier
-                            .fillMaxSize()
+                        bitmap = loadImage(video.thumbnail),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))

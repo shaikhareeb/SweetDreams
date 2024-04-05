@@ -7,6 +7,9 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.toComposeImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import model.AudioManager
@@ -16,9 +19,9 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 import youtube.youtubeData
 import java.awt.Desktop
 import java.net.URL
+import javax.imageio.ImageIO
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.Clip
-import kotlin.random.Random
 
 // Assume Video data class and NavBar class are defined elsewhere
 class PlaylistsPage : Page() {
@@ -102,6 +105,10 @@ class PlaylistsPage : Page() {
         }
     }
 
+    private fun loadImage(url: String): ImageBitmap {
+        return ImageIO.read(URL(url)).toComposeImageBitmap()
+    }
+
     @Composable
     fun VideoCard(video: Video) {
         Card(
@@ -115,12 +122,10 @@ class PlaylistsPage : Page() {
                     modifier = Modifier.height(180.dp).fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
-                    val randomNumber = Random.nextInt(1, 14)
                     Image(
-                        painter = painterResource("img$randomNumber.webp"), // Replace with your image path
-                        contentDescription = "Logo",
-                        modifier = Modifier
-                            .fillMaxSize()
+                        bitmap = loadImage(video.thumbnail),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
