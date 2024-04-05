@@ -1,6 +1,7 @@
 // Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
@@ -49,10 +50,18 @@ fun App() {
         val imageLinks = uploadManager.getImageLinks(u)
 
         explore.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
+            if (index >= imageLinks.size) {
+                Video(index + 1, upload, "desc", "no_image", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            } else {
+                Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            }
         }
         user.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
+            if (index >= imageLinks.size) {
+                Video(index + 1, upload, "desc", "no_image", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            } else {
+                Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            }
         }
         SetPage(2)
     }
@@ -86,10 +95,18 @@ fun App() {
         val imageLinks = uploadManager.getImageLinks(u)
 
         explore.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
+            if (index >= imageLinks.size) {
+                Video(index + 1, upload, "desc", "no_image", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            } else {
+                Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            }
         }
         user.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
+            if (index >= imageLinks.size) {
+                Video(index + 1, upload, "desc", "no_image", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            } else {
+                Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            }
         }
         SetPage(3)
     }
@@ -109,10 +126,18 @@ fun App() {
             val imageLinks = uploadManager.getImageLinks(u)
 
             explore.uploadedAudio = uploads.mapIndexed { index, upload ->
-                Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+                if (index >= imageLinks.size) {
+                    Video(index + 1, upload, "desc", "no_image", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+                } else {
+                    Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+                }
             }
             user.uploadedAudio = uploads.mapIndexed { index, upload ->
-                Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+                if (index >= imageLinks.size) {
+                    Video(index + 1, upload, "desc", "no_image", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+                } else {
+                    Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+                }
             }
             SetPage(2)
 
@@ -163,10 +188,18 @@ fun App() {
         val imageLinks = uploadManager.getImageLinks(u)
 
         explore.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
+            if (index >= imageLinks.size) {
+                Video(index + 1, upload, "desc", "no_image", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            } else {
+                Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            }
         }
         user.uploadedAudio = uploads.mapIndexed { index, upload ->
-            Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
+            if (index >= imageLinks.size) {
+                Video(index + 1, upload, "desc", "no_image", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            } else {
+                Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
+            }
         }
     }
 

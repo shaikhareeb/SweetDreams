@@ -43,17 +43,17 @@ class ExplorePage : Page() {
     lateinit var videos: MutableList<Video>
 
     init {
-        //thumbnails = youtube.getSearchData("Lullabies");
+        thumbnails = youtube.getSearchData("Lullabies");
         videos = mutableListOf();
         var index1 = 0;
-//        for (data in thumbnails) {
-//            var newVid = data?.let { Video(index1, it.title, data.description, data.thumbnail, data.playerId, data.id) };
-//            index1 ++;
-//            if (newVid != null) {
-//                videos.add(newVid)
-//            };
-//        }
-
+        for (data in thumbnails) {
+            var newVid = data?.let { Video(index1, it.title, data.description, data.thumbnail, data.playerId, data.id) };
+            index1 ++;
+            if (newVid != null) {
+                videos.add(newVid)
+            };
+        }
+        /*
         var index = 0;
         for (i in 0..10) {
             var newVid = Video(index, "video", "blah", "blah", "blah", 0)
@@ -61,8 +61,7 @@ class ExplorePage : Page() {
             if (newVid != null) {
                 videos.add(newVid)
             };
-        }
-
+        }*/
     }
 
     @Composable
@@ -163,7 +162,7 @@ class ExplorePage : Page() {
                     modifier = Modifier.height(180.dp).fillMaxWidth(),
                     contentAlignment = Alignment.Center
                 ) {
-                    val randomNumber = Random.nextInt(1, 14)
+                    val randomNumber = (video.title.length % 13) + 1
                     Image(
                         painter = painterResource("img$randomNumber.webp"), // Replace with your image path
                         contentDescription = "Logo",

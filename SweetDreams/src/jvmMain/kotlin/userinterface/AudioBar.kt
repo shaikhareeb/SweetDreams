@@ -110,7 +110,7 @@ class AudioBar {
                               },
                     //enabled = isQueuePlaying,
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                    modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(30.dp),
+                    modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(40.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
                 ) {
                     Text("⏯", color = Color.White)
@@ -120,7 +120,7 @@ class AudioBar {
                     onClick = { AudioManager.instance!!.previous(); play(); isPlaying = true },
                     //enabled = isQueuePlaying,
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                    modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(30.dp),
+                    modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(40.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
                 ) {
                     Text("⏮", color = Color.White)
@@ -130,7 +130,7 @@ class AudioBar {
                     onClick = { AudioManager.instance!!.next(); play(); isPlaying = true },
                     //enabled = isQueuePlaying,
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                    modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(30.dp),
+                    modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(40.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
                 ) {
                     Text("⏭", color = Color.White)
@@ -140,7 +140,7 @@ class AudioBar {
                     onClick = { playQueue(); isPlaying = true; },
                     enabled = PlaylistManager.instance?.GetPlaylist()?.size != 0,
                     colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)),
-                    modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(30.dp),
+                    modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(40.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
                 ) {
                     Text(if (isQueuePlaying) "Stop Queue" else "Play Queue", color = Color.White)
