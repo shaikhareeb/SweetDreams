@@ -19,10 +19,17 @@ class AudioManager {
     private var pausePosition: Long = 0
     private var clipName: String = "Nothing is playing"
 
+    public lateinit var OnPlay : () -> Unit
     init {
         AudioManager.instance = this
         playlist = mutableListOf();
         loadTrack(currentTrackIndex)
+    }
+
+    public fun GetCurrentVideo() : Video?{
+        if (currentTrackIndex < playlist.size)
+            return playlist[currentTrackIndex];
+        return null;
     }
 
     public fun loadPlaylist(playlist: MutableList<Video>){
@@ -55,6 +62,7 @@ class AudioManager {
             if (!it.isRunning) {
                 it.microsecondPosition = pausePosition
                 it.start()
+                OnPlay();
             }
         }
     }

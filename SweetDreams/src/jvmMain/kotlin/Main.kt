@@ -21,6 +21,7 @@ var settings = SettingsPage();
 var lockpage = LockPage();
 var navbar = NavBar()
 var audiobar = AudioBar()
+var currentPage = -1;
 
 var playlistManager = PlaylistManager()
 
@@ -196,10 +197,13 @@ fun App() {
     lockpage.RenderPage();
 
     SetPage(1)
+
+    audioManager.OnPlay = { if (currentPage == 7) SetPage(7); };
 }
 
 fun SetPage(int: Int) {
     CloseAllPages();
+    currentPage = int;
     when (int) {
         0 -> register.ShowPage()
         1 -> login.ShowPage()

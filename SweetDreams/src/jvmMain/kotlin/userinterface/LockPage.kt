@@ -3,16 +3,18 @@ package userinterface
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import model.AccountManager
+import model.AudioManager
+import model.PlaylistManager
+import java.awt.Desktop
+import java.net.URL
 
 
 class LockPage: Page() {
@@ -24,20 +26,14 @@ class LockPage: Page() {
     override fun Content() {
         Scaffold(
             bottomBar = {
-                Spacer(modifier = Modifier.width(200.dp))
                 Row(
                     modifier = Modifier
-                        .fillMaxHeight(0.1F)
-                        .fillMaxWidth()
-                        .border(2.dp, Color.Black)
-                        .background(Color(0xFF93AEDE))
-                        .padding(vertical = 8.dp, horizontal = 8.dp),
+                        .alpha(0f)
                 ) {
                     audioBar.audioplayer()
                 }
             }
-        )
-        {
+        ) {
             Column(
                 modifier = Modifier.fillMaxSize().background(Color(0xFF93AEDE)),
                 verticalArrangement = Arrangement.Center,
@@ -47,8 +43,12 @@ class LockPage: Page() {
                 var pwd by remember { mutableStateOf("") }
                 var errorText by remember { mutableStateOf("") }
 
-                Text("Playing lullabies")
-                Text("Up next......")
+                if (AudioManager.instance?.GetCurrentVideo() != null) {
+                    Text("Playing lullabies...")
+                    VideoCard(AudioManager.instance?.GetCurrentVideo()!!)
+                } else {
+                    Text("No lullabies playing!")
+                }
                 Spacer(modifier = Modifier.height(20.dp))
                 TextFieldFormat(
                     name = username,
@@ -72,6 +72,28 @@ class LockPage: Page() {
                 }
 
                 Text(errorText)
+            }
+        }
+        }
+
+    @Composable
+    fun VideoCard(video: Video) {
+        Card(
+            modifier = Modifier.width(200.dp).padding(bottom = 16.dp), // Set width for the card
+            backgroundColor = Color(0xFFF2F1FB),
+            elevation = 4.dp
+        ) {
+            Column(modifier = Modifier.padding(8.dp)) {
+                // Placeholder for video thumbnail
+                Box(
+                    modifier = Modifier.height(180.dp).fillMaxWidth().border(1.dp, Color.Gray),
+                    contentAlignment = Alignment.Center
+                ) {
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(text = video.title, style = MaterialTheme.typography.h6)
+                Spacer(modifier = Modifier.height(4.dp))
+                //Text(text = video.description, style = MaterialTheme.typography.body2)
             }
         }
     }
