@@ -40,7 +40,7 @@ class AudioBar {
             }
         } else {
             isQueuePlaying = false
-            AudioManager.instance?.setClipName("Nothing is playing")
+            //AudioManager.instance?.setClipName("Nothing is playing")
             textState = AudioManager.instance!!.getClipName;
             var list = PlaylistManager.instance?.GetPlaylist();
             if (list != null && list.size != 0) {
@@ -80,7 +80,7 @@ class AudioBar {
                     }
                 }
                 delay(100L)
-                if (!isQueuePlaying) AudioManager.instance!!.setClipName("Nothing is playing");
+                if (!isQueuePlaying and !isPlaying) AudioManager.instance!!.setClipName("Nothing is playing");
                 textState = AudioManager.instance!!.getClipName;
             }
         }

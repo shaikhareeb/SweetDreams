@@ -142,10 +142,15 @@ class PlaylistsPage : Page() {
                             desktop.browse(URL("https://www.youtube.com/watch?v=${video.playerId}").toURI())
                         }
                     } else {
+                        audioBar.isPlaying = true
                         playAudio(video)
                     }
                 }) {
+<<<<<<< Updated upstream
                     Text("Play Video", color = Color.White)
+=======
+                    Text("Play Audio", color = Color.White)
+>>>>>>> Stashed changes
                 }
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
                     if (PlaylistManager.instance!!.GetPlaylist().size == 1) {

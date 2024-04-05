@@ -74,7 +74,7 @@ class UserPage: Page() {
                             for (columnIndex in 0..3) {
                                 val videoIndex = rowIndex * 3 + columnIndex
                                 if (videoIndex < uploadedAudio.size) {
-                                    UploadedAudioCard(audio = uploadedAudio[videoIndex], playAudio, deleteAudio, onAdd)
+                                    UploadedAudioCard(audio = uploadedAudio[videoIndex], playAudio, deleteAudio, onAdd, audioBar)
                                 } else {
                                     Spacer(
                                         modifier = Modifier.width(200.dp).padding(bottom = 16.dp)
