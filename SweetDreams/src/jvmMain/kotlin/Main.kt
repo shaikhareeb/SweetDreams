@@ -51,6 +51,7 @@ fun App() {
         user.uploadedAudio = uploads.mapIndexed { index, upload ->
             Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
         }
+        SetPage(2)
     }
 
     playlists.playAudio = onReturn@{video: Video ->
@@ -75,6 +76,7 @@ fun App() {
         user.uploadedAudio = uploads.mapIndexed { index, upload ->
             Video(index + 1, upload, "desc", "thumbnail", "playerid", 0, bloblinks.get(index)) // Assuming id starts from 1
         }
+        SetPage(3)
     }
 
     login.onSignUp = {SetPage(0)};

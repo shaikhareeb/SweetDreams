@@ -98,7 +98,7 @@ class AudioBar {
                     modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(30.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
                 ) {
-                    Text("Play", color = Color.White)
+                    Text("▶/⏸", color = Color.White)
                 }
 
                 Button(
@@ -107,7 +107,7 @@ class AudioBar {
                     modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(30.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
                 ) {
-                    Text("Prev", color = Color.White)
+                    Text("⏮", color = Color.White)
                 }
 
                 Button(
@@ -116,7 +116,7 @@ class AudioBar {
                     modifier = Modifier.width(100.dp).padding(horizontal = 8.dp).height(30.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
                 ) {
-                    Text("Next", color = Color.White)
+                    Text("⏭", color = Color.White)
                 }
 
                 Button(
@@ -125,7 +125,7 @@ class AudioBar {
                     modifier = Modifier.width(150.dp).padding(horizontal = 8.dp).height(30.dp),
                     shape = RoundedCornerShape(8.dp) // Rounded corners
                 ) {
-                    Text("Play Queue", color = Color.White)
+                    Text("Start Queue", color = Color.White)
                 }
             }
         }
