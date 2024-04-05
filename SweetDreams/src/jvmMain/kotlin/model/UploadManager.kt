@@ -65,6 +65,7 @@ class UploadManager {
         println("Done");
     }
 
+    // SOURCE CODE CITATION: The delete audio file code was inspired/taken from the following StackOverflow article: https://stackoverflow.com/questions/53657627/deleting-multiple-blobs-from-google-cloud-storage-efficiently 
     fun deleteAudioFile(url: String, user: String) {
         val blobs = storage.list(Storage.BlobListOption.prefix("users/$user/uploads/")).iterateAll()
         blobs.forEach { blob ->
