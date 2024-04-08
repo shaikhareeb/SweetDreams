@@ -42,6 +42,8 @@ Usage Documentation - https://git.uwaterloo.ca/r2baxi/Team-102-16/-/wikis/User-D
 
 # Design Documentation
 
+Design Docs - https://git.uwaterloo.ca/r2baxi/Team-102-16/-/wikis/Design-Documents
+
 # Software Releases
 
 1. Sprint 1 Release (Feb. 16, 2024): https://git.uwaterloo.ca/r2baxi/Team-102-16/-/releases/sprint-1-conclusion
