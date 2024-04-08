@@ -13,7 +13,7 @@ This project intends to provide a convenient, one-stop solution for parents to u
 Platform: Desktop
 
 1. Account feature to allow users to have their own accounts
-3. Support single-user multi-device scenarios through the accounts feature **(Advanced feature)**
+3. Support multi-user scenarios through the accounts feature **(Advanced feature)**
 4. Explore page for inspiration lullabies
 5. Explore page includes lullabies from Youtube via Youtube application and can be watched when clicked for inspiration **(Advanced feature)**
 6. Upload a lullaby audio (intended for parents)
