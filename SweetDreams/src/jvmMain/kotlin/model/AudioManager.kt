@@ -1,5 +1,6 @@
 package model
 
+import userinterface.AudioBar
 import userinterface.Video
 import java.net.URL
 import javax.sound.sampled.AudioSystem
@@ -37,27 +38,34 @@ class AudioManager {
     }
 
     public fun loadSingleClip(video : Video){
+        AudioBar.instance?.clear();
         this.playlist = mutableListOf(video);
     }
 
     public fun loadTrack(index: Int) {
-        if (index > playlist.size) return;
-        currentTrackIndex = index;
+        clipName = "Nothing is playing"
         clip?.close()
+        if (index >= playlist.size)
+            return;
+        currentTrackIndex = index;
         println("Loading Track");
-        clip = AudioSystem.getClip().apply {
-            try {
+
+        try {
+            clip = AudioSystem.getClip().apply {
                 val audioInputStream = AudioSystem.getAudioInputStream(URL(playlist[index].bloburl))
                 open(audioInputStream)
                 println("Loaded Track " + playlist[index].title);
                 clipName = playlist[index].title;
-            } catch (e : Exception){
-                println(e);
             }
+        } catch (e : Exception){
+            println(e);
+            clipName = "Nothing is playing"
         }
+
     }
 
     public fun play() {
+        AudioBar.instance?.UpdateText();
         clip?.let {
             if (!it.isRunning) {
                 it.microsecondPosition = pausePosition
@@ -68,6 +76,7 @@ class AudioManager {
     }
 
     public fun pause() {
+        AudioBar.instance?.UpdateText();
         clip?.let {
             if (it.isRunning) {
                 pausePosition = it.microsecondPosition

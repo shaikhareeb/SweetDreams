@@ -1,7 +1,6 @@
 package userinterface
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -13,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import model.PlaylistManager
 import java.net.URL
 import javax.imageio.ImageIO
 import androidx.compose.ui.graphics.ImageBitmap
@@ -58,7 +56,7 @@ abstract class Page {
     }
 
     @Composable
-    fun UploadedAudioCard(audio: Video, playAudio: (Video) -> Unit, deleteAudio: (String) -> Unit, onAdd: (Video) -> Unit, audioBar: AudioBar) {
+    fun UploadedAudioCard(audio: Video, playAudio: (Video) -> Unit, deleteAudio: (Video) -> Unit, onAdd: (Video) -> Unit, audioBar: AudioBar) {
         Card(
             modifier = Modifier.width(200.dp).padding(bottom = 16.dp), // Set width for the card
             backgroundColor = Color(0xFFF2F1FB),
@@ -90,7 +88,7 @@ abstract class Page {
                 }
 
                 Button(colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF8893D0)), onClick = {
-                    deleteAudio(audio.title)
+                    deleteAudio(audio)
                 }) {
                     Text("Delete Audio", color = Color.White)
                 }

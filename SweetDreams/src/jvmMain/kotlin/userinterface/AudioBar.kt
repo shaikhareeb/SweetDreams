@@ -41,22 +41,33 @@ class AudioBar {
         } else {
             isQueuePlaying = false
             //AudioManager.instance?.setClipName("Nothing is playing")
-            textState = AudioManager.instance!!.getClipName;
-            var list = PlaylistManager.instance?.GetPlaylist();
-            if (list != null && list.size != 0) {
-                AudioManager.instance?.loadPlaylist(list)
-                AudioManager.instance?.resetSlider()
-            }
+            textState = "Nothing is playing";
+            clear();
         }
 
     }
 
+    fun clear(){
+        pause();
+        isQueuePlaying = false
+        textState = "Nothing is playing";
+        AudioManager.instance?.loadPlaylist(mutableListOf())
+        AudioManager.instance?.loadTrack(0);
+        AudioManager.instance?.resetSlider()
+    }
+
     private fun pause(){
         AudioManager.instance?.pause();
+        textState = AudioManager.instance!!.getClipName;
     }
 
     public fun play(){
         AudioManager.instance?.play();
+        textState = AudioManager.instance!!.getClipName;
+    }
+
+    public fun UpdateText(){
+        textState = AudioManager.instance!!.getClipName;
     }
 
     companion object {
@@ -80,8 +91,8 @@ class AudioBar {
                     }
                 }
                 delay(100L)
-                if (!isQueuePlaying and !isPlaying) AudioManager.instance!!.setClipName("Nothing is playing");
-                textState = AudioManager.instance!!.getClipName;
+//                if (!isQueuePlaying and !isPlaying) textState = "Nothing is playing";
+//                else textState = AudioManager.instance!!.getClipName;
             }
         }
         Column {

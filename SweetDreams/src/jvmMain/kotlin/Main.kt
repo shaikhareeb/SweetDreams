@@ -40,8 +40,8 @@ fun App() {
         AudioManager.instance?.loadTrack(0);
         AudioBar.instance?.play();
     }
-    explore.deleteAudio = onReturn@{url: String ->
-        uploadManager.deleteFiles(url, accountManager.getUser())
+    explore.deleteAudio = onReturn@{vid: Video ->
+        uploadManager.deleteFiles(vid.title, accountManager.getUser())
 
         val u = accountManager.getUser()
         val uploads = uploadManager.getAudioFiles(u)
@@ -55,6 +55,8 @@ fun App() {
             Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
         }
         SetPage(2)
+        PlaylistManager.instance?.RemoveFromQueue(vid);
+        AudioBar.instance?.clear();
     }
 
     playlists.playAudio = onReturn@{video: Video ->
@@ -64,12 +66,10 @@ fun App() {
     }
     playlists.onDelete = onReturn@{video: Video, isQPlaying: Boolean ->
         PlaylistManager.instance?.RemoveFromQueue(video);
-        if (isQPlaying) {
-            AudioManager.instance?.loadPlaylist(PlaylistManager.instance!!.GetPlaylist())
-            if (PlaylistManager.instance!!.GetPlaylist().size != 0) {
-                AudioManager.instance?.playTrackAtIndex(0)
-            }
-        }
+        AudioManager.instance?.pause();
+        AudioManager.instance?.loadPlaylist(PlaylistManager.instance!!.GetPlaylist())
+        AudioManager.instance?.loadTrack(0);
+        AudioBar.instance?.UpdateText();
         SetPage(5)
     }
     user.playAudio = onReturn@{video: Video ->
@@ -77,8 +77,8 @@ fun App() {
         AudioManager.instance?.loadTrack(0);
         AudioBar.instance?.play();
     }
-    user.deleteAudio = onReturn@{url: String ->
-        uploadManager.deleteFiles(url, accountManager.getUser())
+    user.deleteAudio = onReturn@{vid: Video ->
+        uploadManager.deleteFiles(vid.title, accountManager.getUser())
 
         val u = accountManager.getUser()
         val uploads = uploadManager.getAudioFiles(u)
@@ -92,6 +92,8 @@ fun App() {
             Video(index + 1, upload, "desc", imageLinks[index], "playerid", 0, bloblinks[index]) // Assuming id starts from 1
         }
         SetPage(3)
+        PlaylistManager.instance?.RemoveFromQueue(vid);
+        AudioBar.instance?.clear();
     }
 
     user.onAdd = onReturn@{video: Video ->
@@ -194,7 +196,10 @@ fun App() {
     navbar.onPlaylists = {SetPage(5)}
     navbar.onSettings = {SetPage(6)}
     navbar.onLock = {SetPage(7)}
-    navbar.onLogout = {SetPage(1)}
+    navbar.onLogout = {
+        SetPage(1)
+        AudioBar.instance?.clear();
+    }
 
 
     explore.navBar = navbar

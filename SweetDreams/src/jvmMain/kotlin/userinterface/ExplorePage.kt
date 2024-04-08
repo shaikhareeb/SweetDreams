@@ -40,7 +40,7 @@ class ExplorePage : Page() {
     lateinit var uploadedAudio: List<Video>
     lateinit var thumbnails : Array<youtubeData?>
     lateinit var playAudio: (Video) -> Unit
-    lateinit var deleteAudio: (String) -> Unit
+    lateinit var deleteAudio: (Video) -> Unit
 
     // Sample list of videos
     lateinit var videos: MutableList<Video>
