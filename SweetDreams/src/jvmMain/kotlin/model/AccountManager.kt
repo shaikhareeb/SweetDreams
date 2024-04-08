@@ -2,6 +2,7 @@ package model
 
 import com.google.api.client.http.HttpResponseException
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.UserRecord.CreateRequest
 import org.json.JSONObject
 import userinterface.AudioBar
@@ -62,7 +63,11 @@ class AccountManager {
         record.setEmail(email);
         record.setPassword(pwd);
 
-        auth.createUser(record);
+        try {
+            auth.createUser(record);
+        } catch (e: FirebaseAuthException) {
+            return "This email/username has already been used."
+        }
         return "";
     }
 
