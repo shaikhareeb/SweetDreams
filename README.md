@@ -25,13 +25,18 @@ Platform: Desktop
 
 # Team Members
 
-Rohun Baxi - r2baxi@uwaterloo.ca, Akshen Jasikumar - ajasikum@uwaterloo.ca, Yun Tao - y83tao@uwaterloo.ca, Areeb Shaikh - a59shaik@uwaterloo.ca
+1. Rohun Baxi - r2baxi@uwaterloo.ca
+2. Akshen Jasikumar - ajasikum@uwaterloo.ca
+3. Yun Tao - y83tao@uwaterloo.ca
+4. Areeb Shaikh - a59shaik@uwaterloo.ca
 
 # Screenshot
 
 # User Documentation
 
 To run this application, clone the repo, ensure JDK 17 is installed, and press run on the top right corner of the IDE.
+
+Usage Documentation - https://git.uwaterloo.ca/r2baxi/Team-102-16/-/wikis/User-Documentation
 
 # Project Documentation
 
@@ -41,6 +46,18 @@ To run this application, clone the repo, ensure JDK 17 is installed, and press r
 2. Sprint 2 Release (Mar. 8, 2024): https://git.uwaterloo.ca/r2baxi/Team-102-16/-/releases/sprint-2-conclusion
 3. Sprint 3 Release (Mar. 22, 2024): https://git.uwaterloo.ca/r2baxi/Team-102-16/-/releases/sprint-3-conclusion
 4. Sprint 4 Release (Apr. 5, 2024): https://git.uwaterloo.ca/r2baxi/Team-102-16/-/releases/sprint-4-conclusion
+
+# Meeting Minutes and Individual Developer Journals
+
+Meeting Minutes: https://git.uwaterloo.ca/r2baxi/Team-102-16/-/wikis/Team-Meeting-Minutes
+
+Developer Journals:
+
+1. Rohun Baxi - https://git.uwaterloo.ca/r2baxi/Team-102-16/-/wikis/Rohun-Baxi-Development-Journal
+2. Akshen Jasikumar - https://git.uwaterloo.ca/r2baxi/Team-102-16/-/wikis/Akshen-Jasikumar-Dev-Journal
+3. Yun Tao - https://git.uwaterloo.ca/r2baxi/Team-102-16/-/wikis/Dev-Journal-Yun-Tao
+4. Areeb Shaikh - https://git.uwaterloo.ca/r2baxi/Team-102-16/-/wikis/Areeb-Shaikh%E2%80%99s-Development-Journal
+
 
 # Third-Party Acknowledgements / Citations
 
