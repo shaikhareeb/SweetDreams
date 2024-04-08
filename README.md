@@ -32,9 +32,7 @@ Platform: Desktop
 
 # Screenshots
 
-Sign Up Page:
-
-file:///var/folders/2c/cc4s9n9x6yj5c6bn6q363f4w0000gn/T/TemporaryItems/NSIRD_screencaptureui_1QKFHG/Screenshot%202024-04-07%20at%2011.42.14%E2%80%AFPM.png
+Screenshots - https://git.uwaterloo.ca/r2baxi/Team-102-16/-/wikis/Screenshots
 
 # User Documentation
 
@@ -42,7 +40,7 @@ To run this application, clone the repo, ensure JDK 17 is installed, and press r
 
 Usage Documentation - https://git.uwaterloo.ca/r2baxi/Team-102-16/-/wikis/User-Documentation
 
-# Project Documentation
+# Design Documentation
 
 # Software Releases
 
