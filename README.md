@@ -1,4 +1,4 @@
-# Project Name: SweetDreams
+# Project Title: SweetDreams
 
 # Project Proposal Link
 
@@ -30,7 +30,11 @@ Platform: Desktop
 3. Yun Tao - y83tao@uwaterloo.ca
 4. Areeb Shaikh - a59shaik@uwaterloo.ca
 
-# Screenshot
+# Screenshots
+
+Sign Up Page:
+
+file:///var/folders/2c/cc4s9n9x6yj5c6bn6q363f4w0000gn/T/TemporaryItems/NSIRD_screencaptureui_1QKFHG/Screenshot%202024-04-07%20at%2011.42.14%E2%80%AFPM.png
 
 # User Documentation
 
