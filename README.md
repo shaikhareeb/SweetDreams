@@ -12,16 +12,19 @@ This project intends to provide a convenient, one-stop solution for parents to u
 
 Platform: Desktop
 
-1. Explore page for inspiration lullabies
-2. Explore page includes lullabies from Youtube via Youtube application and can be watched when clicked for inspiration
-3. Upload a lullaby audio (intended for parents)
-4. Upload thumbnails to pair with the audios (intended for parents and can be personlized images)
-5. View and listen to uploaded lullabies in the app (intended for children)
-6. Play audio in background as users can use other apps.
-7. Add a child lock preventing app functionality that can only be unlocked via parental password.
-8. Play lullabies automatically once the queue is started.
-9. Lullabies stop playing after the user stops playing the queue
-10. Lullabies can be put into a queue and played and will continue to play after lock screen is initiated. 
+1. Account feature to allow users to have their own accounts
+3. Support single-user multi-device scenarios through the accounts feature **(Advanced feature)**
+4. Explore page for inspiration lullabies
+5. Explore page includes lullabies from Youtube via Youtube application and can be watched when clicked for inspiration **(Advanced feature)**
+6. Upload a lullaby audio (intended for parents)
+7. Upload thumbnails to pair with the audios (intended for parents and can be personlized images)
+8. View and listen to uploaded lullabies in the app (intended for children)
+9. Play audio in background as users can use other apps.
+10. Add a child lock preventing app functionality that can only be unlocked via parental password.
+11. Play lullabies automatically once the queue is started.
+12. Lullabies stop playing after the user stops playing the queue
+13. Lullabies can be put into a queue and played and will continue to play after lock screen is initiated. 
+14. Deployed private user data to the cloud including account information, personal audios and thumbnails, and queues **(Advanced feature)**
 
 # Team Members
 
