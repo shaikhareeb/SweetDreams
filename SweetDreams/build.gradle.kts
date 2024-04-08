@@ -31,6 +31,7 @@ kotlin {
                 implementation("org.json:json:20210307")
                 implementation("com.google.firebase:firebase-admin:7.0.1")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+                implementation("ch.qos.logback:logback-classic:1.2.3")
             }
         }
         jvmMain.dependencies {
@@ -39,6 +40,7 @@ kotlin {
             implementation("org.json:json:20210307")
             implementation("com.google.firebase:firebase-admin:7.0.1")
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+            implementation("ch.qos.logback:logback-classic:1.2.3")
         }
         val jvmTest by getting
     }
