@@ -75,5 +75,7 @@ A citation for deleting audio files via removing blobs from GCP from this StackO
 
 Certain emojis and unicode values used in the source code are from https://www.iemoji.com/.
 
+Externals tools include Youtube API and its documentation, Firebase and its documentation, and Google Cloud and its documentation.
+
 # Copyright & License
 
