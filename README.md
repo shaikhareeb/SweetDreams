@@ -36,10 +36,10 @@ Thank you for using SweetDreams, and we hope you and your child have sweet dream
 
 ## Team Members
 
-Areeb Shaikh - a59shaik@uwaterloo.ca
+Areeb Shaikh
 
-Akshen Jasikumar - ajasikum@uwaterloo.ca
+Akshen Jasikumar
 
-Yun Tao - y83tao@uwaterloo.ca
+Yun Tao
 
-Rohun Baxi - r2baxi@uwaterloo.ca
+Rohun Baxi
